@@ -1,5 +1,18 @@
 var express = require('express')
 var app = express()
+var bodyParser = require('body-parser')
+var passport = require('./passportConfig')
+var userRouter = require('./user/router')
+
+// clean datebase and create sample user
+// require('./utils/cleandb')()
+
+app.use(passport.initialize())
+app.use(passport.session())
+app.use(bodyParser.urlencoded({extended: true}))
+app.use(bodyParser.json())
+
+app.use('/user', userRouter);
 
 app.get('/', function(req, res) {
   res.send('Hello, world!')
