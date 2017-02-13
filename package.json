@@ -20,7 +20,9 @@
   },
   "homepage": "https://github.com/michalmikolajczyk/viking-garage-api#readme",
   "dependencies": {
+    "cookie-parser": "^1.4.3",
     "express": "^4.14.1",
+    "express-session": "^1.15.1",
     "passport": "^0.3.2",
     "passport-local": "^1.0.0",
     "pg": "^6.1.2",

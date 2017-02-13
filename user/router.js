@@ -7,9 +7,22 @@ router.post('/signup', signup)
 
 router.post('/login', passport.authenticate('local'),
   function(req, res) {
-    res.send('User login success')
+    res.status(200).send('login success')
   }
 )
+
+router.post('/logout', function(req, res) {
+  req.logout()
+  res.status(200).send('logout')
+})
+
+router.get('/test', function(req, res) {
+  if (req.isAuthenticated()) {
+    res.status(200).send('user is authenticated')
+  } else {
+    res.status(401).send('user is not authenticated')
+  }
+})
 
 module.exports = router
 

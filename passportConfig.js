@@ -7,12 +7,12 @@ passport.use(new LocalStrategy({
     passwordField: 'password',
   },
   function(email, password, done) {
-    console.log('LocalStrategy', email, password)
     User.findOne({
       where: {
         'email': email
       }
-    }).then(function (user) {
+    })
+    .then(function (user) {
       if (user == null) {
         return done(null, false, { message: 'Incorrect credentials.' })
       }
@@ -23,6 +23,7 @@ passport.use(new LocalStrategy({
 
       return done(null, false, { message: 'Incorrect credentials.' })
     })
+    .catch(done)
   }
 ))
 
