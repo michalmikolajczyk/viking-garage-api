@@ -1,14 +1,14 @@
-var User = require('../user/model')
+var User = require('../sequelizeModel').User
 
-module.exports = function(callback) {
+module.exports = function() {
   // recreate User table
-  User.sync({ force: true }).then(function() {
+  return User.sync({ force: true }).then(function() {
     // create new User
-    User.create({
+    return User.create({
       name: 'Viking Garage',
       email: 'viking@garage.com',
       birtday: new Date(1980, 6, 20),
       password: 'secret',
-    }).then(callback)
+    })
   })
 }

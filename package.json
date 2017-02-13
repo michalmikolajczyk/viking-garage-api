@@ -4,9 +4,9 @@
   "description": "VIKING GARAGE API",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node index.js",
-    "dev": "nodemon index.js"
+    "dev": "NODE_ENV=dev nodemon index.js",
+    "test": "NODE_ENV=test mocha *.spec.js ./**/*.spec.js",
+    "start": "NODE_ENV=prod node index.js"
   },
   "repository": {
     "type": "git",
@@ -29,6 +29,8 @@
     "sequelize": "^3.30.2"
   },
   "devDependencies": {
+    "chai": "^3.5.0",
+    "chai-http": "^3.0.0",
     "nodemon": "^1.11.0"
   }
 }

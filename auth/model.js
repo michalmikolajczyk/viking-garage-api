@@ -1,5 +1,4 @@
 var Sequelize = require('Sequelize')
-var sequelizeConfig = require('../sequelizeConfig');
 
 var attributes = {
   name: {
@@ -25,5 +24,7 @@ var options = {
   freezeTableName: true
 }
 
-var User = sequelizeConfig.define('users', attributes, options)
-module.exports = User;
+module.exports = {
+  attributes: attributes,
+  options: options
+}
