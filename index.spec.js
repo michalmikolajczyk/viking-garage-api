@@ -2,10 +2,7 @@ var chai = require('chai');
 var chaiHttp = require('chai-http');
 var server = require('./index');
 var should = chai.should();
-
 chai.use(chaiHttp)
-
-console.log(process.env.NODE_ENV)
 
 describe('Smoke test', function() {
   it('should return hello world', function(done) {

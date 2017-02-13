@@ -1,3 +1,5 @@
+process.env.NODE_ENV = 'test'
+
 var chai = require('chai')
 var chaiHttp = require('chai-http')
 var server = require('../index')
@@ -12,16 +14,7 @@ describe('Auth signup tests', function() {
     return cleandb()
   })
 
-  it('should return 401 status on test if user logged in', function(done) {
-    chai.request(server)
-    .get('/auth/test')
-    .end(function(err, res) {
-      res.should.have.status(401)
-      done();
-    })
-  })
-
-  it('should return error due the empty fields', function(done) {
+  it('should return error due the one empty field (birthday)', function(done) {
     chai.request(server)
     .post('/auth/signup')
     .send({
@@ -74,7 +67,7 @@ describe('Auth signup tests', function() {
     })
   })
 
-  it('should create new user', function(done) {
+  it('should create new user successfully', function(done) {
     chai.request(server)
     .post('/auth/signup')
     .send({
