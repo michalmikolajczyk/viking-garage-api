@@ -1,5 +1,6 @@
 var express = require('express')
 var app = express()
+var cors = require('cors')
 var session = require('express-session')
 var bodyParser = require('body-parser')
 var cookieParser = require('cookie-parser')
@@ -10,6 +11,10 @@ var config = require('./config')
 // clean datebase and create sample user
 // require('./utils/cleandb')()
 
+app.use(cors({
+  origin: ['http://localhost:3000', 'http://vikinggarage.com'],
+  credentials: true,
+}))
 app.use(cookieParser())
 app.use(session({
   secret: config.session.secret,

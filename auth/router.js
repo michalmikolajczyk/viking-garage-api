@@ -7,6 +7,7 @@ router.post('/signup', signup)
 
 router.post('/login', passport.authenticate('local'),
   function(req, res) {
+    // TODO: check filed remeber and set Access-Control-Max-Age
     res.status(200).send('login success')
   }
 )
