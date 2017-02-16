@@ -54,4 +54,6 @@ var config = {
     secret: 'secret-session-key',
   },
 }
+
+module.exports = config
 ```

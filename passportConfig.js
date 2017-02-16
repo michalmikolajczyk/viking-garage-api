@@ -1,6 +1,6 @@
 var passport = require('passport')
 var LocalStrategy = require('passport-local').Strategy
-var User = require('./sequelizeConfig').User
+var User = require('./sequelizeModel').User
 
 passport.use(new LocalStrategy({
     usernameField: 'email',
