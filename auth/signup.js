@@ -31,7 +31,10 @@ module.exports = function(req, res, next) {
 
   return User.create(newUser)
   .then(function() {
-    res.send('User created successfully')
+    res.status(200).json({
+      error: false,
+      msg: 'User created successfully'
+    })
   })
   .catch(function(error) {
     // http://stackoverflow.com/questions/3825990/http-response-code-for-post-when-resource-already-exists
