@@ -7,7 +7,7 @@ module.exports = function() {
     return User.create({
       name: 'Viking Garage',
       email: 'viking@garage.com',
-      birtday: new Date(1980, 6, 20),
+      birthday: new Date(1980, 6, 20),
       password: 'secret',
     })
   })

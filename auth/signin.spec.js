@@ -8,7 +8,7 @@ var should = chai.should()
 
 chai.use(chaiHttp)
 
-describe('Auth signup tests', function() {
+describe('Auth signin tests', function() {
 
   beforeEach(function() {
     return cleandb()
@@ -16,7 +16,7 @@ describe('Auth signup tests', function() {
 
   it('should return error due the one empty field (birthday)', function(done) {
     chai.request(server)
-    .post('/auth/signup')
+    .post('/auth/signin')
     .send({
       name: 'Viking',
       email: 'viking@garage.com',
@@ -33,7 +33,7 @@ describe('Auth signup tests', function() {
 
   it('should return error 400 due the different passwords', function(done) {
     chai.request(server)
-    .post('/auth/signup')
+    .post('/auth/signin')
     .send({
       name: 'Viking',
       email: 'viking@garage.com',
@@ -51,7 +51,7 @@ describe('Auth signup tests', function() {
 
   it('should return error 409 because of user with the same email in database', function(done) {
     chai.request(server)
-    .post('/auth/signup')
+    .post('/auth/signin')
     .send({
       name: 'Viking',
       email: 'viking@garage.com',
@@ -69,7 +69,7 @@ describe('Auth signup tests', function() {
 
   it('should create new user successfully', function(done) {
     chai.request(server)
-    .post('/auth/signup')
+    .post('/auth/signin')
     .send({
       name: 'Viking',
       email: 'viking.garage@garage.com',
