@@ -40,7 +40,7 @@ module.exports = function(req, res, next) {
     // http://stackoverflow.com/questions/3825990/http-response-code-for-post-when-resource-already-exists
     res.status(409).json({
       error: true,
-      msg: 'User with provided email already exists.'
+      msg: `User with provided email already exists ${error}`
     })
   })
 }

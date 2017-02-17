@@ -1,9 +1,9 @@
 var express = require('express')
 var router = express.Router()
 var passport = require('passport')
-var signup = require('./signup')
+var signin = require('./signin')
 
-router.post('/signup', signup)
+router.post('/signin', signin)
 
 router.post('/login', passport.authenticate('local'),
   function(req, res) {
