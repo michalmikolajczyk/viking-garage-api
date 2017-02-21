@@ -4,9 +4,9 @@
   "description": "VIKING GARAGE API",
   "main": "index.js",
   "scripts": {
-    "dev": "nodemon --watch 'src/**/*.ts' --ignore 'src/*.spec.ts src/**/*.spec.ts' --exec 'ts-node' src/index.ts",
-    "test": "mocha -r ts-node/register src/*.spec.ts src/**/*.spec.ts",
-    "start": "$(npm bin)/ts-node src/index.ts"
+    "dev": "nodemon --watch '**/*.ts' --ignore '*.spec.ts **/*.spec.ts' --exec 'ts-node' index.ts",
+    "test": "mocha -r ts-node/register *.spec.ts **/*.spec.ts",
+    "start": "$(npm bin)/ts-node index.ts"
   },
   "repository": {
     "type": "git",
@@ -33,6 +33,7 @@
     "pg": "^6.1.2",
     "sequelize": "^3.30.2",
     "ts-node": "^2.1.0",
+    "typescript": "^2.1.6"
   },
   "devDependencies": {
     "@types/chai": "^3.4.35",

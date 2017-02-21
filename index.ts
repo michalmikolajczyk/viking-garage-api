@@ -5,7 +5,7 @@ import * as bodyParser from 'body-parser'
 import * as cookieParser from 'cookie-parser'
 // import * as passport from './passportConfig'
 import * as userRouter from './auth/router'
-import * as config from '../config'
+import * as config from './config'
 const app = express()
 
 // clean datebase and create sample user
