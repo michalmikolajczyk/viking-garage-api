@@ -4,9 +4,9 @@
   "description": "VIKING GARAGE API",
   "main": "index.js",
   "scripts": {
-    "dev": "NODE_ENV=dev nodemon index.js",
-    "test": "NODE_ENV=test mocha *.spec.js ./**/*.spec.js",
-    "start": "NODE_ENV=prod node index.js"
+    "dev": "nodemon --watch 'src/**/*.ts' --ignore 'src/*.spec.ts src/**/*.spec.ts' --exec 'ts-node' src/index.ts",
+    "test": "mocha -r ts-node/register src/*.spec.ts src/**/*.spec.ts",
+    "start": "$(npm bin)/ts-node src/index.ts"
   },
   "repository": {
     "type": "git",
@@ -20,6 +20,9 @@
   },
   "homepage": "https://github.com/michalmikolajczyk/viking-garage-api#readme",
   "dependencies": {
+    "@types/express": "^4.0.35",
+    "@types/passport": "^0.3.3",
+    "@types/passport-local": "^1.0.29",
     "body-parser": "^1.16.1",
     "cookie-parser": "^1.4.3",
     "cors": "^2.8.1",
@@ -28,11 +31,16 @@
     "passport": "^0.3.2",
     "passport-local": "^1.0.0",
     "pg": "^6.1.2",
-    "sequelize": "^3.30.2"
+    "sequelize": "^3.30.2",
+    "ts-node": "^2.1.0",
   },
   "devDependencies": {
+    "@types/chai": "^3.4.35",
+    "@types/chai-http": "0.0.30",
+    "@types/mocha": "^2.2.39",
     "chai": "^3.5.0",
     "chai-http": "^3.0.0",
+    "mocha": "^3.2.0",
     "nodemon": "^1.11.0"
   }
 }

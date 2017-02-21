@@ -1,7 +1,7 @@
-var express = require('express')
-var router = express.Router()
-var passport = require('passport')
-var signin = require('./signin')
+import * as express from 'express'
+import * as passport from 'passport'
+import signin from './signin'
+const router = express.Router()
 
 router.post('/signin', signin)
 

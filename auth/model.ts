@@ -1,6 +1,6 @@
-var Sequelize = require('Sequelize')
+import * as Sequelize from 'Sequelize'
 
-var attributes = {
+const attributes = {
   name: {
     type: Sequelize.STRING,
   },
@@ -20,11 +20,11 @@ var attributes = {
   },
 }
 
-var options = {
+const options = {
   freezeTableName: true
 }
 
-module.exports = {
-  attributes: attributes,
-  options: options
+export {
+  attributes,
+  options,
 }

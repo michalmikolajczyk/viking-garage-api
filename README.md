@@ -2,28 +2,25 @@
 VIKING GARAGE API
 
 ### Setup
-#### Add config.js file in root dir, example:
+#### Add config.ts file in root dir, example:
 ```
-var config = {
-  session: {
-    secret: 'secret-session-key',
-  },
+const session = {
+  secret: 'secret-session-key',
 }
+
+export { session }
 ```
 #### Run app
 ```
 git clone git@github.com:michalmikolajczyk/viking-garage-api.git
 cd viking-garage-api && npm i
-# for production environment
-npm start
-# for development (hot reloading)
-npm run dev
-# for running tests (mocha)
-npm test
+npm test    # for running tests (mocha)
+npm run dev # for development (hot reloading)
+npm start   # for production environment
 ```
 
-### Setup Database (PostgreSQL)
-#### PostgreSQL installation
+### Setup Database with Postgres
+#### Postgres installation
 ```
 brew update
 brew install postgres
@@ -31,29 +28,31 @@ postgres -D /usr/local/var/postgres
 ```
 #### Create user & database
 ```
-createuser -P viking # provide password
-createdb vg # create database for prod, test and dev
-psql vg # login to db and grant privieges
+createuser -P viking  # provide username & password
+createdb test_db      # create database for prod, test and dev
+psql vg               # login to db and grant privieges
 grant all privileges on database vg to viking;
 ```
-#### Add config.js file in root dir, example:
+#### Add config.ts file in root dir, example:
 ```
-var config = {
-  db: {
-    database: {
-      test: 'test', // name of test db
-      prod: 'prod',
-      dev: 'dev',
-    },
-    username: 'viking',
-    password: 'password',
-    host: 'localhost',
-    port: 5432,
+const db = {
+  database: {
+    test: 'test_db', // name of test db
+    prod: 'prod_db',
+    dev: 'dev_db',
   },
-  session: {
-    secret: 'secret-session-key',
-  },
+  username: 'viking',
+  password: 'secret',
+  host: 'localhost',
+  port: 5432,
 }
 
-module.exports = config
+const session = {
+  secret: 'secret-session-key',
+}
+
+export {
+  session,
+  db
+}
 ```

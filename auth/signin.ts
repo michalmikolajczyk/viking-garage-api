@@ -1,6 +1,6 @@
 var User = require('../sequelizeModel').User
 
-module.exports = function(req, res, next) {
+function signin(req, res, next) {
 
   var name = req.body.name
   var email = req.body.email
@@ -44,3 +44,5 @@ module.exports = function(req, res, next) {
     })
   })
 }
+
+export default signin

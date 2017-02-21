@@ -1,0 +1,17 @@
+{
+  "compilerOptions": {
+    "module": "commonjs",
+    "target": "es6",
+    "moduleResolution": "node",
+    "baseUrl": "src/",
+    "allowSyntheticDefaultImports": true,
+    "outDir": "ts-build",
+    "noImplicitAny": false,
+    "sourceMap": false
+  },
+  "exclude": [
+    "node_modules",
+    "src/*.spec.ts",
+    "src/**/*.spec.ts"
+  ]
+}

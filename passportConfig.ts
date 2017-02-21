@@ -1,8 +1,8 @@
-var passport = require('passport')
-var LocalStrategy = require('passport-local').Strategy
-var User = require('./sequelizeModel').User
+import * as passport from 'passport'
+import { Strategy } from 'passport-local'
+import { User } from './sequelizeModel'
 
-passport.use(new LocalStrategy({
+passport.use(new Strategy({
     usernameField: 'email',
     passwordField: 'password',
   },
@@ -28,7 +28,7 @@ passport.use(new LocalStrategy({
 ))
 
 passport.serializeUser(function(user, done) {
-  done(null, user.id)
+  done(null, user['id'])
 })
 
 passport.deserializeUser(function(id, done) {
@@ -45,4 +45,4 @@ passport.deserializeUser(function(id, done) {
   })
 })
 
-module.exports = passport
+export default passport
