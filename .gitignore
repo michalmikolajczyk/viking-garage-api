@@ -1,5 +1,6 @@
 ### Project ###
-config.ts
+src/config.ts
+dist
 
 ### Node ###
 # Logs
