@@ -9,7 +9,7 @@ import {
   User,
 } from '../models/user'
 import login from '../services/login'
-
+import signin from '../services/signin'
 
 @Route('auth')
 export class AuthController {
@@ -27,18 +27,8 @@ export class AuthController {
    * User signin with credentials
    */
   @Post('signin')
-  public async signin(): Promise<User[]> {
-    return [
-      {
-        createdAt: new Date(),
-        email: 'test@test.com',
-        id: 1
-      },
-      {
-        createdAt: new Date(),
-        email: 'test2@test2.com',
-        id: 2,
-      }
-    ];
+  public async signin(@Request() req: express.Request): Promise<Message> {
+    let res, next
+    return signin(req, res, next)
   }
 }
