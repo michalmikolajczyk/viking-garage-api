@@ -2,13 +2,25 @@
 VIKING GARAGE API
 
 ### Setup
-#### Add config.ts file in root dir, example:
+#### Add src/config.ts file (database config below)
 ```
-const session = {
-  secret: 'secret-session-key',
+export default {
+  database: {
+    username: 'viking',
+    password: 'secret',
+    host: 'localhost',
+    port: 5432,
+    name: {
+      test: 'test_db',
+      prod: 'prod_db',
+      dev: 'dev_db',
+    }
+  },
+  session: 'secret-session-key',
+  origin: ['http://localhost:4000', 'http://vikinggarage.com'],
+  host: 'localhost',
+  port: 4000,
 }
-
-export { session }
 ```
 #### Run app
 ```
@@ -32,27 +44,4 @@ createuser -P viking  # provide username & password
 createdb test_db      # create database for prod, test and dev
 psql vg               # login to db and grant privieges
 grant all privileges on database vg to viking;
-```
-#### Add config.ts file in root dir, example:
-```
-const db = {
-  database: {
-    test: 'test_db', // name of test db
-    prod: 'prod_db',
-    dev: 'dev_db',
-  },
-  username: 'viking',
-  password: 'secret',
-  host: 'localhost',
-  port: 5432,
-}
-
-const session = {
-  secret: 'secret-session-key',
-}
-
-export {
-  session,
-  db
-}
 ```
