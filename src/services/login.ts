@@ -6,22 +6,20 @@ export default function login(req, res, next):Promise<Message> {
     passport.authenticate('local', function(err, user, info) {
 
       if (err) {
-        console.log('Unexpected error')
-        resolve({
+        return resolve({
           err: true,
           msg: 'Unexpected error.'
         })
       }
 
       if (!user) {
-        console.log('Incorrect credentials')
-        resolve({
+        return resolve({
           err: true,
           msg: 'Incorrect credentials.'
         })
       }
 
-      resolve({
+      return resolve({
         err: false,
         msg: 'User logged in successfully'
       })

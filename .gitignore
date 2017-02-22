@@ -1,5 +1,6 @@
 ### Project ###
 src/config.ts
+src/routes.ts
 dist
 
 ### Node ###
