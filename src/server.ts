@@ -26,17 +26,13 @@ app.use(bodyParser.urlencoded({extended: true}))
 app.use(bodyParser.json())
 app.use(methodOverride());
 
-passportConfig(app)
-RegisterRoutes(app)
-
 app.use('/docs', express.static(__dirname + '/swagger-ui'));
 app.use('/swagger.json', (req, res) => {
     res.sendfile('./dist/swagger.json')
 })
 
-app.get('/', function(req, res) {
-  res.send('Hello world')
-})
+passportConfig(app)
+RegisterRoutes(app)
 
 app.listen(config['port'], function() {
   console.log(`Server running at ${config['host']}:${config['port']}`)

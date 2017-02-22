@@ -45,3 +45,8 @@ createdb test_db      # create database for prod, test and dev
 psql vg               # login to db and grant privieges
 grant all privileges on database vg to viking;
 ```
+
+### Dev env
+- Sublime
+- [DocBlockr](https://github.com/spadgos/sublime-jsdocs) plugin for Sublime jsDoc
+- [TSLint](https://github.com/lavrton/SublimeLinter-contrib-tslint) TypeScript linter for Sublime

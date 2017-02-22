@@ -3,7 +3,7 @@
   "version": "0.0.1",
   "description": "VIKING GARAGE API",
   "scripts": {
-    "dev": "nodemon --watch './src/*.ts ./src/**/*.ts' --ignore './src/**/*.spec.ts' --exec 'ts-node' ./src/server.ts",
+    "dev": "nodemon --watch src --exec 'ts-node' src/server.ts",
     "test": "mocha -r ts-node/register ./src/**/*.spec.ts",
     "start": "npm run build && node ./dist/server.js",
     "build": "npm run clean && npm run swagger-gen && npm run routes-gen && tsc && npm run copy-swagger-ui",
@@ -29,6 +29,7 @@
     "body-parser": "^1.16.1",
     "cookie-parser": "^1.4.3",
     "cors": "^2.8.1",
+    "debug": "^2.6.1",
     "express": "^4.14.1",
     "express-session": "^1.15.1",
     "method-override": "^2.3.7",
