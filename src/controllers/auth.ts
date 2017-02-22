@@ -7,6 +7,8 @@ import {
 import {
   Message,
   User,
+  UserLogin,
+  UserSignin,
 } from '../models/user'
 import login from '../services/login'
 import signin from '../services/signin'
@@ -18,7 +20,7 @@ export class AuthController {
    * User login with credentials
    */
   @Post('login')
-  public async login(@Request() req: express.Request): Promise<Message> {
+  public async login(request: UserLogin, @Request() req: express.Request): Promise<Message> {
     let res, next
     return login(req, res, next)
   }
@@ -27,7 +29,7 @@ export class AuthController {
    * User signin with credentials
    */
   @Post('signin')
-  public async signin(@Request() req: express.Request): Promise<Message> {
+  public async signin(request: UserSignin, @Request() req: express.Request): Promise<Message> {
     let res, next
     return signin(req, res, next)
   }

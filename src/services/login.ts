@@ -29,4 +29,3 @@ export default function login(req, res, next):Promise<Message> {
     })(req, res, next)
   })
 }
-
