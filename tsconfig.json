@@ -1,11 +1,12 @@
 {
   "compilerOptions": {
+    "outDir": "./dist",
+    "rootDir": "./src",
     "module": "commonjs",
     "target": "es6",
+    "experimentalDecorators": true,
     "moduleResolution": "node",
-    "baseUrl": "src/",
     "allowSyntheticDefaultImports": true,
-    "outDir": "ts-build",
     "noImplicitAny": false,
     "sourceMap": false
   },

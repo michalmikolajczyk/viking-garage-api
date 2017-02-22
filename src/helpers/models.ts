@@ -1,5 +1,5 @@
-import * as UserModel from './auth/model'
-import sequelize from './sequelizeConfig'
+import * as UserModel from '../models/model'
+import sequelize from './sequelize'
 
 var User = sequelize.define('users', UserModel.attributes, UserModel.options)
 

@@ -14,6 +14,6 @@ describe('Smoke test', function() {
         expect(res.status).to.equal(200)
         expect(res.body).to.be.string
         expect(res.body).to.equal('Hello world')
-      });
-  });
+      })
+  })
 })

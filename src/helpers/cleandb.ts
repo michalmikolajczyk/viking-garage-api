@@ -1,4 +1,4 @@
-var User = require('../sequelizeModel').User
+const User = require('../sequelizeModel').User
 
 module.exports = function() {
   // recreate User table

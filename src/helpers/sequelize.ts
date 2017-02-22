@@ -1,7 +1,9 @@
 import Sequelize from 'sequelize'
-import { db } from './config'
+import config from '../config'
 
-var db_name = db.database['test']
+let db = config.database
+
+var db_name = 'vg'
 
 var sequelize = new Sequelize(db_name, db.username, db.password, {
   host: db.host || 'localhost',
