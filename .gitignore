@@ -1,0 +1,24 @@
+### Project ###
+src/config.ts
+src/routes.ts
+dist
+
+### Node ###
+# Logs
+logs
+*.log
+
+# node-waf configuration
+.lock-wscript
+
+# Dependency directory
+node_modules
+
+### OSX ###
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Thumbnails
+._*
+
