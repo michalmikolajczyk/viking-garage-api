@@ -30,6 +30,10 @@ npm test    # for running tests (mocha)
 npm run dev # for development (hot reloading)
 npm start   # for production environment
 ```
+#### Docs
+`npm start`
+for swagger-ui go to browser [localhost:4000/docs](http://localhost:4000/docs)
+for json with OpenAPI spec go to [localhost:4000/swagger.json](http://localhost:4000/swagger.json)
 
 ### Setup Database with Postgres
 #### Postgres installation
