@@ -34,6 +34,14 @@ app.use(methodOverride());
 passportConfig(app)
 RegisterRoutes(app)
 
+app.use(function(err, req, res, next) {
+  console.log(err)
+  res.json({
+    err: true,
+    msg: err
+  })
+})
+
 app.listen(config['port'], function() {
   console.log(`Server running at ${config['host']}:${config['port']}`)
 })
