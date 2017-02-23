@@ -19,6 +19,13 @@ export default function login(req, res, next):Promise<Message> {
         })
       }
 
+      if (!user.verified) {
+        return resolve({
+          err: true,
+          msg: 'User not verified - check your inbox!'
+        })
+      }
+
       return resolve({
         err: false,
         msg: 'User logged in successfully'

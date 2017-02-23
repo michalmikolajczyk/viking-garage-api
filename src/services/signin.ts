@@ -1,3 +1,4 @@
+import { signinMail } from '../helpers/nodemailer'
 import { User } from '../helpers/models'
 import { Message } from '../models/user'
 
@@ -31,11 +32,8 @@ export default function signin(req, res, next):Promise<Message> {
     }
 
     User.create(newUser)
-    .then(() => {
-      return resolve({
-        err: false,
-        msg: 'User created successfully'
-      })
+    .then(user => {
+      return signinMail(email, user.dataValues.token, resolve)
     })
     .catch((err) => {
       // http://stackoverflow.com/questions/3825990/http-response-code-for-post-when-resource-already-exists
