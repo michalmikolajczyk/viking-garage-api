@@ -1,36 +1,56 @@
 import * as express from 'express'
 import {
-  Request,
-  Route,
+  Get,
+  Inject,
   Post,
+  Route,
 } from 'tsoa'
 import {
-  Message,
-  User,
   UserLogin,
   UserSignin,
-} from '../models/user'
-import login from '../services/login'
-import signin from '../services/signin'
+} from '../models/auth'
+import {
+  login,
+  logout,
+  signin,
+  verify,
+} from '../services/auth'
 
 @Route('auth')
 export class AuthController {
 
   /**
    * User login with credentials
+   * @param {UserLogin} user login credentials
    */
   @Post('login')
-  public async login(request: UserLogin, @Request() req: express.Request): Promise<Message> {
-    let res, next
-    return login(req, res, next)
+  public login(body: UserLogin, @Inject() req, @Inject() res, @Inject() next):void {
+    login(req, res, next)
+  }
+
+  /**
+   * User logout (end cookie session)
+   */
+  @Get('logout')
+  public logout(@Inject() req, @Inject() res, @Inject() next):void {
+
   }
 
   /**
    * User signin with credentials
+   * @param {UserSigin} user credentials
    */
   @Post('signin')
-  public async signin(request: UserSignin, @Request() req: express.Request): Promise<Message> {
-    let res, next
-    return signin(req, res, next)
+  public signin(body: UserSignin, @Inject() req, @Inject() res, @Inject() next):void {
+    signin(req, res, next)
+  }
+
+  /**
+   * Verify user by uuid token
+   * @param {string} 'token' uuid token
+   */
+  @Get('verify')
+  public verify(token: string, @Inject() req, @Inject() res, @Inject() next):void {
+    verify(req, res, next)
   }
 }

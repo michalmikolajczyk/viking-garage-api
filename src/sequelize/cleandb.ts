@@ -1,4 +1,4 @@
-import { User } from './models'
+import { User } from './'
 
 export default function cleandb() {
   // recreate User table

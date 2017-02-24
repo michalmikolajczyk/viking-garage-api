@@ -1,6 +1,6 @@
 import * as passport from 'passport'
 import { Strategy } from 'passport-local'
-import { User } from './models'
+import { User } from '../sequelize'
 
 export default function config(app: any) {
 

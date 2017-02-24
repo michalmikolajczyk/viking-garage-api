@@ -1,4 +1,3 @@
-import { Message } from '../models/user'
 import * as nodemailer from 'nodemailer'
 import config from '../config'
 

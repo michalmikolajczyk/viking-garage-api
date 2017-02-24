@@ -1,32 +1,31 @@
 import * as passport from 'passport'
-import { Message } from '../models/user'
 
-export default function login(req, res, next):Promise<Message> {
+export default function login(req, res, next):any {
   return new Promise((resolve, reject) => {
     passport.authenticate('local', function(err, user, info) {
 
       if (err) {
-        return resolve({
+        return res.json({
           err: true,
           msg: 'Unexpected error.'
         })
       }
 
       if (!user) {
-        return resolve({
+        return res.json({
           err: true,
           msg: 'Incorrect credentials.'
         })
       }
 
       if (!user.verified) {
-        return resolve({
+        return res.json({
           err: true,
           msg: 'User not verified - check your inbox!'
         })
       }
 
-      return resolve({
+      return res.json({
         err: false,
         msg: 'User logged in successfully'
       })

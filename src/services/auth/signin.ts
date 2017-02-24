@@ -1,8 +1,7 @@
-import { signinMail } from '../helpers/nodemailer'
-import { User } from '../helpers/models'
-import { Message } from '../models/user'
+import { signinMail } from '../../helpers/nodemailer'
+import { User } from '../../sequelize'
 
-export default function signin(req, res, next):Promise<Message> {
+export default function signin(req, res, next):any {
   return new Promise((resolve, reject) => {
     var name = req.body.name
     var email = req.body.email
