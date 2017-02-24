@@ -13,10 +13,11 @@ import {
   login,
   logout,
   signin,
+  check,
   verify,
 } from '../services/auth'
 
-@Route('auth')
+@Route('user')
 export class AuthController {
 
   /**
@@ -33,7 +34,7 @@ export class AuthController {
    */
   @Get('logout')
   public logout(@Inject() req, @Inject() res, @Inject() next):void {
-
+    logout(req, res, next)
   }
 
   /**
@@ -52,5 +53,13 @@ export class AuthController {
   @Get('verify')
   public verify(token: string, @Inject() req, @Inject() res, @Inject() next):void {
     verify(req, res, next)
+  }
+
+  /**
+   * Check if user is logged in
+   */
+  @Get('check')
+  public check(@Inject() req, @Inject() res, @Inject() next):void {
+    check(req, res, next)
   }
 }

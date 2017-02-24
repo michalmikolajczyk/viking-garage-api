@@ -1,35 +1,18 @@
 import * as passport from 'passport'
 
-export default function login(req, res, next):any {
-  return new Promise((resolve, reject) => {
-    passport.authenticate('local', function(err, user, info) {
+export default function login(req, res, next) {
+  passport.authenticate('local', function(err, user, info) {
+    if (err) { return next(err) }
 
-      if (err) {
-        return res.json({
-          err: true,
-          msg: 'Unexpected error.'
-        })
-      }
-
-      if (!user) {
-        return res.json({
-          err: true,
-          msg: 'Incorrect credentials.'
-        })
-      }
-
-      if (!user.verified) {
-        return res.json({
-          err: true,
-          msg: 'User not verified - check your inbox!'
-        })
-      }
+    req.logIn(user, function(err) {
+      if (err) { return next(err) }
 
       return res.json({
         err: false,
-        msg: 'User logged in successfully'
+        msg: `User logged in successfully`
       })
+    })
 
-    })(req, res, next)
-  })
+  })(req, res, next)
 }
+

@@ -3,6 +3,8 @@ import { Strategy } from 'passport-local'
 import { User } from '../sequelize'
 
 export default function config(app: any) {
+  app.use(passport.initialize())
+  app.use(passport.session())
 
   passport.use(new Strategy({
       usernameField: 'email',
@@ -19,11 +21,15 @@ export default function config(app: any) {
           return done(null, false, { message: 'Incorrect credentials.' })
         }
 
-        if (user.password === password) {
-          return done(null, user)
+        if (user.verified === false) {
+          return done(null, false, { message: 'User not verified - check out inbox'})
         }
 
-        return done(null, false, { message: 'Incorrect credentials.' })
+        if (user.password !== password) {
+          return done(null, false, { message: 'Incorrect credentials.' })
+        }
+
+        return done(null, user)
       })
       .catch(done)
     }
@@ -46,9 +52,6 @@ export default function config(app: any) {
       done(null, user)
     })
   })
-
-  app.use(passport.initialize())
-  app.use(passport.session())
 }
 
 
