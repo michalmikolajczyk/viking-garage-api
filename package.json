@@ -6,12 +6,14 @@
     "dev": "nodemon --watch src --exec 'ts-node' src/server.ts",
     "test": "mocha -r ts-node/register ./src/**/*.spec.ts",
     "start": "npm run build && node ./dist/server.js",
-    "build": "npm run clean && npm run swagger-gen && npm run routes-gen && tsc && npm run copy-swagger-ui",
+    "build": "npm run swagger-gen && npm run routes-gen && tsc",
     "lint": "tslint ./src/**/*.ts",
-    "clean": "rimraf dist",
     "swagger-gen": "$(npm bin)/tsoa swagger",
     "routes-gen": "$(npm bin)/tsoa routes",
-    "copy-swagger-ui": "ncp ./src/swagger-ui ./dist/swagger-ui"
+    "postinstall": "npm run create-dist && npm run copy-template && npm run copy-swagger",
+    "create-dist": "mkdirp dist/swagger-ui",
+    "copy-swagger": "ncp ./node_modules/swagger-ui/dist ./dist/swagger-ui",
+    "copy-template": "ncp ./src/express.js ./node_modules/tsoa/dist/routeGeneration/templates/express.js"
   },
   "repository": {
     "type": "git",
@@ -50,10 +52,12 @@
     "@types/passport-local": "^1.0.29",
     "chai": "^3.5.0",
     "chai-http": "^3.0.0",
+    "mkdirp": "^0.5.1",
     "mocha": "^3.2.0",
     "ncp": "^2.0.0",
     "nodemon": "^1.11.0",
     "rimraf": "^2.6.0",
+    "swagger-ui": "^2.2.10",
     "ts-node": "^2.1.0",
     "tslint": "^4.4.2",
     "typescript": "^2.1.6"

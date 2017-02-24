@@ -6,13 +6,14 @@ export function RegisterRoutes(app: any) {
   {{#each actions}}
   app.{{method}}('{{../../basePath}}/{{../path}}{{path}}', function (req: any, res: any, next: any) {
       const params = [
-          {{#each parameters}}
+          {{~#each parameters}}
           {{#if injected}}
-          undefined
-          {{/if}}
-          {{/each}}
+          {{else}}
+          null,
+          {{~/if}}
+          {{/each~}}
       ];
-      params.push.apply(params, [req, res, next])
+      params.push.apply(params, [req, res, next]);
       const controller = new {{../name}}();
       controller.{{name}}.apply(controller, params);
     }
