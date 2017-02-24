@@ -13,7 +13,7 @@ const app = express()
 
 app.use('/docs', express.static(__dirname + '/swagger-ui'));
 app.use('/swagger.json', (req, res) => {
-    res.sendfile('./dist/swagger.json')
+  res.sendfile('./dist/swagger.json')
 })
 
 app.use(cors({
@@ -23,8 +23,8 @@ app.use(cors({
 app.use(cookieParser())
 app.use(session({
   secret: config['session'],
-  resave: false,
-  saveUninitialized: false,
+  resave: true,
+  saveUninitialized: true,
 }))
 app.use(bodyParser.urlencoded({extended: true}))
 app.use(bodyParser.json())
@@ -34,10 +34,10 @@ passportConfig(app)
 RegisterRoutes(app)
 
 app.use(function(err, req, res, next) {
-  console.log(err)
+  console.log(`Unexpected error ${err}`)
   res.json({
     err: true,
-    msg: err
+    msg: `Unexpected error ${err}`
   })
 })
 
