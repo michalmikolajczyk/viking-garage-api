@@ -11,10 +11,6 @@ import config from './config'
 
 const app = express()
 
-// app.use('/docs', function(req, res, next) {
-//   req.url = '/docs/?url=http://localhost:4000/swagger.json'
-//   next()
-// })
 app.use('/docs', express.static(__dirname + '/swagger-ui'));
 app.use('/swagger.json', (req, res) => {
     res.sendfile('./dist/swagger.json')

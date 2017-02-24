@@ -32,7 +32,7 @@ npm start   # for production environment
 ```
 #### Docs
 `npm start`
-for swagger-ui go to browser [localhost:4000/docs](http://localhost:4000/docs)
+for swagger-ui go to browser [localhost:4000/docs?url=http://localhost:4000/swagger.json](http://localhost:4000/docs?url=http://localhost:4000/swagger.json)
 for json with OpenAPI spec go to [localhost:4000/swagger.json](http://localhost:4000/swagger.json)
 
 ### Setup Database with Postgres
