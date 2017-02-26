@@ -1,7 +1,5 @@
 
 export default function check(req, res, next) {
-  console.log(req.isAuthenticated())
-  console.log(req.user)
    if (req.isAuthenticated()) {
     res.json({
       err: false,
@@ -10,7 +8,7 @@ export default function check(req, res, next) {
   } else {
     res.json({
       err: false,
-      msg: 'User is not logged in ;('
+      msg: 'User is not logged in :('
     })
   }
 }

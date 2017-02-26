@@ -4,8 +4,8 @@ import * as chai from 'chai'
 import chaiHttp = require('chai-http')
 import server from '../../server'
 import cleandb from '../../sequelize/cleandb'
-chai.use(chaiHttp)
 const should = chai.should()
+chai.use(chaiHttp)
 
 describe('user/signin tests', function() {
 
