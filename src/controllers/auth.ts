@@ -7,6 +7,7 @@ import {
 } from 'tsoa'
 import {
   UserChange,
+  UserEmail,
   UserLogin,
   UserSignin,
 } from '../models/auth'
@@ -71,19 +72,19 @@ export class AuthController {
 
   /**
    * Send email with reset url for provided email address
-   * @param {string} 'email' user email address
+   * @param {UserEmail} 'email' user email address
    */
   @Post('reset')
-  public reset(email: string, @Inject() req, @Inject() res, @Inject() next):void {
+  public reset(body: UserEmail, @Inject() req, @Inject() res, @Inject() next):void {
     reset(req, res, next)
   }
 
   /**
    * Resend email with reset url
-   * @param {string} 'email' user email address
+   * @param {UserEmail} 'email' user email address
    */
   @Post('resend')
-  public resend(email: string, @Inject() req, @Inject() res, @Inject() next):void {
+  public resend(body: UserEmail, @Inject() req, @Inject() res, @Inject() next):void {
     resend(req, res, next)
   }
 

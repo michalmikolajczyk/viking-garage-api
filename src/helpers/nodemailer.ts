@@ -1,26 +1,40 @@
 import * as nodemailer from 'nodemailer'
 import config from '../config'
-
 const transporter = nodemailer.createTransport(config.nodemailer)
+const host = 'http://localhost:3000'
 
-function signinMail(email: string, token: string):Promise<any> {
+function sendEmail(body):Promise<any> {
   return new Promise((res, rej) => {
-    const body = {
-      from: config.nodemailer.auth.user,
-      to: email,
-      subject: 'Viking Garage Signin',
-      text: `Click link: https://vikinggarage.com/verify/${token} to verify your new account`
-    }
-
     transporter.sendMail(body, (err, info) => {
       if (err) {
-        return rej(`Error with sending email ${err}`)
+        return rej(`Email sent error ${err}`)
       }
-      return res('User created successfully, email with token sent')
+      return res(`Email sent successfully ${info}`)
     })
   })
 }
 
+function signinEmail(email: string, token: string):Promise<any> {
+  const body = {
+    from: config.nodemailer.auth.user,
+    to: email,
+    subject: 'Viking Garage Signin',
+    text: `Click link: ${host}/verify/${token} to verify your new account`
+  }
+ return sendEmail(body)
+}
+
+function resetEmail(email: string, token: string):Promise<any> {
+  const body = {
+    from: config.nodemailer.auth.user,
+    to: email,
+    subject: 'Viking Garage Reset Password',
+    text: `Click link: ${host}/change/${token} to change your password`
+  }
+ return sendEmail(body)
+}
+
 export {
-  signinMail,
+  signinEmail,
+  resetEmail,
 }

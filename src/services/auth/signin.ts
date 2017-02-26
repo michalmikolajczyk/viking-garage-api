@@ -1,4 +1,4 @@
-import { signinMail } from '../../helpers/nodemailer'
+import { signinEmail } from '../../helpers/nodemailer'
 import { User } from '../../sequelize'
 
 export default function signin(req, res, next):any {
@@ -26,7 +26,7 @@ export default function signin(req, res, next):any {
 
   User.create(newUser)
   .then(user => {
-    signinMail(email, user.dataValues.token)
+    signinEmail(email, user.dataValues.token)
     .then(() => res.status(200).json({
       err: false,
       msg: 'User created successfully - email sent'
