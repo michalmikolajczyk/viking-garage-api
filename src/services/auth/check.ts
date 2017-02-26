@@ -1,6 +1,6 @@
 
 export default function check(req, res, next) {
-   if (req.isAuthenticated()) {
+  if (req.isAuthenticated()) {
     res.json({
       err: false,
       msg: 'User is logged in :)'

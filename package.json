@@ -4,7 +4,7 @@
   "description": "VIKING GARAGE API",
   "scripts": {
     "dev": "nodemon --watch src --exec 'ts-node' src/server.ts",
-    "test": "mocha -r ts-node/register ./src/tests/**/*.spec.ts",
+    "test": "npm run build && mocha -r ts-node/register ./src/tests/**/*.spec.ts",
     "start": "npm run build && node ./dist/server.js",
     "build": "npm run swagger-gen && npm run routes-gen && tsc",
     "lint": "tslint ./src/**/*.ts",

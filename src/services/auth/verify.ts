@@ -1,27 +1,51 @@
 import { User } from '../../sequelize'
+import { v1 } from 'uuid'
 
 export default function verify(req, res, next) {
-  let token = req.query.token
-  console.log(req.query)
-  console.log(token)
-  User.findOne({
-    where: {'token': token}
-  })
+
+  let {
+    token
+  } = req.body
+
+  User.findOne({where: { token }})
   .then(user => {
     if (user === null) {
-      return res.json({
+      return res.status(400).json({
         err: true,
-        msg: 'User with this token does not exists!'
+        msg: 'Token expired'
       })
     }
-    user.update({verified: true})
-    .then(() => {
-      res.json({
-        err: false,
-        msg: 'User verified successfully!'
+
+    user.update({
+      verified: true,
+      token: v1(),
+    })
+    .then(info => {
+      req.logIn(user, function(err) {
+        if (err) {
+          return res.status(400).json({
+            err: true,
+            msg: `Invalid email or password`
+          })
+        }
+
+        return res.status(200).json({
+          err: false,
+          msg: `User verified successfully`
+        })
       })
     })
-    .catch(next)
+    .catch(err => {
+      res.status(400).json({
+        err: true,
+        msg: `Token expired`
+      })
+    })
   })
-  .catch(next)
+  .catch(res => {
+    res.status(400).json({
+      err: true,
+      msg: `Token expired`
+    })
+  })
 }
