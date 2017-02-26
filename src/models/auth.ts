@@ -9,6 +9,10 @@ export interface UserChange {
   token: string,
 }
 
+export interface UserEmail {
+  email: string
+}
+
 export interface UserLogin {
   email: string
   password: string
