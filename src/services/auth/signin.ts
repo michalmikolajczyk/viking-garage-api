@@ -6,30 +6,37 @@ export default function signin(req, res, next):any {
     name,
     email,
     birthday,
-    password
+    password1,
+    password2,
   } = req.body
 
-  if (!name || !email || !birthday || !password) {
-    return next('Please fill in all the fields.')
+  if (!name || !email || !birthday || !password1) {
+    return res.status(400).json({
+      err: true,
+      msg: 'Please fill in all the fields.'
+    })
   }
 
   var newUser = {
-    name: name,
-    email: email,
-    birthday: birthday,
-    password: password,
+    name,
+    email,
+    birthday,
+    password: password1,
   }
 
   User.create(newUser)
   .then(user => {
     signinMail(email, user.dataValues.token)
-    .then(() => res.json({
+    .then(() => res.status(200).json({
       err: false,
       msg: 'User created successfully - email sent'
     }))
     .catch(next)
   })
   .catch(err => {
-    next(`Unexpected error ${err}`)
+    res.status(400).json({
+      err: true,
+      msg: 'Unexpected error ${err}'
+    })
   })
 }

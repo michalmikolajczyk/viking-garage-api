@@ -35,10 +35,7 @@ RegisterRoutes(app)
 
 app.use(function(err, req, res, next) {
   console.log(`Unexpected error ${err}`)
-  res.json({
-    err: true,
-    msg: `Unexpected error ${err}`
-  })
+  res.status(500).send(`Unexpected error ${err}`)
 })
 
 app.listen(config['port'], function() {
