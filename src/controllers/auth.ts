@@ -10,16 +10,17 @@ import {
   UserEmail,
   UserLogin,
   UserSignin,
+  UserToken,
 } from '../models/auth'
 import {
   change,
   check,
   login,
   logout,
+  me,
   resend,
   reset,
   signin,
-  user,
   verify,
 } from '../services/auth'
 
@@ -29,9 +30,26 @@ export class AuthController {
   /**
    * If user is logged in return object with user info
    */
-  @Get('/')
-  public user(@Inject() req, @Inject() res, @Inject() next):void {
-    user(req, res, next)
+  @Get('me')
+  public me(@Inject() req, @Inject() res, @Inject() next):void {
+    me(req, res, next)
+  }
+
+  /**
+   * Change user password with provided token
+   * @param {UserChange} 'UserChange' password and user token
+   */
+  @Post('change')
+  public change(body: UserChange, @Inject() req, @Inject() res, @Inject() next):void {
+    change(req, res, next)
+  }
+
+  /**
+   * Check if user is logged in
+   */
+  @Get('check')
+  public check(@Inject() req, @Inject() res, @Inject() next):void {
+    check(req, res, next)
   }
 
   /**
@@ -44,39 +62,11 @@ export class AuthController {
   }
 
   /**
-   * User signin with credentials
-   * @param {UserSigin} user credentials
+   * User logout (end cookie session)
    */
-  @Post('signin')
-  public signin(body: UserSignin, @Inject() req, @Inject() res, @Inject() next):void {
-    signin(req, res, next)
-  }
-
-
-  /**
-   * Verify and activate user by uuid token
-   * @param {string} 'token' uuid token
-   */
-  @Get('verify')
-  public verify(token: string, @Inject() req, @Inject() res, @Inject() next):void {
-    verify(req, res, next)
-  }
-
-  /**
-   * Check if user is logged in
-   */
-  @Get('check')
-  public check(@Inject() req, @Inject() res, @Inject() next):void {
-    check(req, res, next)
-  }
-
-  /**
-   * Send email with reset url for provided email address
-   * @param {UserEmail} 'email' user email address
-   */
-  @Post('reset')
-  public reset(body: UserEmail, @Inject() req, @Inject() res, @Inject() next):void {
-    reset(req, res, next)
+  @Get('logout')
+  public logout(@Inject() req, @Inject() res, @Inject() next):void {
+    logout(req, res, next)
   }
 
   /**
@@ -89,21 +79,29 @@ export class AuthController {
   }
 
   /**
-   * Change user password with provided token
-   * @param {string} 'password1' user new password
-   * @param {string} 'password2' user password repeated
-   * @param {string} 'token' user uuid token
+   * Send email with reset url for provided email address
+   * @param {UserEmail} 'email' user email address
    */
-  @Post('change')
-  public change(body: UserChange, @Inject() req, @Inject() res, @Inject() next):void {
-    change(req, res, next)
+  @Post('reset')
+  public reset(body: UserEmail, @Inject() req, @Inject() res, @Inject() next):void {
+    reset(req, res, next)
   }
 
   /**
-   * User logout (end cookie session)
+   * User signin with credentials
+   * @param {UserSigin} user credentials
    */
-  @Get('logout')
-  public logout(@Inject() req, @Inject() res, @Inject() next):void {
-    logout(req, res, next)
+  @Post('signin')
+  public signin(body: UserSignin, @Inject() req, @Inject() res, @Inject() next):void {
+    signin(req, res, next)
+  }
+
+  /**
+   * Verify and activate user by uuid token
+   * @param {UserToken} 'UserToken' user uuid token
+   */
+  @Post('verify')
+  public verify(body: UserToken, @Inject() req, @Inject() res, @Inject() next):void {
+    verify(req, res, next)
   }
 }

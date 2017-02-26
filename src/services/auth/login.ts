@@ -19,10 +19,9 @@ export default function login(req, res, next) {
 
       return res.status(200).json({
         err: false,
-        msg: `User logged in successfully`
+        msg: `User logged in successfully`,
       })
     })
-
   })(req, res, next)
 }
 

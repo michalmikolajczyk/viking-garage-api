@@ -25,3 +25,7 @@ export interface UserSignin {
   birthday: Date
   password: string
 }
+
+export interface UserToken {
+  token: string
+}
