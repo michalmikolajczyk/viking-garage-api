@@ -7,20 +7,18 @@ import cleandb from '../../sequelize/cleandb'
 chai.use(chaiHttp)
 const should = chai.should()
 
-describe('user/signin tests', function() {
+describe('user/login tests', function() {
 
   before(function() {
     return cleandb()
   })
 
-  it('should return error due the one empty field (birthday)', function(done) {
+  it('should return error because of wrong email', function(done) {
     chai.request(server)
-    .post('/user/signin')
+    .post('/user/login')
     .send({
-      name: 'Viking',
-      email: 'viking.garage.app@gmail.com',
-      password1: 'secret',
-      password2: 'secret',
+      email: 'wrong.email@gmail.com',
+      password: 'secret',
     })
     .end(function(err, res) {
       res.should.have.status(400)
@@ -28,20 +26,17 @@ describe('user/signin tests', function() {
       res.body.should.have.property('err')
       res.body.err.should.equal(true)
       res.body.should.have.property('msg')
-      res.body.msg.should.be.equal('Please fill in all the fields.')
+      res.body.msg.should.be.equal('Invalid email or password')
       done()
     })
   })
 
-  it('should return error because of user with the same email in database', function(done) {
+  it('should return error because of wrong password', function(done) {
     chai.request(server)
-    .post('/user/signin')
+    .post('/user/login')
     .send({
-      name: 'Viking',
       email: 'viking.garage.app@gmail.com',
-      birthday: new Date(),
-      password1: 'secret',
-      password2: 'secret',
+      password: 'wrong_password',
     })
     .end(function(err, res) {
       res.should.have.status(400)
@@ -49,19 +44,17 @@ describe('user/signin tests', function() {
       res.body.should.have.property('err')
       res.body.err.should.equal(true)
       res.body.should.have.property('msg')
+      res.body.msg.should.be.equal('Invalid email or password')
       done()
     })
   })
 
-  it('should create new user successfully', function(done) {
+  it('should logged in user successfully', function(done) {
     chai.request(server)
-    .post('/user/signin')
+    .post('/user/login')
     .send({
-      name: 'Viking',
-      email: 'viking.garage.app+123@gmail.com',
-      birthday: new Date(),
-      password1: 'secret',
-      password2: 'secret',
+      email: 'viking.garage.app@gmail.com',
+      password: 'secret',
     })
     .end(function(err, res) {
       res.should.have.status(200)
@@ -69,7 +62,7 @@ describe('user/signin tests', function() {
       res.body.should.have.property('err')
       res.body.err.should.equal(false)
       res.body.should.have.property('msg')
-      res.body.msg.should.be.equal('User created successfully - email sent')
+      res.body.msg.should.be.equal('User logged in successfully')
       done()
     })
   })

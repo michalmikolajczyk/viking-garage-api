@@ -31,7 +31,7 @@ export default function config(app: any) {
 
         return done(null, user)
       })
-      .catch(done)
+      .catch(err => done(null, false, { message: err}))
     }
   ))
 
