@@ -8,8 +8,8 @@ function signinMail(email: string, token: string):Promise<any> {
     const body = {
       from: config.nodemailer.auth.user,
       to: email,
-      subject: 'Submit ok!',
-      text: `its ok! https://vikinggarage.com/verify/${token}`
+      subject: 'Viking Garage Signin',
+      text: `Click link: https://vikinggarage.com/verify/${token} to verify your new account`
     }
 
     transporter.sendMail(body, (err, info) => {
