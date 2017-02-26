@@ -16,7 +16,7 @@ export default function config(app: any) {
           'email': email
         }
       })
-      .then(function (user) {
+      .then(function(user) {
         if (user == null) {
           return done(null, false, { message: 'Incorrect credentials.' })
         }
@@ -31,7 +31,9 @@ export default function config(app: any) {
 
         return done(null, user)
       })
-      .catch(err => done(null, false, { message: err}))
+      .catch(function(err) {
+        done(null, false, { message: err})
+      })
     }
   ))
 
