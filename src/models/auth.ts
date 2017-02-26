@@ -1,3 +1,13 @@
+export interface User {
+  email: string
+  photo: string
+}
+
+export interface UserChange {
+  password1: string,
+  password2: string,
+  token: string,
+}
 
 export interface UserLogin {
   email: string
