@@ -1,27 +1,42 @@
-import * as passport from 'passport'
+import * as jwt from 'jsonwebtoken'
+import config from '../../config'
+import { User } from '../../sequelize'
 
 export default function login(req, res, next) {
-  passport.authenticate('local', function(err, user, info) {
-    if (err) {
+  let {
+    email,
+    password,
+  } = req.body
+
+  if (!email || !password) {
+    return res.status(400).json({
+      err: true,
+      msg: `Empty field email or password`
+    })
+  }
+
+  User.findOne({where: {email, password}})
+  .then(function(user) {
+    if (user === null) {
       return res.status(400).json({
         err: true,
-        msg: `Invalid email or password`
+        msg: `User with provided email not exists`,
       })
     }
 
-    req.logIn(user, function(err) {
-      if (err) {
-        return res.status(400).json({
-          err: true,
-          msg: `Invalid email or password`
-        })
-      }
-
-      return res.status(200).json({
-        err: false,
-        msg: `User logged in successfully`,
-      })
+    let payload = {id: user.dataValues.id}
+    let token = jwt.sign(payload, config.jwt.secret)
+    return res.status(200).json({
+      token,
+      err: false,
+      msg: `User logged in successfully`,
     })
-  })(req, res, next)
+  })
+  .catch(function(err) {
+    return res.status(400).json({
+      err: true,
+      msg: `User with provided email not exists ${err}`,
+    })
+  })
 }
 
