@@ -1,59 +1,27 @@
 import * as passport from 'passport'
-import { Strategy } from 'passport-local'
+import config from '../config'
+import { Strategy, ExtractJwt } from 'passport-jwt'
 import { User } from '../sequelize'
 
-export default function config(app: any) {
+export default function configPassport(app: any) {
   app.use(passport.initialize())
-  app.use(passport.session())
 
   passport.use(new Strategy({
-      usernameField: 'email',
-      passwordField: 'password',
+      secretOrKey: config.jwt.secret,
+      jwtFromRequest: ExtractJwt.fromAuthHeader(),
     },
-    function(email, password, done) {
-      User.findOne({
-        where: {
-          'email': email
+    (payload, next) => {
+      User.findOne({where: {'id': payload.id}})
+      .then(user => {
+        if (user) {
+          next(null, user)
+        } else {
+          next(null, false)
         }
       })
-      .then(function(user) {
-        if (user == null) {
-          return done(null, false, { message: 'Incorrect credentials.' })
-        }
-
-        if (user.verified === false) {
-          return done(null, false, { message: 'User not verified - check out inbox'})
-        }
-
-        if (user.password !== password) {
-          return done(null, false, { message: 'Incorrect credentials.' })
-        }
-
-        return done(null, user)
-      })
-      .catch(function(err) {
-        done(null, false, { message: err})
-      })
+      .catch(err => next(null, false, {message: err}))
     }
   ))
-
-  passport.serializeUser(function(user, done) {
-    done(null, user['id'])
-  })
-
-  passport.deserializeUser(function(id, done) {
-    User.findOne({
-      where: {
-        'id': id
-      }
-    }).then(function (user) {
-      if (user == null) {
-        done(new Error('Wrong user id.'))
-      }
-
-      done(null, user)
-    })
-  })
 }
 
 
