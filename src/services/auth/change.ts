@@ -22,21 +22,23 @@ export default function change(req, res, next) {
       password: password1,
       token: v1(),
     })
-    .then(() => res.status(200).json({
-      err: false,
-      msg: 'Password changed successfully'
-    }))
+    .then(() => {
+        res.status(200).json({
+        err: false,
+        msg: 'Password changed successfully'
+      })
+    })
     .catch(err => {
-      res.status(400).json({
+      res.status(500).json({
         err: true,
-        msg: 'Token expired'
+        msg: `Unexpected error ${err}`
       })
     })
   })
   .catch(err => {
-    res.status(400).json({
+    res.status(500).json({
       err: true,
-      msg: 'Token expired'
+      msg: `Unexpected error ${err}`
     })
   })
 }

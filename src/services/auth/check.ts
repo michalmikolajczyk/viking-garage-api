@@ -1,17 +1,21 @@
-import * as passport from 'passport'
+import { authorize } from '../../helpers/passport'
 
 export default function check(req, res, next) {
-  passport.authenticate('jwt', {session: false}, function(err, user, info) {
-    if (err || !user) {
-      return res.status(401).json({
-        err: false,
-        msg: 'User is not auth :('
-      })
-    }
-
-    res.json({
+  authorize(req, res, next)
+  .then(user => {
+    res.status(200).json({
       err: false,
-      msg: 'User is authorized :)'
+      msg: `User authorized succesfully`,
+      user: {
+        email: user['email'],
+        name: user['name'],
+      }
     })
-  })(req, res, next)
+  })
+  .catch(err => {
+    res.status(401).json({
+      err: true,
+      msg: `User is not authorized`,
+    })
+  })
 }
