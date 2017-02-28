@@ -25,7 +25,7 @@ export default function login(req, res, next) {
   .catch(err => {
     res.status(400).json({
       err: true,
-      msg: `User with provided email or password not exists`,
+      msg: `Invalid email or password`,
     })
   })
 }

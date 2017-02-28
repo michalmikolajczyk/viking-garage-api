@@ -30,7 +30,7 @@ describe('user/verify tests', function() {
     })
   })
 
-  it('should changed password successfully', function(done) {
+  it('should verified user successfully', function(done) {
     let email = 'viking.garage.app@gmail.com'
     User.findOne({where: { email }})
     .then(user => {

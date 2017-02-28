@@ -20,7 +20,7 @@ export default function verify(req, res, next) {
       token: v1(),
     })
     .then(info => {
-      login(user.dataValue.email, user.dataValue.password)
+      login(user.dataValues.email, user.dataValues.password)
       .then(jwt => {
         res.status(200).json({
           token: jwt,
