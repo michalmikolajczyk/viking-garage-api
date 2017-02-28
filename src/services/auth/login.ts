@@ -15,11 +15,15 @@ export default function login(req, res, next) {
   }
 
   logIn(email, password)
-  .then(token => {
+  .then(({token, user}) => {
     res.status(200).json({
       token,
       err: false,
       msg: `User logged in successfully`,
+      user: {
+        name: user.name,
+        email: user.email,
+      }
     })
   })
   .catch(err => {

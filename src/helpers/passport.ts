@@ -48,7 +48,7 @@ export function login(email: string, password: string):Promise<any> {
 
       let payload = {id: user.dataValues.id}
       let token = jwt.sign(payload, conf.jwt.secret)
-      return resolve(token)
+      return resolve({token, user: user.dataValues})
     })
     .catch(reject)
   })
