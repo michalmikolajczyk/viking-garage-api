@@ -1,5 +1,4 @@
-import * as jwt from 'jsonwebtoken'
-import config from '../../config'
+import { login as logIn } from '../../helpers/passport'
 import { User } from '../../sequelize'
 
 export default function login(req, res, next) {
@@ -15,27 +14,18 @@ export default function login(req, res, next) {
     })
   }
 
-  User.findOne({where: {email, password}})
-  .then(function(user) {
-    if (user === null) {
-      return res.status(400).json({
-        err: true,
-        msg: `User with provided email not exists`,
-      })
-    }
-
-    let payload = {id: user.dataValues.id}
-    let token = jwt.sign(payload, config.jwt.secret)
-    return res.status(200).json({
+  logIn(email, password)
+  .then(token => {
+    res.status(200).json({
       token,
       err: false,
       msg: `User logged in successfully`,
     })
   })
-  .catch(function(err) {
-    return res.status(400).json({
+  .catch(err => {
+    res.status(400).json({
       err: true,
-      msg: `User with provided email not exists ${err}`,
+      msg: `User with provided email or password not exists`,
     })
   })
 }

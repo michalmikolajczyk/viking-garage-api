@@ -1,11 +1,10 @@
+import { login } from '../../helpers/passport'
 import { User } from '../../sequelize'
 import { v1 } from 'uuid'
 
 export default function verify(req, res, next) {
 
-  let {
-    token
-  } = req.body
+  let { token } = req.body
 
   User.findOne({where: { token }})
   .then(user => {
@@ -21,24 +20,25 @@ export default function verify(req, res, next) {
       token: v1(),
     })
     .then(info => {
-      req.logIn(user, function(err) {
-        if (err) {
-          return res.status(400).json({
-            err: true,
-            msg: `Invalid email or password`
-          })
-        }
-
-        return res.status(200).json({
+      login(user.dataValue.email, user.dataValue.password)
+      .then(jwt => {
+        res.status(200).json({
+          token: jwt,
           err: false,
           msg: `User verified successfully`
+        })
+      })
+      .catch(err => {
+        res.status(401).json({
+          err: true,
+          msg: `User not authorized`
         })
       })
     })
     .catch(err => {
       res.status(400).json({
         err: true,
-        msg: `Token expired`
+        msg: `User not authorized`
       })
     })
   })

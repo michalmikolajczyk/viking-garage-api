@@ -27,14 +27,21 @@ export default function signin(req, res, next):any {
   User.create(newUser)
   .then(user => {
     signinEmail(email, user.dataValues.token)
-    .then(() => res.status(200).json({
-      err: false,
-      msg: 'User created successfully - email sent'
-    }))
-    .catch(next)
+    .then(() => {
+        res.status(200).json({
+        err: false,
+        msg: 'User created successfully - email sent'
+      })
+    })
+    .catch(err => {
+      res.status(500).json({
+        err: true,
+        msg: 'Unexpected error ${err}'
+      })
+    })
   })
   .catch(err => {
-    res.status(400).json({
+    res.status(500).json({
       err: true,
       msg: 'Unexpected error ${err}'
     })

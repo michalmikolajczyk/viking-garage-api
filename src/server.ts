@@ -4,7 +4,7 @@ import * as cors from 'cors'
 import * as bodyParser from 'body-parser'
 import * as methodOverride from 'method-override'
 import { RegisterRoutes } from './routes'
-import passportConfig from './helpers/passport'
+import { config as passportConfig } from './helpers/passport'
 import config from './config'
 
 const app = express()
@@ -13,6 +13,7 @@ app.use('/docs', express.static(__dirname + '/swagger-ui'));
 app.use('/swagger.json', (req, res) => {
   res.sendfile('./dist/swagger.json')
 })
+
 app.use(cors({
   origin: config['origin'],
   credentials: true,
