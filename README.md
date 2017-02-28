@@ -2,26 +2,8 @@
 VIKING GARAGE API
 
 ### Setup
-#### Add src/config.ts file (database config below)
-```
-export default {
-  database: {
-    username: 'viking',
-    password: 'secret',
-    host: 'localhost',
-    port: 5432,
-    name: {
-      test: 'test_db',
-      prod: 'prod_db',
-      dev: 'dev_db',
-    }
-  },
-  session: 'secret-session-key',
-  origin: ['http://localhost:4000', 'http://vikinggarage.com'],
-  host: 'localhost',
-  port: 4000,
-}
-```
+#### Add src/config.ts file with configuration
+Check out src/config.ts.example with sample data
 #### Run app
 ```
 git clone git@github.com:michalmikolajczyk/viking-garage-api.git
@@ -30,12 +12,13 @@ npm test    # for running tests (mocha)
 npm run dev # for development (hot reloading)
 npm start   # for production environment
 ```
-#### Docs
-`npm start`
-for swagger-ui go to browser [localhost:4000/docs?url=http://localhost:4000/swagger.json](http://localhost:4000/docs?url=http://localhost:4000/swagger.json)
-for json with OpenAPI spec go to [localhost:4000/swagger.json](http://localhost:4000/swagger.json)
 
-### Setup Database with Postgres
+### Docs
+- `npm start`
+- swagger-ui: [localhost:4000/docs?url=http://localhost:4000/swagger.json](http://localhost:4000/docs?url=http://localhost:4000/swagger.json)
+- openAPI spec: [localhost:4000/swagger.json](http://localhost:4000/swagger.json)
+
+### Database
 #### Postgres installation
 ```
 brew update
@@ -46,8 +29,8 @@ postgres -D /usr/local/var/postgres
 ```
 createuser -P viking  # provide username & password
 createdb test_db      # create database for prod, test and dev
-psql vg               # login to db and grant privieges
-grant all privileges on database vg to viking;
+psql test_db          # login to db and grant privieges
+GRANT ALL PRIVILEGES ON DATABASE test_db TO viking;
 ```
 
 ### Dev env
