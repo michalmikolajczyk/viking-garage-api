@@ -1,10 +1,8 @@
 import { User } from './'
 
 export default function cleandb() {
-  // recreate User table
   return User.sync({ force: true })
     .then(function() {
-      // create new User
       return User.create({
         name: 'Viking Garage',
         email: 'viking.garage.app@gmail.com',
