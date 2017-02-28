@@ -41,7 +41,7 @@ export default function signin(req, res, next):any {
     })
   })
   .catch(err => {
-    res.status(500).json({
+    res.status(400).json({
       err: true,
       msg: 'Unexpected error ${err}'
     })
