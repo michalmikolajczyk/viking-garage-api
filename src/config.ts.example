@@ -1,0 +1,38 @@
+export default {
+
+  // database config
+  database: {
+    username: 'viking',
+    password: 'secret',
+    host: 'localhost',
+    port: 5432,
+    name: {
+      test: 'test',
+      prod: 'prod',
+      dev: 'dev',
+    }
+  },
+
+  // credentials for nodemailer
+  nodemailer: {
+    service: 'gmail',
+    auth: {
+      user: 'viking.garage.app@gmail.com',
+      pass: 'secret',
+    },
+  },
+
+  // Json Web Token config
+  jwt: {
+    secret: 'secret-jwt-key',
+    session: false,
+  },
+
+
+  // host and port for server
+  host: 'localhost',
+  port: 4000,
+
+  // domains allowed with CORS
+  origin: ['http://localhost:3000', 'http://vikinggarage.com'],
+}
