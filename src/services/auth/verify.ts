@@ -21,15 +21,19 @@ export default function verify(req, res, next) {
     })
     .then(info => {
       login(user.dataValues.email, user.dataValues.password)
-      .then(jwt => {
+      .then(({token, user}) => {
         res.status(200).json({
-          token: jwt,
+          token,
           err: false,
-          msg: `User verified successfully`
+          msg: `User verified successfully`,
+          user: {
+            name: user.name,
+            email: user.email,
+          }
         })
       })
       .catch(err => {
-        res.status(401).json({
+        res.status(400).json({
           err: true,
           msg: `User not authorized`
         })

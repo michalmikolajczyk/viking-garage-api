@@ -18,6 +18,7 @@ import {
   login,
   logout,
   me,
+  resend,
   reset,
   signin,
   verify,
@@ -74,7 +75,7 @@ export class AuthController {
    */
   @Post('resend')
   public resend(body: UserEmail, @Inject() req, @Inject() res, @Inject() next):void {
-    reset(req, res, next)
+    resend(req, res, next)
   }
 
   /**
