@@ -1,2 +1,5 @@
-import './auth'
-import './helloworld'
+import * as auth from './auth'
+
+export {
+  auth,
+}

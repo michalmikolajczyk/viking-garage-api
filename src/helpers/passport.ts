@@ -1,54 +1,55 @@
 import * as passport from 'passport'
-import { Strategy } from 'passport-local'
-import { User } from './models'
+import * as jwt from 'jsonwebtoken'
+import conf from '../config'
+import { Strategy, ExtractJwt } from 'passport-jwt'
+import { User } from '../sequelize'
 
-export default function config(app: any) {
+export function config(app: any) {
+  app.use(passport.initialize())
 
   passport.use(new Strategy({
-      usernameField: 'email',
-      passwordField: 'password',
+      secretOrKey: conf.jwt.secret,
+      jwtFromRequest: ExtractJwt.fromAuthHeader(),
     },
-    function(email, password, done) {
-      User.findOne({
-        where: {
-          'email': email
+    (payload, next) => {
+      User.findOne({where: {'id': payload.id}})
+      .then(user => {
+        if (user) {
+          next(null, user)
+        } else {
+          next(null, false)
         }
       })
-      .then(function (user) {
-        if (user == null) {
-          return done(null, false, { message: 'Incorrect credentials.' })
-        }
-
-        if (user.password === password) {
-          return done(null, user)
-        }
-
-        return done(null, false, { message: 'Incorrect credentials.' })
-      })
-      .catch(done)
+      .catch(err => next(null, false, {message: err}))
     }
   ))
-
-  passport.serializeUser(function(user, done) {
-    done(null, user['id'])
-  })
-
-  passport.deserializeUser(function(id, done) {
-    User.findOne({
-      where: {
-        'id': id
-      }
-    }).then(function (user) {
-      if (user == null) {
-        done(new Error('Wrong user id.'))
-      }
-
-      done(null, user)
-    })
-  })
-
-  app.use(passport.initialize())
-  app.use(passport.session())
 }
 
+export function authorize(req, res, next) {
+  return new Promise((resolve, reject) => {
+    passport.authenticate('jwt', {session: conf.jwt.session},
+      function(err, user, info) {
+        if (err || !user) {
+          reject(info)
+        }
+        resolve(user)
+      }
+    )(req, res, next)
+  })
+}
 
+export function login(email: string, password: string):Promise<any> {
+  return new Promise((resolve, reject) => {
+    User.findOne({where: {email, password}})
+    .then(function(user) {
+      if (user === null) {
+        return reject(`User with provided email and password not exists`)
+      }
+
+      let payload = {id: user.dataValues.id}
+      let token = jwt.sign(payload, conf.jwt.secret)
+      return resolve({token, user: user.dataValues})
+    })
+    .catch(reject)
+  })
+}
