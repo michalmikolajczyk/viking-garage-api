@@ -14,7 +14,7 @@ export default function change(req, res, next) {
     if (user == null) {
       return res.status(400).json({
         err: true,
-        msg: 'Token expired'
+        msg: 'Your login token has expired, please log in again'
       })
     }
 
@@ -29,16 +29,17 @@ export default function change(req, res, next) {
       })
     })
     .catch(err => {
+      // let's log the error
       res.status(500).json({
         err: true,
-        msg: `Unexpected error ${err}`
+        msg: `There was an error processing your request`
       })
     })
   })
   .catch(err => {
     res.status(500).json({
       err: true,
-      msg: `Unexpected error ${err}`
+      msg: `There was an error processing your request`
     })
   })
 }

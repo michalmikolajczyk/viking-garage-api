@@ -31,20 +31,20 @@ describe('user/reset tests', function() {
     })
   })
 
-  it('should send email with reset link successfully', function(done) {
+  it('should send email with reset link successfully', function (done) {
+    this.timeout(10000);
     chai.request(server)
-    .post('/user/reset')
-    .send({
-      email: 'viking.garage.app@gmail.com'
-    })
-    .end(function(err, res) {
-      res.should.have.status(200)
-      res.should.be.json
-      res.body.should.have.property('err')
-      res.body.err.should.equal(false)
-      res.body.should.have.property('msg')
-      res.body.msg.should.be.equal('Email with reset link sent successfully')
-      done()
-    })
+      .post('/user/reset')
+      .send({
+        email: 'viking.garage.app@gmail.com'
+      })
+      .end(function(err, res) {
+        res.should.have.status(200)
+        res.should.be.json
+        res.body.should.have.property('err')
+        res.body.err.should.equal(false)
+        res.body.should.have.property('msg')
+        res.body.msg.should.be.equal('Email with reset link sent successfully')
+        done()})
   })
 })

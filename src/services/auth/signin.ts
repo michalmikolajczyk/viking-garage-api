@@ -34,16 +34,16 @@ export default function signin(req, res, next):any {
       })
     })
     .catch(err => {
-      res.status(400).json({
+      res.status(500).json({
         err: true,
-        msg: 'Unexpected error ${err}'
+        msg: 'There was an error processing your request'
       })
     })
   })
   .catch(err => {
-    res.status(400).json({
+    res.status(500).json({
       err: true,
-      msg: 'Unexpected error ${err}'
+      msg: 'There was an error processing your request'
     })
   })
 }
