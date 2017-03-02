@@ -24,14 +24,14 @@ export default function reset(req, res, next) {
     .catch(err => {
       res.status(500).json({
         err: true,
-        msg: `Email sending error ${err}`
+        msg: 'There was an error with sending the reset link email'
       })
     })
   })
   .catch(err => {
     res.status(500).json({
       err: true,
-      msg: `Unexpected error ${err}`
+      msg: 'There was an error processing your request'
     })
   })
 }
