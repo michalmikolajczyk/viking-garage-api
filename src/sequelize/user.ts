@@ -1,4 +1,4 @@
-import * as Sequelize from 'sequelize'
+import * as Sequelize from 'sequelize';
 
 const attributes = {
   name: {
@@ -31,11 +31,11 @@ const attributes = {
     defaultValue: Sequelize.UUIDV1,
     allowNull: false,
   }
-}
+};
 
 const options = {
   freezeTableName: true
-}
+};
 
 export {
   attributes,

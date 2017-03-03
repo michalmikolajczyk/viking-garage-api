@@ -1,8 +1,8 @@
-import { User } from './'
+import { User } from './';
 
-export default function cleandb() {
+export default function cleandb(): Promise<any> {
   return User.sync({ force: true })
-    .then(function() {
+    .then(() => {
       return User.create({
         name: 'Viking Garage',
         email: 'viking.garage.app@gmail.com',
@@ -10,8 +10,6 @@ export default function cleandb() {
         password: 'secret',
         verified: true,
       })
-      .catch(err => {
-        console.log('Database clean error', err)
-      })
-    })
+      .catch(err => console.log('Database clean error', err));
+    });
 }
