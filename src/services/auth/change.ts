@@ -13,7 +13,7 @@ export default function change(req: any, res: any, next: any): void {
     if (!user) {
       return res.status(400).json({
         err: true,
-        msg: 'Your login token has expired, please log in again'
+        msg: 'Your reset token has expired, please reset the password again'
       });
     }
 

@@ -13,7 +13,7 @@ describe('user/signin tests', () => {
     return cleandb();
   });
 
-  it('should return error due the one empty field (birthday)', (done) => {
+  it('should return error due the one empty field (birthday)', function(done: any): void {
     chai.request(server)
       .post('/user/signin')
       .send({
@@ -32,7 +32,7 @@ describe('user/signin tests', () => {
       });
   });
 
-  it('should return error because of user with the same email in database', (done) => {
+  it('should return error because of user with the same email in database', function(done: any): void {
     chai.request(server)
       .post('/user/signin')
       .send({
@@ -43,7 +43,7 @@ describe('user/signin tests', () => {
         password2: 'secret',
       })
       .end((err, res) => {
-        res.should.have.status(400);
+        res.should.have.status(500);
         res.body.should.have.property('err');
         res.body.err.should.equal(true);
         res.body.should.have.property('msg');
@@ -51,7 +51,7 @@ describe('user/signin tests', () => {
       });
   });
 
-  it('should create new user successfully', (done) => {
+  it('should create new user successfully', function(done: any): void {
     chai.request(server)
       .post('/user/signin')
       .send({

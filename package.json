@@ -8,7 +8,7 @@
     "tdd": "npm run build && mocha --watch --watch-extensions ts,tsx -r ts-node/register ./src/tests/**/*.spec.ts",
     "start": "npm run build && node ./dist/server.js",
     "build": "npm run swagger-gen && npm run routes-gen && tsc",
-    "lint": "tslint ./src/**/*.ts ./src/**/**/*.ts",
+    "lint": "tslint ./src/*.ts ./src/**/*.ts ./src/**/**/*.ts",
     "swagger-gen": "$(npm bin)/tsoa swagger",
     "routes-gen": "$(npm bin)/tsoa routes",
     "postinstall": "npm run create-dist && npm run copy-template && npm run copy-swagger && npm run build",

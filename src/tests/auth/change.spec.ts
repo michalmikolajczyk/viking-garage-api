@@ -15,7 +15,7 @@ describe('user/change tests', () => {
     return cleandb();
   });
 
-  it('should return error because of token expired', (done) => {
+  it('should return error because of token expired', function(done: any): void {
     chai.request(server)
       .post('/user/change')
       .send({
@@ -28,12 +28,12 @@ describe('user/change tests', () => {
         res.body.should.have.property('err');
         res.body.err.should.equal(true);
         res.body.should.have.property('msg');
-        res.body.msg.should.be.equal('Token expired');
+        res.body.msg.should.be.equal('Your reset token has expired, please reset the password again');
         done();
       });
   });
 
-  it('should changed password successfully', (done) => {
+  it('should changed password successfully', function(done: any): void {
     const email = 'viking.garage.app@gmail.com';
     User.findOne({ where: { email } })
     .then((user) => {

@@ -15,7 +15,7 @@ describe('user/verify tests', () => {
     return cleandb();
   });
 
-  it('should return error because of wrong token', (done) => {
+  it('should return error because of wrong token', function(done: any): void {
     chai.request(server)
       .post('/user/verify')
       .send({ token: v1() })
@@ -29,7 +29,7 @@ describe('user/verify tests', () => {
       });
   });
 
-  it('should verified user successfully', (done) => {
+  it('should verified user successfully', function(done: any): void {
     const email = 'viking.garage.app@gmail.com';
     User.findOne({ where: { email } })
       .then((user) => {
