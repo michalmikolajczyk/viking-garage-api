@@ -55,7 +55,7 @@ export class AuthController {
    */
   @Get('logout')
   public logout(@Inject() req: any, @Inject() res: any, @Inject() next: any): void {
-    auth.logout(req: any, res, next);
+    auth.logout(req, res, next);
   }
 
   /**

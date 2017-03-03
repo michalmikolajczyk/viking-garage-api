@@ -13,6 +13,7 @@ export {
   check,
   login,
   logout,
+  resend,
   reset,
   signin,
   me,
