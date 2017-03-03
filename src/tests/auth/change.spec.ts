@@ -11,9 +11,9 @@ chai.use(chaiHttp);
 
 describe('user/change tests', () => {
 
-  before(() =>  cleandb());
+  before(cleandb);
 
-  it('should return error because of token expired', function(done: any): void {
+  it('should return error because of token expired', (done) => {
     chai.request(server)
       .post('/user/change')
       .send({
@@ -31,7 +31,7 @@ describe('user/change tests', () => {
       });
   });
 
-  it('should changed password successfully', function(done: any): void {
+  it('should changed password successfully', (done) => {
     const email = 'viking.garage.app@gmail.com';
     User.findOne({ where: { email } })
     .then((user) => {

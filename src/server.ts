@@ -18,7 +18,7 @@ app.use(cors({
   origin: config.origin,
   credentials: true,
 }));
-app.use(bodyParser.urlencoded({extended: true}));
+app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use(methodOverride());
 

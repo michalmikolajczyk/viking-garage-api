@@ -35,16 +35,14 @@ export default function verify(req: Request, res: Response, next: NextFunction):
               name: user.name,
               email: user.email,
             },
-          })
-        )
+          }))
         .catch((err) => {
           log(`Unexpected error ${err}`);
           res.status(400).json({
             err: true,
             msg: 'User not authorized',
           });
-        })
-      )
+        }))
       .catch((err) => {
         log(`Unexpected error ${err}`);
         res.status(400).json({

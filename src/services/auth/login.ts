@@ -18,7 +18,7 @@ export default function login(req: Request, res: Response, next: NextFunction): 
     return res.status(400)
       .json({
         err: true,
-        msg: 'Empty field email or password'
+        msg: 'Empty field email or password',
       });
   }
 
@@ -32,9 +32,8 @@ export default function login(req: Request, res: Response, next: NextFunction): 
           name: user.name,
           email: user.email,
         },
-      })
-    )
-    .catch(err => {
+      }))
+    .catch((err) => {
       log(`Unexpected error ${err}`);
       res.status(400).json({
         err: true,

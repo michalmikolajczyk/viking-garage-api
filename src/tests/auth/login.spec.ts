@@ -11,7 +11,7 @@ describe('user/login tests', () => {
 
   before(cleandb);
 
-  it('should return error because of wrong email', function(done: any): void {
+  it('should return error because of wrong email', (done) => {
     chai.request(server)
     .post('/user/login')
     .send({
@@ -28,7 +28,7 @@ describe('user/login tests', () => {
     });
   });
 
-  it('should return error because of wrong password', function(done: any): void {
+  it('should return error because of wrong password', (done) => {
     chai.request(server)
     .post('/user/login')
     .send({
@@ -45,7 +45,7 @@ describe('user/login tests', () => {
     });
   });
 
-  it('should logged in user successfully', function(done: any): void {
+  it('should logged in user successfully', (done) => {
     chai.request(server)
     .post('/user/login')
     .send({

@@ -20,12 +20,12 @@ export function config(app: Express): void {
     },
     (payload, next) => {
       User.findOne({ where: { id: payload.id } })
-      .then(user => {
+      .then((user) => {
         if (user) return next(null, user);
         next(null, false);
       })
       .catch(err => next(null, false, { message: err }));
-    }
+    },
   ));
 }
 
@@ -37,7 +37,7 @@ export function authorize(req: Request, res: Response, next: NextFunction): Prom
       (err, user, info) => {
         if (err || !user) return reject(info);
         resolve(user);
-      }
+      },
     )(req, res, next);
   });
 }
@@ -49,7 +49,7 @@ export function login(email: string, password: string): Promise<any> {
       if (!user) {
         throw new Error('User with provided email and password not exists');
       }
-      const payload = {id: user.dataValues.id};
+      const payload = { id: user.dataValues.id };
       const token = jwt.sign(payload, conf.jwt.secret);
       return { token, user: user.dataValues };
     });

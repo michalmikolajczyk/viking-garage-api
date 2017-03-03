@@ -26,8 +26,7 @@ export default function reset(req: Request, res: Response, next: NextFunction): 
           .json({
             err: false,
             msg: 'Email with reset link sent successfully',
-          })
-        )
+          }))
         .catch((err) => {
           log(`Unexpected error ${err}`);
           res.status(500).json({

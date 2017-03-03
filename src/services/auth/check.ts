@@ -17,8 +17,7 @@ export default function check(req: Request, res: Response, next: NextFunction): 
           email: user.email,
           name: user.name,
         },
-      })
-    )
+      }))
     .catch((err) => {
       log(`Unexpected error ${err}`);
       res.status(401).json({

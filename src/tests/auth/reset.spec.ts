@@ -12,7 +12,7 @@ describe('user/reset tests', () => {
 
   before(cleandb);
 
-  it('should return error because of wrong email', function(done: any): void {
+  it('should return error because of wrong email', (done) => {
     chai.request(server)
       .post('/user/reset')
       .send({
@@ -28,7 +28,7 @@ describe('user/reset tests', () => {
       });
   });
 
-  it('should send email with reset link successfully', function(done: any): void {
+  it('should send email with reset link successfully', (done) => {
     this.timeout(10000);
     chai.request(server)
       .post('/user/reset')

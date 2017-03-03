@@ -10,8 +10,8 @@ const attributes = {
     allowNull: false,
     unique: true,
     validate: {
-      isEmail: true
-    }
+      isEmail: true,
+    },
   },
   birthday: {
     type: Sequelize.DATE,
@@ -30,11 +30,11 @@ const attributes = {
     type: Sequelize.UUID,
     defaultValue: Sequelize.UUIDV1,
     allowNull: false,
-  }
+  },
 };
 
 const options = {
-  freezeTableName: true
+  freezeTableName: true,
 };
 
 export {

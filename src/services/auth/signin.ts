@@ -35,21 +35,19 @@ export default function signin(req: Request, res: Response, next: NextFunction):
         .json({
           err: false,
           msg: 'User created successfully - email sent',
-        })
-      )
+        }))
       .catch((err) => {
         log(`Unexpected error ${err}`);
         res.status(500).json({
           err: true,
-          msg: 'There was an error processing your request'
+          msg: 'There was an error processing your request',
         });
-      })
-    )
+      }))
     .catch((err) => {
       log(`Unexpected error ${err}`);
       res.status(500).json({
         err: true,
-        msg: 'There was an error processing your request'
+        msg: 'There was an error processing your request',
       });
     });
 }
