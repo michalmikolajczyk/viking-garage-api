@@ -1,10 +1,16 @@
+import {
+  Express,
+  Request,
+  Response,
+  NextFunction,
+} from 'express';
 import * as passport from 'passport';
 import * as jwt from 'jsonwebtoken';
 import conf from '../config';
 import { Strategy, ExtractJwt } from 'passport-jwt';
 import { User } from '../sequelize';
 
-export function config(app: any): void {
+export function config(app: Express): void {
   app.use(passport.initialize());
 
   passport.use(new Strategy(
@@ -23,7 +29,7 @@ export function config(app: any): void {
   ));
 }
 
-export function authorize(req: any, res: any, next: any): Promise<any> {
+export function authorize(req: Request, res: Response, next: NextFunction): Promise<any> {
   return new Promise((resolve, reject) => {
     passport.authenticate(
       'jwt',
@@ -37,15 +43,14 @@ export function authorize(req: any, res: any, next: any): Promise<any> {
 }
 
 export function login(email: string, password: string): Promise<any> {
-  return new Promise((resolve, reject) => {
-    User.findOne({where: {email, password}})
+  return User
+    .findOne({ where: { email, password } })
     .then((user) => {
-      if (!user) return reject(`User with provided email and password not exists`);
-
+      if (!user) {
+        throw new Error('User with provided email and password not exists');
+      }
       const payload = {id: user.dataValues.id};
       const token = jwt.sign(payload, conf.jwt.secret);
-      return resolve({token, user: user.dataValues});
-    })
-    .catch(reject);
-  });
+      return { token, user: user.dataValues };
+    });
 }

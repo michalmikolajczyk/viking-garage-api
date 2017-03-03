@@ -11,9 +11,7 @@ chai.use(chaiHttp);
 
 describe('user/verify tests', () => {
 
-  before(() => {
-    return cleandb();
-  });
+  before(cleandb);
 
   it('should return error because of wrong token', function(done: any): void {
     chai.request(server)

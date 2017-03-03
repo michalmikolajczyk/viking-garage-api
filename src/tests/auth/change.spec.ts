@@ -11,9 +11,7 @@ chai.use(chaiHttp);
 
 describe('user/change tests', () => {
 
-  before(() => {
-    return cleandb();
-  });
+  before(() =>  cleandb());
 
   it('should return error because of token expired', function(done: any): void {
     chai.request(server)

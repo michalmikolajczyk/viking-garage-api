@@ -9,9 +9,7 @@ chai.use(chaiHttp);
 
 describe('user/signin tests', () => {
 
-  before(() => {
-    return cleandb();
-  });
+  before(cleandb);
 
   it('should return error due the one empty field (birthday)', function(done: any): void {
     chai.request(server)

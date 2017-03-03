@@ -1,6 +1,11 @@
+import {
+  Request,
+  Response,
+  NextFunction,
+} from 'express';
 import { User } from '../../sequelize';
 
-export default function me(req: any, res: any, next: any): void {
+export default function me(req: Request, res: Response, next: NextFunction): any {
   if (req.isAuthenticated()) {
     res.status(200).json({
       err: false,
@@ -8,7 +13,7 @@ export default function me(req: any, res: any, next: any): void {
       user: req.user,
     });
   } else {
-    res.json({
+    res.status(401).json({
       err: false,
       msg: 'User is not logged in',
       user: false,

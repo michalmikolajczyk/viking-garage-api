@@ -1,7 +1,12 @@
+import {
+  Request,
+  Response,
+  NextFunction,
+} from 'express';
 import { signinEmail } from '../../helpers/nodemailer';
 import { User } from '../../sequelize';
 
-export default function signin(req: any, res: any, next: any): void {
+export default function signin(req: Request, res: Response, next: NextFunction): any {
   const {
     name,
     email,
@@ -25,22 +30,23 @@ export default function signin(req: any, res: any, next: any): void {
   };
 
   User.create(newUser)
-    .then((user) => {
-      signinEmail(email, user.dataValues.token)
-      .then(() => {
-          res.status(200).json({
+    .then(user => signinEmail(email, user.dataValues.token)
+      .then(() => res.status(200)
+        .json({
           err: false,
           msg: 'User created successfully - email sent',
-        });
-      })
+        })
+      )
       .catch((err) => {
+        log(`Unexpected error ${err}`);
         res.status(500).json({
           err: true,
           msg: 'There was an error processing your request'
         });
-      });
-    })
+      })
+    )
     .catch((err) => {
+      log(`Unexpected error ${err}`);
       res.status(500).json({
         err: true,
         msg: 'There was an error processing your request'

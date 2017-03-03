@@ -10,9 +10,7 @@ chai.use(chaiHttp);
 
 describe('user/reset tests', () => {
 
-  before(() => {
-    return cleandb();
-  });
+  before(cleandb);
 
   it('should return error because of wrong email', function(done: any): void {
     chai.request(server)
