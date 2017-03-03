@@ -47,11 +47,9 @@
     ],
     "no-construct": true,
     "no-debugger": true,
-    "no-shadowed-variable": true,
     "no-duplicate-variable": true,
     "no-empty": true,
     "no-eval": true,
-    "no-require-imports": true,
     "no-string-literal": true,
     "no-switch-case-fall-through": true,
     "trailing-comma": {
@@ -63,6 +61,7 @@
     "no-use-before-declare": true,
     "no-var-keyword": true,
     "no-var-requires": false,
+    "object-literal-shorthand": true,
     "one-line": [
       true,
       "check-open-brace",
@@ -105,7 +104,8 @@
       "check-decl",
       "check-operator",
       "check-separator",
-      "check-type"
+      "check-type",
+      "check-preblock"
     ]
   }
 }
