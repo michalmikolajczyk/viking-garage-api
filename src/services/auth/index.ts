@@ -1,9 +1,20 @@
-export {default as change} from './change'
-export {default as check} from './check'
-export {default as login} from './login'
-export {default as logout} from './logout'
-export {default as resend} from './resend'
-export {default as reset} from './reset'
-export {default as signin} from './signin'
-export {default as me} from './me'
-export {default as verify} from './verify'
+import change from './change';
+import  check from './check';
+import  login from './login';
+import  logout from './logout';
+import  resend from './resend';
+import  reset from './reset';
+import  signin from './signin';
+import  me from './me';
+import  verify from './verify';
+
+export {
+  change,
+  check,
+  login,
+  logout,
+  reset,
+  signin,
+  me,
+  verify,
+}

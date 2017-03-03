@@ -1,21 +1,20 @@
-import { User } from '../../sequelize'
-import { v1 } from 'uuid'
+import { User } from '../../sequelize';
+import { v1 } from 'uuid';
 
-export default function change(req, res, next) {
-
-  let {
+export default function change(req: any, res: any, next: any): void {
+  const {
     password1,
     password2,
-    token
-  } = req.body
+    token,
+  } = req.body;
 
-  User.findOne({where: { token }})
+  User.findOne({ where: { token } })
   .then(user => {
-    if (user == null) {
+    if (!user) {
       return res.status(400).json({
         err: true,
         msg: 'Your login token has expired, please log in again'
-      })
+      });
     }
 
     user.update({
@@ -23,23 +22,23 @@ export default function change(req, res, next) {
       token: v1(),
     })
     .then(() => {
-        res.status(200).json({
+      res.status(200).json({
         err: false,
         msg: 'Password changed successfully'
-      })
+      });
     })
     .catch(err => {
       // let's log the error
       res.status(500).json({
         err: true,
         msg: `There was an error processing your request`
-      })
-    })
+      });
+    });
   })
   .catch(err => {
     res.status(500).json({
       err: true,
       msg: `There was an error processing your request`
-    })
-  })
+    });
+  });
 }

@@ -1,55 +1,54 @@
-import { login } from '../../helpers/passport'
-import { User } from '../../sequelize'
-import { v1 } from 'uuid'
+import { login } from '../../helpers/passport';
+import { User } from '../../sequelize';
+import { v1 } from 'uuid';
 
-export default function verify(req, res, next) {
+export default function verify(req: any, res: any, next: any): void {
+  const { token } = req.body;
 
-  let { token } = req.body
+  User.findOne({ where: { token } })
+    .then((user) => {
+      if (!user) {
+        return res.status(400).json({
+          err: true,
+          msg: 'Token expired',
+        });
+      }
 
-  User.findOne({where: { token }})
-  .then(user => {
-    if (user === null) {
-      return res.status(400).json({
-        err: true,
-        msg: 'Token expired'
+      user.update({
+        verified: true,
+        token: v1(),
       })
-    }
-
-    user.update({
-      verified: true,
-      token: v1(),
-    })
-    .then(info => {
-      login(user.dataValues.email, user.dataValues.password)
-      .then(({token, user}) => {
-        res.status(200).json({
-          token,
-          err: false,
-          msg: `User verified successfully`,
-          user: {
-            name: user.name,
-            email: user.email,
-          }
-        })
+      .then((info) => {
+        login(user.dataValues.email, user.dataValues.password)
+          .then(({ token, user }) => {
+            res.status(200).json({
+              token,
+              err: false,
+              msg: `User verified successfully`,
+              user: {
+                name: user.name,
+                email: user.email,
+              },
+            });
+          })
+          .catch((err) => {
+            res.status(400).json({
+              err: true,
+              msg: `User not authorized`
+            });
+          });
       })
-      .catch(err => {
+      .catch((err) => {
         res.status(400).json({
           err: true,
           msg: `User not authorized`
-        })
-      })
+        });
+      });
     })
-    .catch(err => {
+    .catch((err) => {
       res.status(400).json({
         err: true,
-        msg: `User not authorized`
-      })
-    })
-  })
-  .catch(res => {
-    res.status(400).json({
-      err: true,
-      msg: `Token expired`
-    })
-  })
+        msg: `Token expired`
+      });
+    });
 }
