@@ -28,7 +28,13 @@ describe('user/reset tests', () => {
       });
   });
 
-  it('should send email with reset link successfully', (done) => {
+  /**
+   * if we need this inside function (for example for timeout()) we can
+   * use function expression instead of arrow function, but we have to
+   * use this explicit (it's a 'no-function-expression' rule from linter)
+   */
+
+  it('should send email with reset link successfully', function (done) {
     this.timeout(10000);
     chai.request(server)
       .post('/user/reset')

@@ -5,6 +5,8 @@ import {
 } from 'express';
 import { signinEmail } from '../../helpers/nodemailer';
 import { User } from '../../sequelize';
+import debug from 'debug';
+const log = debug('api:signin');
 
 export default function signin(req: Request, res: Response, next: NextFunction): any {
   const {
