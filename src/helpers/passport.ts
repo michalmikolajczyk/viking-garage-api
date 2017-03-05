@@ -29,7 +29,7 @@ export function config(app: Express): void {
   ));
 }
 
-export function authorize(req: Request, res: Response, next: NextFunction): Promise<any> {
+export function authenticate(req: Request, res: Response, next: NextFunction): Promise<any> {
   return new Promise((resolve, reject) => {
     passport.authenticate(
       'jwt',

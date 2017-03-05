@@ -1,5 +1,4 @@
 export default {
-
   // database config
   database: {
     username: 'viking',
