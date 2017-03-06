@@ -1,28 +1,22 @@
-import * as express from 'express'
+import {
+  Request,
+  Response,
+  NextFunction,
+} from 'express';
 import {
   Get,
   Inject,
   Post,
   Route,
-} from 'tsoa'
+} from 'tsoa';
 import {
   UserChange,
   UserEmail,
   UserLogin,
   UserSignin,
   UserToken,
-} from '../models/auth'
-import {
-  change,
-  check,
-  login,
-  logout,
-  me,
-  resend,
-  reset,
-  signin,
-  verify,
-} from '../services/auth'
+} from '../models/auth';
+import * as auth from '../services/auth';
 
 @Route('user')
 export class AuthController {
@@ -31,8 +25,8 @@ export class AuthController {
    * If user is logged in return object with user info
    */
   @Get('me')
-  public me(@Inject() req, @Inject() res, @Inject() next):void {
-    me(req, res, next)
+  public me(@Inject() req: Request, @Inject() res: Response, @Inject() next: NextFunction): void {
+    auth.me(req, res, next);
   }
 
   /**
@@ -40,16 +34,16 @@ export class AuthController {
    * @param {UserChange} 'UserChange' password and user token
    */
   @Post('change')
-  public change(body: UserChange, @Inject() req, @Inject() res, @Inject() next):void {
-    change(req, res, next)
+  public change(body: UserChange, @Inject() req: Request, @Inject() res: Response, @Inject() next: NextFunction): void {
+    auth.change(req, res, next);
   }
 
   /**
    * Check if user is logged in
    */
   @Get('check')
-  public check(@Inject() req, @Inject() res, @Inject() next):void {
-    check(req, res, next)
+  public check(@Inject() req: Request, @Inject() res: Response, @Inject() next: NextFunction): void {
+    auth.check(req, res, next);
   }
 
   /**
@@ -57,16 +51,16 @@ export class AuthController {
    * @param {UserLogin} user login credentials
    */
   @Post('login')
-  public login(body: UserLogin, @Inject() req, @Inject() res, @Inject() next):void {
-    login(req, res, next)
+  public login(body: UserLogin, @Inject() req: Request, @Inject() res: Response, @Inject() next: NextFunction): void {
+    auth.login(req, res, next);
   }
 
   /**
    * User logout (end cookie session)
    */
   @Get('logout')
-  public logout(@Inject() req, @Inject() res, @Inject() next):void {
-    logout(req, res, next)
+  public logout(@Inject() req: Request, @Inject() res: Response, @Inject() next: NextFunction): void {
+    auth.logout(req, res, next);
   }
 
   /**
@@ -74,8 +68,8 @@ export class AuthController {
    * @param {UserEmail} 'email' user email address
    */
   @Post('resend')
-  public resend(body: UserEmail, @Inject() req, @Inject() res, @Inject() next):void {
-    resend(req, res, next)
+  public resend(body: UserEmail, @Inject() req: Request, @Inject() res: Response, @Inject() next: NextFunction): void {
+    auth.resend(req, res, next);
   }
 
   /**
@@ -83,8 +77,8 @@ export class AuthController {
    * @param {UserEmail} 'email' user email address
    */
   @Post('reset')
-  public reset(body: UserEmail, @Inject() req, @Inject() res, @Inject() next):void {
-    reset(req, res, next)
+  public reset(body: UserEmail, @Inject() req: Request, @Inject() res: Response, @Inject() next: NextFunction): void {
+    auth.reset(req, res, next);
   }
 
   /**
@@ -92,8 +86,8 @@ export class AuthController {
    * @param {UserSigin} user credentials
    */
   @Post('signin')
-  public signin(body: UserSignin, @Inject() req, @Inject() res, @Inject() next):void {
-    signin(req, res, next)
+  public signin(body: UserSignin, @Inject() req: Request, @Inject() res: Response, @Inject() next: NextFunction): void {
+    auth.signin(req, res, next);
   }
 
   /**
@@ -101,7 +95,7 @@ export class AuthController {
    * @param {UserToken} 'UserToken' user uuid token
    */
   @Post('verify')
-  public verify(body: UserToken, @Inject() req, @Inject() res, @Inject() next):void {
-    verify(req, res, next)
+  public verify(body: UserToken, @Inject() req: Request, @Inject() res: Response, @Inject() next: NextFunction): void {
+    auth.verify(req, res, next);
   }
 }

@@ -1,13 +1,12 @@
-import Sequelize from 'sequelize'
-import config from '../config'
+import Sequelize from 'sequelize';
+import config from '../config';
 
-let db = config.database
-
+const db = config.database;
 const sequelize = new Sequelize(db.name, db.username, db.password, {
   host: db.host || 'localhost',
   port: db.port || 5432,
   dialect: 'postgres',
   logging: false,
-})
+});
 
-export default sequelize
+export default sequelize;
