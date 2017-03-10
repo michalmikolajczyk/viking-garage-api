@@ -5,7 +5,7 @@ export default {
     password: 'secret',
     host: 'localhost',
     port: 5432,
-    name: 'vg'
+    name: 'vg',
   },
 
   // credentials for nodemailer
