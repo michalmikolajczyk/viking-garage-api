@@ -1,9 +1,11 @@
-import * as Sequelize from 'sequelize';
-
-export default {
-  name: {
-    allowNull: false,
-    primaryKey: true,
-    type: Sequelize.STRING,
-  }
-};
+export default [
+  'club',
+  'coach',
+  'guide',
+  'mechanic',
+  'motocross',
+  'motocycle',
+  'photographer',
+  'transport',
+  'garage',
+];

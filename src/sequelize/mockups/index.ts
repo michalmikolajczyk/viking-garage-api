@@ -1,10 +1,10 @@
 import {
   Offer,
-  Type,
+  Tag,
   User,
 } from '../';
 import offers from './offers';
-import types from './types';
+import tags from './tags';
 import users from './users';
 import debug from 'debug';
 const log = debug('api:Sequelize');
@@ -21,8 +21,8 @@ export function createOffers(): Promise<any> {
     .catch(err => log('Database bulkCreate error', err));
 }
 
-export function createTypes(): Promise<any> {
-  return Type.sync({ force: true })
-    .then(() => Type.bulkCreate(types))
+export function createTags(): Promise<any> {
+  return Tag.sync({ force: true })
+    .then(() => Tag.bulkCreate(tags))
     .catch(err => log('Database bulkCreate error', err));
 }

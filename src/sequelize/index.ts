@@ -1,25 +1,32 @@
 import sequelize from './config';
 import OfferModel from './models/offer';
-import TypeModel from './models/type';
+import TagModel from './models/tag';
 import UserModel from './models/user';
 
 const freezeTableName = true;
 const Offer = sequelize.define('offers', OfferModel, { freezeTableName });
-const Type = sequelize.define('types', TypeModel, { freezeTableName });
+const Tag = sequelize.define('tags', TagModel, { freezeTableName });
 const User = sequelize.define('users', UserModel, { freezeTableName });
+
+// Offer.belongsTo(Tag);
 
 export {
   Offer,
-  Type,
+  Tag,
   User,
 }
 
 import {
-  createUsers,
   createOffers,
-  createTypes,
+  createTags,
+  createUsers,
 } from './mockups';
 
-// createUsers();
-// createOffers();
-createTypes();
+createUsers();
+createOffers();
+createTags();
+
+// Offer.find({ where: { id: 1 } })
+//   .then(offer => {
+//     console.log(offer);
+//   })
