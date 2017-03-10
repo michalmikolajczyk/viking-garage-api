@@ -1,6 +1,34 @@
-import * as UserModel from './user';
+import UserModel from './user';
+import OfferModel from './offer';
+import TagModel from './offer/tag';
+import TypeModel from './offer/type';
+// import OwnerModel from './offer/owner';
 import sequelize from './config';
 
-const User = sequelize.define('users', UserModel.attributes, UserModel.options);
+const freezeTableName = true;
+const User = sequelize.define('user', UserModel, { freezeTableName });
+const Offer = sequelize.define('offers', OfferModel, { freezeTableName });
+const Tag = sequelize.define('tags', TagModel, { freezeTableName });
+const Type = sequelize.define('types', TypeModel, { freezeTableName });
 
-export { User }
+Offer.belongsTo(Type);
+
+Offer.belongsToMany(Tag, { through: 'OfferTag' });
+Tag.belongsToMany(Offer, { through: 'OfferTag' });
+
+export {
+  User,
+  Offer,
+  Tag,
+  Type,
+}
+
+import {
+  createOffers,
+  createTags,
+  createTypes,
+} from './mocks';
+
+// createOffers();
+// createTags();
+createTypes();
