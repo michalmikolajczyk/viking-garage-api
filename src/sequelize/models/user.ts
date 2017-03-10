@@ -1,6 +1,6 @@
 import * as Sequelize from 'sequelize';
 
-const attributes = {
+export default {
   name: {
     type: Sequelize.STRING,
     allowNull: false,
@@ -32,12 +32,3 @@ const attributes = {
     allowNull: false,
   },
 };
-
-const options = {
-  freezeTableName: true,
-};
-
-export {
-  attributes,
-  options,
-}

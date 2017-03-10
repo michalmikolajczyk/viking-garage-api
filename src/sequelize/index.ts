@@ -1,6 +1,7 @@
-import * as UserModel from './user';
+import UserModel from './models/user';
 import sequelize from './config';
 
-const User = sequelize.define('users', UserModel.attributes, UserModel.options);
+const freezeTableName = true;
+const User = sequelize.define('users', UserModel, { freezeTableName });
 
 export { User }
