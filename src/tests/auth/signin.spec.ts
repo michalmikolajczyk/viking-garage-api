@@ -3,13 +3,13 @@ import * as mocha from 'mocha';
 import * as chai from 'chai';
 import chaiHttp = require('chai-http');
 import server from '../../server';
-import cleandb from '../../sequelize/cleandb';
+import { createUsers } from '../../sequelize/mockups';
 const should = chai.should();
 chai.use(chaiHttp);
 
 describe('user/signin tests', () => {
 
-  before(cleandb);
+  before(createUsers);
 
   it('should return error due the one empty field (birthday)', (done) => {
     chai.request(server)
