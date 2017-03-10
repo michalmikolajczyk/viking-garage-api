@@ -12,51 +12,39 @@ import {
   Inject,
   Route,
 } from 'tsoa';
-import {
-  UserChange,
-  UserEmail,
-  UserLogin,
-  UserSignin,
-  UserToken,
-} from '../models/auth';
-import * as auth from '../services/auth';
+
+/**
+ * Offer CRUD
+ */
 
 @Route('offer')
 export class OfferController {
 
   /**
-   * If user is logged in return object with user info
+   * Get offer by id
    */
   @Get('{id}')
   @Tags('offer')
-  public get(id: number, @Inject() req: Request, @Inject() res: Response, @Inject() next: NextFunction): void {
-    auth.me(req, res, next);
-  }
+  public get(id: number, @Inject() req: Request, @Inject() res: Response, @Inject() next: NextFunction): void {}
 
   /**
-   * Change user password with provided token
+   * Create new offer
    */
   @Post('')
   @Tags('offer')
-  public post(@Inject() req: Request, @Inject() res: Response, @Inject() next: NextFunction): void {
-    auth.change(req, res, next);
-  }
+  public post(@Inject() req: Request, @Inject() res: Response, @Inject() next: NextFunction): void {}
 
   /**
-   * Change user password with provided token
+   * Update existing offer
    */
   @Put('{id}')
   @Tags('offer')
-  public put(@Inject() req: Request, @Inject() res: Response, @Inject() next: NextFunction): void {
-    auth.change(req, res, next);
-  }
+  public put(id: number, @Inject() req: Request, @Inject() res: Response, @Inject() next: NextFunction): void {}
 
   /**
-   * Change user password with provided token
+   * Delete offer by id
    */
   @Delete('{id}')
   @Tags('offer')
-  public delete(@Inject() req: Request, @Inject() res: Response, @Inject() next: NextFunction): void {
-    auth.change(req, res, next);
-  }
+  public delete(id: number, @Inject() req: Request, @Inject() res: Response, @Inject() next: NextFunction): void {}
 }
