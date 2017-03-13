@@ -5,4 +5,8 @@ export default {
     allowNull: false,
     type: Sequelize.STRING,
   },
+  picture: {
+    allowNull: false,
+    type: Sequelize.STRING,
+  },
 };

@@ -1,12 +1,14 @@
 import {
   Location,
   Offer,
+  Offerer,
   Tag,
   User,
 } from '../';
 import sequelize from '../config';
 import locations from './locations';
 import offers from './offers';
+import offerers from './offerers';
 import tags from './tags';
 import users from './users';
 import debug from 'debug';
@@ -30,6 +32,12 @@ export function createOffers(): Promise<any> {
     .catch(err => log('Database bulkCreate error', err));
 }
 
+export function createOfferers(): Promise<any> {
+  return Offerer.sync({ force: true })
+    .then(() => Offerer.bulkCreate(offerers))
+    .catch(err => log('Database bulkCreate error', err));
+}
+
 export function createTags(): Promise<any> {
   return Tag.sync({ force: true })
     .then(() => Tag.bulkCreate(tags))
@@ -42,29 +50,31 @@ export function createRelations(): Promise<any> {
   Tag.belongsToMany(Offer, { through: 'OfferTag' });
 
   Offer.belongsTo(Location);
+  Offer.belongsTo(Offerer);
 
   return sequelize.sync({ force: true });
 }
 
 export function createAll() {
-
   createRelations().then(() => {
     Promise.all([
       createLocation(),
       createUsers(),
       createOffers(),
+      createOfferers(),
       createTags(),
     ]).then(() => {
         Offer.findById(1)
-          .then(offer => {
+          .then((offer) => {
             Promise.all([
               offer.setTags([3, 5, 7, 8]),
               offer.setLocation(1),
+              offer.setOfferer(1),
             ]).then(() => {
               console.log(offer);
-            })
-          })
-        })
-  })
+            });
+          });
+        });
+  });
 }
 
