@@ -36,29 +36,35 @@ export function createTags(): Promise<any> {
     .catch(err => log('Database bulkCreate error', err));
 }
 
+export function createRelations(): Promise<any> {
+
+  Offer.belongsToMany(Tag, { through: 'OfferTag' });
+  Tag.belongsToMany(Offer, { through: 'OfferTag' });
+
+  Offer.belongsTo(Location);
+
+  return sequelize.sync({ force: true });
+}
+
 export function createAll() {
 
-  Promise.all([
-    createLocation(),
-    createUsers(),
-    createOffers(),
-    createTags(),
-  ]).then(() => {
-
-    Offer.belongsToMany(Tag, { through: 'OfferTag' });
-    Tag.belongsToMany(Offer, { through: 'OfferTag' });
-
-    sequelize.sync().then(() => {
-      Offer.find({ where: { id: 1 } })
-        .then(offer => {
-          console.log(offer.dataValues);
-          offer.setTags([1, 2]).then(() => {
-            offer.getTags().then((tag) => {
-              console.log(tag.map(t => t.dataValues));
+  createRelations().then(() => {
+    Promise.all([
+      createLocation(),
+      createUsers(),
+      createOffers(),
+      createTags(),
+    ]).then(() => {
+        Offer.findById(1)
+          .then(offer => {
+            Promise.all([
+              offer.setTags([3, 5, 7, 8]),
+              offer.setLocation(1),
+            ]).then(() => {
+              console.log(offer);
             })
           })
         })
-      })
   })
 }
 
