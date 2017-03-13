@@ -3,6 +3,7 @@ import {
   Tag,
   User,
 } from '../';
+import sequelize from '../config';
 import offers from './offers';
 import tags from './tags';
 import users from './users';
@@ -26,3 +27,29 @@ export function createTags(): Promise<any> {
     .then(() => Tag.bulkCreate(tags))
     .catch(err => log('Database bulkCreate error', err));
 }
+
+export function createAll() {
+
+  Promise.all([
+    createUsers(),
+    createOffers(),
+    createTags(),
+  ]).then(() => {
+
+    Offer.belongsToMany(Tag, { through: 'OfferTag' });
+    Tag.belongsToMany(Offer, { through: 'OfferTag' });
+
+    sequelize.sync().then(() => {
+      Offer.find({ where: { id: 1 } })
+        .then(offer => {
+          console.log(offer.dataValues);
+          offer.setTags([1, 2]).then(() => {
+            offer.getTags().then((tag) => {
+              console.log(tag.map(t => t.dataValues));
+            })
+          })
+        })
+      })
+  })
+}
+
