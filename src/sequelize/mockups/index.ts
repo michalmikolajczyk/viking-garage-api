@@ -1,14 +1,22 @@
 import {
+  Location,
   Offer,
   Tag,
   User,
 } from '../';
 import sequelize from '../config';
+import locations from './locations';
 import offers from './offers';
 import tags from './tags';
 import users from './users';
 import debug from 'debug';
 const log = debug('api:Sequelize');
+
+export function createLocation(): Promise<any> {
+  return Location.sync({ force: true })
+    .then(() => Location.bulkCreate(locations))
+    .catch(err => log('Database bulkCreate error', err));
+}
 
 export function createUsers(): Promise<any> {
   return User.sync({ force: true })
@@ -31,6 +39,7 @@ export function createTags(): Promise<any> {
 export function createAll() {
 
   Promise.all([
+    createLocation(),
     createUsers(),
     createOffers(),
     createTags(),

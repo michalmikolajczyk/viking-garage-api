@@ -1,14 +1,17 @@
 import sequelize from './config';
+import LocationModel from './models/location';
 import OfferModel from './models/offer';
 import TagModel from './models/tag';
 import UserModel from './models/user';
 
 const freezeTableName = true;
-const Offer = sequelize.define('offers', OfferModel, { freezeTableName });
-const Tag = sequelize.define('tags', TagModel, { freezeTableName });
-const User = sequelize.define('users', UserModel, { freezeTableName });
+const Location = sequelize.define('location', LocationModel, { freezeTableName });
+const Offer = sequelize.define('offer', OfferModel, { freezeTableName });
+const Tag = sequelize.define('tag', TagModel, { freezeTableName });
+const User = sequelize.define('user', UserModel, { freezeTableName });
 
 export {
+  Location,
   Offer,
   Tag,
   User,
