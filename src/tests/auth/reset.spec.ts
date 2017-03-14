@@ -3,14 +3,14 @@ import * as mocha from 'mocha';
 import * as chai from 'chai';
 import chaiHttp = require('chai-http');
 import server from '../../server';
-import cleandb from '../../sequelize/cleandb';
+import { createUsers } from '../../sequelize/mockups';
 import { User } from '../../sequelize';
 const should = chai.should();
 chai.use(chaiHttp);
 
 describe('user/reset tests', () => {
 
-  before(cleandb);
+  before(createUsers);
 
   it('should return error because of wrong email', (done) => {
     chai.request(server)

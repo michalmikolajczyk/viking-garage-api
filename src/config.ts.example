@@ -5,7 +5,7 @@ export default {
     password: 'secret',
     host: 'localhost',
     port: 5432,
-    name: 'vg'
+    name: 'vg',
   },
 
   // credentials for nodemailer
@@ -22,7 +22,6 @@ export default {
     secret: 'secret-jwt-key',
     session: false,
   },
-
 
   // host and port for server
   host: 'localhost',

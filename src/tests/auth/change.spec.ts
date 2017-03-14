@@ -4,14 +4,14 @@ import * as chai from 'chai';
 import chaiHttp = require('chai-http');
 import { v1 } from 'uuid';
 import server from '../../server';
-import cleandb from '../../sequelize/cleandb';
+import { createUsers } from '../../sequelize/mockups';
 import { User } from '../../sequelize';
 const should = chai.should();
 chai.use(chaiHttp);
 
 describe('user/change tests', () => {
 
-  before(cleandb);
+  before(createUsers);
 
   it('should return error because of token expired', (done) => {
     chai.request(server)
