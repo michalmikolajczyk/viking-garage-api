@@ -3,12 +3,14 @@ import {
   Model,
   Modelspec,
   Motorcycle,
+  Motorspec,
 } from '../../motocycle';
 import sequelize from '../../config';
 import makes from './makes';
 import models from './models';
 import modelspecs from './modelspecs';
 import motorcycles from './motorcycles';
+import motorspecs from './motorspecs';
 import debug from 'debug';
 const log = debug('api:Sequelize');
 
@@ -36,13 +38,22 @@ export function createMotorcycles(): Promise<any> {
     .catch(err => log('Database bulkCreate error', err));
 }
 
-export function createRelations(): Promise<any> {
-  Motorcycle.belongsTo(Make);
-  Motorcycle.belongsTo(Model);
-  Motorcycle.belongsTo(Modelspec);
-  return sequelize.sync({ force: true });
+export function createMotorspecs(): Promise<any> {
+  return Motorspec.sync({ force: true })
+    .then(() => Motorspec.bulkCreate(motorspecs))
+    .catch(err => log('Database bulkCreate error', err));
 }
 
+export function createRelations(): Promise<any> {
+  return sequelize.drop({ cascade: true })
+    .then(() => {
+      Motorcycle.belongsTo(Motorspec);
+      Motorcycle.belongsTo(Make);
+      Motorcycle.belongsTo(Model);
+      Motorcycle.belongsTo(Modelspec);
+      return sequelize.sync({ force: true });
+    });
+}
 
 export function createAll() {
   createRelations().then(() => {
@@ -51,6 +62,7 @@ export function createAll() {
       createModels(),
       createModelspecs(),
       createMotorcycles(),
+      createMotorspecs(),
     ]).then(() => {
         Motorcycle.findById(1)
           .then((moto) => {
@@ -58,6 +70,7 @@ export function createAll() {
               moto.setMake('KTM'),
               moto.setModel('SX 125'),
               moto.setModelspec(1),
+              moto.setMotorspec(1),
             ]).then(() => {
               console.log(moto.dataValues);
             });
@@ -69,6 +82,7 @@ export function createAll() {
               moto.setMake('Husaberg'),
               moto.setModel('FE 390'),
               moto.setModelspec(1),
+              moto.setMotorspec(1),
             ]).then(() => {
               console.log(moto.dataValues);
             });
@@ -80,6 +94,7 @@ export function createAll() {
               moto.setMake('KTM'),
               moto.setModel('Freeride 250R'),
               moto.setModelspec(1),
+              moto.setMotorspec(1),
             ]).then(() => {
               console.log(moto.dataValues);
             });
