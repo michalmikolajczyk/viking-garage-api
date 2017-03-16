@@ -1,29 +1,25 @@
+import * as walkSync from 'walk-sync';
+import * as appRoot from 'app-root-path';
 import sequelize from './config';
-import MakeModel from './models/motorcycle/make';
-import ModelModel from './models/motorcycle/model';
-import ModelModelspec from './models/motorcycle/modelspec';
-import MotorcycleModel from './models/motorcycle/motorcycle';
-import MotorspecModel from './models/motorcycle/motorspec';
-import ProtectionModel from './models/motorcycle/protection';
+import fillDb from './mockups/motorcycle';
 
-const freezeTableName = true;
-const Make = sequelize.define('make', MakeModel, { freezeTableName });
-const Model = sequelize.define('model', ModelModel, { freezeTableName });
-const Modelspec = sequelize.define('modelspec', ModelModelspec, { freezeTableName });
-const Motorcycle = sequelize.define('motorcycle', MotorcycleModel, { freezeTableName });
-const Motorspec = sequelize.define('motorspec', MotorspecModel, { freezeTableName });
-const Protection = sequelize.define('protection', ProtectionModel, { freezeTableName });
+const db = {};
+const path = `${appRoot.path}/src/sequelize/models/motorcycle`
+const paths = walkSync(`${path}`);
 
-export {
-  Make,
-  Model,
-  Modelspec,
-  Motorcycle,
-  Motorspec,
-  Protection,
-  sequelize,
-}
+paths.forEach((file) => {
+  const model = sequelize.import(`${path}/${file}`);
+  db[model.name] = model;
+})
 
-import { createAll } from './mockups/motorcycle';
+Object.keys(db).forEach((model) => {
+  if ('associate' in db[model]) {
+    db[model].associate(db);
+  }
+})
 
-createAll();
+sequelize.sync({ force: true }).then(fillDb);
+
+db['sequelize'] = sequelize;
+
+export default db;
