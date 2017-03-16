@@ -14,7 +14,7 @@ import users from './users';
 import debug from 'debug';
 const log = debug('api:Sequelize');
 
-export function createLocation(): Promise<any> {
+export function createLocations(): Promise<any> {
   return Location.sync({ force: true })
     .then(() => Location.bulkCreate(locations))
     .catch(err => log('Database bulkCreate error', err));
@@ -58,7 +58,7 @@ export function createRelations(): Promise<any> {
 export function createAll() {
   createRelations().then(() => {
     Promise.all([
-      createLocation(),
+      createLocations(),
       createUsers(),
       createOffers(),
       createOfferers(),
