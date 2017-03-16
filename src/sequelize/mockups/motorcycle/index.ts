@@ -4,55 +4,53 @@ import {
   Modelspec,
   Motorcycle,
   Motorspec,
+  Protection,
+  sequelize,
 } from '../../motocycle';
-import sequelize from '../../config';
 import makes from './makes';
 import models from './models';
 import modelspecs from './modelspecs';
 import motorcycles from './motorcycles';
 import motorspecs from './motorspecs';
+import protections from './protections';
 import debug from 'debug';
 const log = debug('api:Sequelize');
 
 export function createMakes(): Promise<any> {
-  return Make.sync({ force: true })
-    .then(() => Make.bulkCreate(makes))
-    .catch(err => log('Database bulkCreate error', err));
+  return Make.bulkCreate(makes);
 }
 
 export function createModels(): Promise<any> {
-  return Model.sync({ force: true })
-    .then(() => Model.bulkCreate(models))
-    .catch(err => log('Database bulkCreate error', err));
+  return Model.bulkCreate(models);
 }
 
 export function createModelspecs(): Promise<any> {
-  return Modelspec.sync({ force: true })
-    .then(() => Modelspec.bulkCreate(modelspecs))
-    .catch(err => log('Database bulkCreate error', err));
+  return Modelspec.bulkCreate(modelspecs);
 }
 
 export function createMotorcycles(): Promise<any> {
-  return Motorcycle.sync({ force: true })
-    .then(() => Motorcycle.bulkCreate(motorcycles))
-    .catch(err => log('Database bulkCreate error', err));
+  return Motorcycle.bulkCreate(motorcycles);
 }
 
 export function createMotorspecs(): Promise<any> {
-  return Motorspec.sync({ force: true })
-    .then(() => Motorspec.bulkCreate(motorspecs))
-    .catch(err => log('Database bulkCreate error', err));
+  return Motorspec.bulkCreate(motorspecs);
+}
+
+export function createProtections(): Promise<any> {
+  return Protection.bulkCreate(protections);
 }
 
 export function createRelations(): Promise<any> {
-  return sequelize.drop({ cascade: true })
+  return sequelize.sync({ force: true })
     .then(() => {
-      Motorcycle.belongsTo(Motorspec);
       Motorcycle.belongsTo(Make);
       Motorcycle.belongsTo(Model);
       Motorcycle.belongsTo(Modelspec);
+      Motorcycle.belongsTo(Motorspec);
+      Motorcycle.belongsTo(Protection);
       return sequelize.sync({ force: true });
-    });
+    })
+    .catch(err => log('sequielize.drop error', err))
 }
 
 export function createAll() {
@@ -63,6 +61,7 @@ export function createAll() {
       createModelspecs(),
       createMotorcycles(),
       createMotorspecs(),
+      createProtections(),
     ]).then(() => {
         Motorcycle.findById(1)
           .then((moto) => {
@@ -70,7 +69,8 @@ export function createAll() {
               moto.setMake('KTM'),
               moto.setModel('SX 125'),
               moto.setModelspec(1),
-              moto.setMotorspec(1),
+              // moto.setMotorspec(1),
+              moto.setProtection(1),
             ]).then(() => {
               console.log(moto.dataValues);
             });
@@ -82,7 +82,7 @@ export function createAll() {
               moto.setMake('Husaberg'),
               moto.setModel('FE 390'),
               moto.setModelspec(1),
-              moto.setMotorspec(1),
+              // moto.setMotorspec(1),
             ]).then(() => {
               console.log(moto.dataValues);
             });
@@ -94,7 +94,7 @@ export function createAll() {
               moto.setMake('KTM'),
               moto.setModel('Freeride 250R'),
               moto.setModelspec(1),
-              moto.setMotorspec(1),
+              // moto.setMotorspec(1),
             ]).then(() => {
               console.log(moto.dataValues);
             });
