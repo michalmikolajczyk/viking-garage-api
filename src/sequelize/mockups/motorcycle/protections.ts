@@ -1,0 +1,16 @@
+export default [
+  {
+    hemlet: true,
+    gloves: true,
+    boots: true,
+    jacket: true,
+    vest: true,
+    chestProtector: true,
+    buzzer: true,
+    pants: true,
+    knees: true,
+    elbows: true,
+    goggles: true,
+    neckBrace: true,
+  },
+];
