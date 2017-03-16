@@ -1,106 +1,55 @@
-import {
-  Make,
-  Model,
-  Modelspec,
-  Motorcycle,
-  Motorspec,
-  Protection,
-  sequelize,
-} from '../../motocycle';
-import makes from './makes';
-import models from './models';
-import modelspecs from './modelspecs';
-import motorcycles from './motorcycles';
-import motorspecs from './motorspecs';
-import protections from './protections';
+import * as walkSync from 'walk-sync';
+import * as appRoot from 'app-root-path';
+import * as fs from 'fs';
 import debug from 'debug';
-const log = debug('api:Sequelize');
+import db from '../../motocycle';
+const log = debug('api:sequelize');
 
-export function createMakes(): Promise<any> {
-  return Make.bulkCreate(makes);
-}
+export default function fillDb() {
+  const path = `${appRoot.path}/src/sequelize/mockups/motorcycle`
+  const paths = walkSync(`${path}`, { ignore: ['index.ts'] });
+  const promises = [];
 
-export function createModels(): Promise<any> {
-  return Model.bulkCreate(models);
-}
+  paths.forEach((file) => {
+    const json = fs.readFileSync(`${path}/${file}`, 'utf-8');
+    const data = JSON.parse(json);
+    const model = file.replace('.json', '');
+    promises.push(db[model].bulkCreate(data));
+  })
 
-export function createModelspecs(): Promise<any> {
-  return Modelspec.bulkCreate(modelspecs);
-}
+  Promise.all(promises).then(() => {
+    const motorcycle = db['motorcycle']
+    motorcycle.findById(1)
+      .then((moto) => {
+        Promise.all([
+          moto.setMake('KTM'),
+          moto.setModel('SX 125'),
+          moto.setModelspec(1),
+          moto.setMotorspec(1),
+          moto.setProtection(1),
+        ]).then(() => log(moto.dataValues));
+      })
 
-export function createMotorcycles(): Promise<any> {
-  return Motorcycle.bulkCreate(motorcycles);
-}
-
-export function createMotorspecs(): Promise<any> {
-  return Motorspec.bulkCreate(motorspecs);
-}
-
-export function createProtections(): Promise<any> {
-  return Protection.bulkCreate(protections);
-}
-
-export function createRelations(): Promise<any> {
-  return sequelize.sync({ force: true })
-    .then(() => {
-      Motorcycle.belongsTo(Make);
-      Motorcycle.belongsTo(Model);
-      Motorcycle.belongsTo(Modelspec);
-      Motorcycle.belongsTo(Motorspec);
-      Motorcycle.belongsTo(Protection);
-      return sequelize.sync({ force: true });
-    })
-    .catch(err => log('sequielize.drop error', err))
-}
-
-export function createAll() {
-  createRelations().then(() => {
-    Promise.all([
-      createMakes(),
-      createModels(),
-      createModelspecs(),
-      createMotorcycles(),
-      createMotorspecs(),
-      createProtections(),
-    ]).then(() => {
-        Motorcycle.findById(1)
-          .then((moto) => {
-            Promise.all([
-              moto.setMake('KTM'),
-              moto.setModel('SX 125'),
-              moto.setModelspec(1),
-              // moto.setMotorspec(1),
-              moto.setProtection(1),
-            ]).then(() => {
-              console.log(moto.dataValues);
-            });
-          });
-
-        Motorcycle.findById(2)
-          .then((moto) => {
-            Promise.all([
-              moto.setMake('Husaberg'),
-              moto.setModel('FE 390'),
-              moto.setModelspec(1),
-              // moto.setMotorspec(1),
-            ]).then(() => {
-              console.log(moto.dataValues);
-            });
-          });
-
-        Motorcycle.findById(3)
-          .then((moto) => {
-            Promise.all([
-              moto.setMake('KTM'),
-              moto.setModel('Freeride 250R'),
-              moto.setModelspec(1),
-              // moto.setMotorspec(1),
-            ]).then(() => {
-              console.log(moto.dataValues);
-            });
-          });
-
+      motorcycle.findById(2)
+        .then((moto) => {
+          Promise.all([
+            moto.setMake('Husaberg'),
+            moto.setModel('FE 390'),
+            moto.setModelspec(1),
+            moto.setMotorspec(1),
+            moto.setProtection(1),
+          ]).then(() => log(moto.dataValues));
         });
-  });
-}
 
+      motorcycle.findById(3)
+        .then((moto) => {
+          Promise.all([
+            moto.setMake('KTM'),
+            moto.setModel('Freeride 250R'),
+            moto.setModelspec(1),
+            moto.setMotorspec(1),
+            moto.setProtection(1),
+          ]).then(() => log(moto.dataValues));
+        });
+  })
+}
