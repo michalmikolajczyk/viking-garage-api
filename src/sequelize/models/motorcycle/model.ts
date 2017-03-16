@@ -1,9 +1,10 @@
-import * as Sequelize from 'sequelize';
-
-export default {
-  name: {
-    allowNull: false,
-    primaryKey: true,
-    type: Sequelize.STRING,
-  },
+export default function(sequelize, Sequelize) {
+  return sequelize.define('model', {
+    name: {
+      allowNull: false,
+      primaryKey: true,
+      type: Sequelize.STRING,
+    }
+  });
 };
+
