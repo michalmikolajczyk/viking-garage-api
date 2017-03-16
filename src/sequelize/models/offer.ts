@@ -1,5 +1,16 @@
 import * as Sequelize from 'sequelize';
-import types from './type';
+
+const types = [
+  'club',
+  'coach',
+  'guide',
+  'mechanic',
+  'motocross',
+  'motocycle',
+  'photographer',
+  'transport',
+  'garage',
+];
 
 export default {
   title: {
