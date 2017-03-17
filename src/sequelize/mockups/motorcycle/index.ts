@@ -58,5 +58,5 @@ export default function fillDb() {
           moto.setService(1),
         ]).then(() => log(moto.dataValues));
       });
-  })
+  });
 }
