@@ -27,30 +27,33 @@ export default function fillDb() {
           moto.setModelspec(1),
           moto.setMotorspec(1),
           moto.setProtection(1),
+          moto.setAccessorie(1),
         ]).then(() => log(moto.dataValues));
       })
       .catch(err => console.log('All error', err));
 
-      motorcycle.findById(2)
-        .then((moto) => {
-          Promise.all([
-            moto.setMake('Husaberg'),
-            moto.setModel('FE 390'),
-            moto.setModelspec(1),
-            moto.setMotorspec(1),
-            moto.setProtection(1),
-          ]).then(() => log(moto.dataValues));
-        });
+    motorcycle.findById(2)
+      .then((moto) => {
+        Promise.all([
+          moto.setMake('Husaberg'),
+          moto.setModel('FE 390'),
+          moto.setModelspec(1),
+          moto.setMotorspec(1),
+          moto.setProtection(1),
+          moto.setAccessorie(1),
+        ]).then(() => log(moto.dataValues));
+      });
 
-      motorcycle.findById(3)
-        .then((moto) => {
-          Promise.all([
-            moto.setMake('KTM'),
-            moto.setModel('Freeride 250R'),
-            moto.setModelspec(1),
-            moto.setMotorspec(1),
-            moto.setProtection(1),
-          ]).then(() => log(moto.dataValues));
-        });
+    motorcycle.findById(3)
+      .then((moto) => {
+        Promise.all([
+          moto.setMake('KTM'),
+          moto.setModel('Freeride 250R'),
+          moto.setModelspec(1),
+          moto.setMotorspec(1),
+          moto.setProtection(1),
+          moto.setAccessorie(1),
+        ]).then(() => log(moto.dataValues));
+      });
   })
 }

@@ -1,0 +1,9 @@
+[
+  {
+    "travelBoxes": true,
+    "lock": true,
+    "camera": true,
+    "basicTools": "included",
+    "firstAidKit": true
+  }
+]

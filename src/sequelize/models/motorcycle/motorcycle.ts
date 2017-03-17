@@ -57,6 +57,7 @@ export default function(sequelize, Sequelize) {
   }, {
     classMethods: {
       associate(db) {
+        this.belongsTo(db.accessorie);
         this.belongsTo(db.make);
         this.belongsTo(db.model);
         this.belongsTo(db.modelspec);
