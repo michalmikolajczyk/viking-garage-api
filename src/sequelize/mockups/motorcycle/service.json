@@ -1,0 +1,15 @@
+[
+  {
+    "parkingGarage": false,
+    "recommendedMechanic": false,
+    "transportTheMorocycle": false,
+    "transportToFromMotorcycle": false,
+    "photographer": false,
+    "mechanicalChangesOptions": false,
+    "guide": false,
+    "coach": false,
+    "group": false,
+    "club": false,
+    "nearbyCircuitTrail": false
+  }
+]

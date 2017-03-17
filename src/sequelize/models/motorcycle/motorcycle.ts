@@ -19,7 +19,7 @@ export default function(sequelize, Sequelize) {
     'cat. B',
   ];
 
-  const motorcycle = sequelize.define('motorcycle', {
+  return sequelize.define('motorcycle', {
     year: {
       allowNull: false,
       type: Sequelize.INTEGER,
@@ -63,9 +63,8 @@ export default function(sequelize, Sequelize) {
         this.belongsTo(db.modelspec);
         this.belongsTo(db.motorspec);
         this.belongsTo(db.protection);
+        this.belongsTo(db.service);
       }
     }
   });
-
-  return motorcycle;
 }
