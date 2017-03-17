@@ -1,9 +1,5 @@
 export default function(sequelize, Sequelize) {
   return sequelize.define('protection', {
-    name: {
-      allowNull: false,
-      type: Sequelize.BOOLEAN,
-    },
     hemlet: {
       allowNull: false,
       type: Sequelize.BOOLEAN,

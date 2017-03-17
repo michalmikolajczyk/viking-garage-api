@@ -14,7 +14,7 @@ export default function fillDb() {
     const json = fs.readFileSync(`${path}/${file}`, 'utf-8');
     const data = JSON.parse(json);
     const model = file.replace('.json', '');
-    promises.push(db[model].bulkCreate(data));
+    promises.push(db[model].bulkCreate(data).catch(err => console.log('Bulk create', err)));
   })
 
   Promise.all(promises).then(() => {
@@ -29,6 +29,7 @@ export default function fillDb() {
           moto.setProtection(1),
         ]).then(() => log(moto.dataValues));
       })
+      .catch(err => console.log('All error', err));
 
       motorcycle.findById(2)
         .then((moto) => {
