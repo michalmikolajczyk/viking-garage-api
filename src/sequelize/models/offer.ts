@@ -1,6 +1,6 @@
 import offerTypes from '../offertypes';
 
-export default function(sequelize, Sequelize) {
+export default function (sequelize, Sequelize) {
   return sequelize.define('offer', {
     title: {
       allowNull: false,
@@ -14,11 +14,20 @@ export default function(sequelize, Sequelize) {
     main: {
       allowNull: false,
       type: Sequelize.INTEGER,
-    }
+    },
   }, {
     classMethods: {
       associate(db) {
         this.belongsToMany(db.accessorie, {
+          through: {
+            model: db.offeritem,
+            unique: false,
+          },
+          foreignKey: 'offerId',
+          constraints: false,
+        });
+
+        this.belongsToMany(db.motorcycle, {
           through: {
             model: db.offeritem,
             unique: false,
@@ -35,7 +44,7 @@ export default function(sequelize, Sequelize) {
           foreignKey: 'offerId',
           constraints: false,
         });
-      }
-    }
+      },
+    },
   });
 }

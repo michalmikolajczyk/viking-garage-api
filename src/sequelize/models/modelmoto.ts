@@ -1,5 +1,5 @@
 export default function (sequelize, Sequelize) {
-  return sequelize.define('make', {
+  return sequelize.define('modelmoto', {
     name: {
       allowNull: false,
       primaryKey: true,
@@ -7,3 +7,4 @@ export default function (sequelize, Sequelize) {
     },
   });
 };
+

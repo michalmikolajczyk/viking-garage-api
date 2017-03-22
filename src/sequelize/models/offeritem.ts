@@ -1,6 +1,6 @@
 import offerTypes from '../offertypes';
 
-export default function(sequelize, Sequelize) {
+export default function (sequelize, Sequelize) {
   return sequelize.define('offeritem', {
     id: {
       type: Sequelize.INTEGER,

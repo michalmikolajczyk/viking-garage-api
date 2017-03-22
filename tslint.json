@@ -4,6 +4,7 @@
     "import-name": [false],
     "max-line-length": [false],
     "ter-indent": [false],
-    "variable-name": [false]
+    "variable-name": [false],
+    "align": [true, "parameters"]
   }
 }

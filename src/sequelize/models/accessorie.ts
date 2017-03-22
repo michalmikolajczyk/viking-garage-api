@@ -1,4 +1,4 @@
-export default function(sequelize, Sequelize) {
+export default function (sequelize, Sequelize) {
   return sequelize.define('accessorie', {
     travelBoxes: {
       allowNull: false,
@@ -34,7 +34,7 @@ export default function(sequelize, Sequelize) {
           foreignKey: 'itemId',
           constraints: false,
         });
-      }
-    }
+      },
+    },
   });
 }

@@ -1,4 +1,4 @@
-export default function(sequelize, Sequelize) {
+export default function (sequelize, Sequelize) {
   return sequelize.define('user', {
     name: {
       type: Sequelize.STRING,

@@ -1,4 +1,4 @@
-export default function(sequelize, Sequelize) {
+export default function (sequelize, Sequelize) {
 
   const motorTypes = [
     'cruiser',
@@ -219,13 +219,24 @@ export default function(sequelize, Sequelize) {
     fuelCapacity: {
       allowNull: true,
       type: Sequelize.FLOAT,
-    }
+    },
   }, {
     classMethods: {
       associate(db) {
         this.belongsTo(db.make);
-        this.belongsTo(db.model);
-      }
-    }
+        this.belongsTo(db.modelmoto);
+        this.belongsToMany(db.offer,  {
+          through: {
+            model: db.offeritem,
+            unique: false,
+            scope: {
+              offerType: 'motorcycle',
+            },
+          },
+          foreignKey: 'itemId',
+          constraints: false,
+        });
+      },
+    },
   });
 }
