@@ -5,13 +5,8 @@ export default function create() {
     motorcycle.findById(1)
       .then((moto) => {
         Promise.all([
-          moto.setAccessorie(1),
           moto.setMake('KTM'),
           moto.setModel('SX 125'),
-          moto.setModelspec(1),
-          moto.setMotorspec(1),
-          moto.setProtection(1),
-          moto.setService(1),
         ]).then(() => console.log(moto.dataValues));
       })
       .catch(err => console.log('All error', err));
