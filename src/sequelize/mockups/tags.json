@@ -1,0 +1,10 @@
+[
+  { "name": "club" },
+  { "name": "coach" },
+  { "name": "guide" },
+  { "name": "mechanic" },
+  { "name": "motocycle" },
+  { "name": "photographer" },
+  { "name": "transport" },
+  { "name": "garage"  }
+]

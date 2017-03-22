@@ -14,7 +14,7 @@ export default function(sequelize, Sequelize) {
     },
     basicTools: {
       allowNull: false,
-      type: Sequelize.STRING,
+      type: Sequelize.BOOLEAN,
     },
     firstAidKit: {
       allowNull: false,
