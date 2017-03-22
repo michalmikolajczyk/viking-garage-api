@@ -19,9 +19,7 @@ Object.keys(db).forEach((model) => {
   }
 });
 
-// sequelize.sync({ force: true })
-  // .then(mockup)
-  // .then(create);
+db['sequelize'] = sequelize;
 
 export default db;
 

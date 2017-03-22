@@ -1,9 +1,10 @@
 import * as walkSync from 'walk-sync';
 import * as appRoot from 'app-root-path';
 import * as fs from 'fs';
+import create from './offers';
 import db from '../';
 
-export default function mockup() {
+function mockup() {
   const path = `${appRoot.path}/src/sequelize/mockups`;
   const paths = walkSync(`${path}`, { globs: ['*.json'] });
   const promises = [];
@@ -21,3 +22,11 @@ export default function mockup() {
 
   return Promise.all(promises);
 }
+
+function createAll() {
+  db['sequelize'].sync({ force: true })
+    .then(mockup)
+    .then(create);
+}
+
+createAll();
