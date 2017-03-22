@@ -20,5 +20,21 @@ export default function(sequelize, Sequelize) {
       allowNull: false,
       type: Sequelize.BOOLEAN,
     },
+  }, {
+    classMethods: {
+      associate(db) {
+        this.belongsToMany(db.offer,  {
+          through: {
+            model: db.offeritem,
+            unique: false,
+            scope: {
+              offerType: 'accessorie',
+            },
+          },
+          foreignKey: 'itemId',
+          constraints: false,
+        });
+      }
+    }
   });
 }

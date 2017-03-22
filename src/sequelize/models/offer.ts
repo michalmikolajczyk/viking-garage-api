@@ -1,17 +1,6 @@
+import offerTypes from '../offertypes';
+
 export default function(sequelize, Sequelize) {
-
-  const types = [
-    'club',
-    'coach',
-    'guide',
-    'mechanic',
-    'motocross',
-    'motocycle',
-    'photographer',
-    'transport',
-    'garage',
-  ];
-
   return sequelize.define('offer', {
     title: {
       allowNull: false,
@@ -20,12 +9,32 @@ export default function(sequelize, Sequelize) {
     type: {
       allowNull: false,
       type: Sequelize.ENUM,
-      values: types,
+      values: offerTypes,
     },
+    main: {
+      allowNull: false,
+      type: Sequelize.INTEGER,
+    }
   }, {
     classMethods: {
       associate(db) {
-        this.belongsTo(db.accessorie);
+        this.belongsToMany(db.accessorie, {
+          through: {
+            model: db.offeritem,
+            unique: false,
+          },
+          foreignKey: 'offerId',
+          constraints: false,
+        });
+
+        this.belongsToMany(db.service, {
+          through: {
+            model: db.offeritem,
+            unique: false,
+          },
+          foreignKey: 'offerId',
+          constraints: false,
+        });
       }
     }
   });
