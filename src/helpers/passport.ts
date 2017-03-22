@@ -8,7 +8,7 @@ import * as passport from 'passport';
 import * as jwt from 'jsonwebtoken';
 import conf from '../config';
 import { Strategy, ExtractJwt } from 'passport-jwt';
-import { User } from '../sequelize';
+import db from '../sequelize';
 
 export function config(app: Express): void {
   app.use(passport.initialize());
@@ -19,7 +19,7 @@ export function config(app: Express): void {
       jwtFromRequest: ExtractJwt.fromAuthHeader(),
     },
     (payload, next) => {
-      User.findOne({ where: { id: payload.id } })
+      db['user'].findOne({ where: { id: payload.id } })
       .then((user) => {
         if (user) return next(null, user);
         next(null, false);
@@ -43,7 +43,7 @@ export function authenticate(req: Request, res: Response, next: NextFunction): P
 }
 
 export function login(email: string, password: string): Promise<any> {
-  return User
+  return db['user']
     .findOne({ where: { email, password } })
     .then((user) => {
       if (!user) {

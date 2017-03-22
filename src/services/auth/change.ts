@@ -3,7 +3,7 @@ import {
   Response,
   NextFunction,
 } from 'express';
-import { User } from '../../sequelize';
+import db from '../../sequelize';
 import { v1 } from 'uuid';
 import debug from 'debug';
 const log = debug('api:change');
@@ -15,7 +15,7 @@ export default function change(req: Request, res: Response, next: NextFunction):
     token,
   } = req.body;
 
-  User.findOne({ where: { token } })
+  db['user'].findOne({ where: { token } })
   .then((user) => {
     if (!user) {
       return res.status(400)

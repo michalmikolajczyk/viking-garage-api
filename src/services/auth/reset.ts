@@ -3,7 +3,7 @@ import {
   Response,
   NextFunction,
 } from 'express';
-import { User } from '../../sequelize';
+import db from '../../sequelize';
 import { resetEmail } from '../../helpers/nodemailer';
 import debug from 'debug';
 const log = debug('api:reset');
@@ -11,7 +11,7 @@ const log = debug('api:reset');
 export default function reset(req: Request, res: Response, next: NextFunction): any {
   const { email } = req.body;
 
-  User.findOne({ where: { email } })
+  db['user'].findOne({ where: { email } })
     .then((user) => {
       if (!user) {
         return res.status(400)

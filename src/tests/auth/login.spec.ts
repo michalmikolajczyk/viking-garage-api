@@ -3,14 +3,10 @@ import * as mocha from 'mocha';
 import * as chai from 'chai';
 import chaiHttp = require('chai-http');
 import server from '../../server';
-import { createUsers } from '../../sequelize/mockups';
 const should = chai.should();
 chai.use(chaiHttp);
 
 describe('user/login tests', () => {
-
-  before(createUsers);
-
   it('should return error because of wrong email', (done) => {
     chai.request(server)
     .post('/user/login')
@@ -50,7 +46,7 @@ describe('user/login tests', () => {
     .post('/user/login')
     .send({
       email: 'viking.garage.app@gmail.com',
-      password: 'secret',
+      password: 'new_pass',
     })
     .end((err, res) => {
       res.should.have.status(200);
