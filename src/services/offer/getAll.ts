@@ -17,7 +17,6 @@ export default function getAll(req: Request, res: Response, next: NextFunction):
   db['sequelize'].query(query([lat, lng], dist), { type: db['sequelize'].QueryTypes.SELECT })
     .then((offers) => {
       if (!offers) return res.status(400).json(err.notExists);
-      console.log(offers);
       res.json(offers);
     })
     .catch(err => {

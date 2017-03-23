@@ -98,7 +98,6 @@ export interface Offer {
 // offer basic
   title: string;
   type: string;
-  main: number;
   brief: string;
   images: {
     main: string;

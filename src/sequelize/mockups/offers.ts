@@ -18,6 +18,11 @@ function createHelmet() {
       ]));
 }
 
+function createOffers() {
+  db['offer'].findAll()
+    .then(offers => offers.map(offer => offer.setOfferer(1)));
+}
+
 export default function create() {
   Promise.all([
     createMotorcycle(),
@@ -31,6 +36,7 @@ export default function create() {
         db['protection'].findById(1),
         db['service'].findById(1),
       ])
-        .then(items => items.map(item => item.addOffer(1)));
+        .then(items => items.map(item => item.addOffer(1)))
+        .then(createOffers);
   });
 }

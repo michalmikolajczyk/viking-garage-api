@@ -15,9 +15,23 @@ export default function (sequelize, Sequelize) {
       allowNull: false,
       type: Sequelize.GEOGRAPHY,
     },
+    image: {
+      allowNull: false,
+      type: Sequelize.STRING,
+    },
+    price: {
+      allowNull: false,
+      type: Sequelize.INTEGER,
+    },
+    url: {
+      allowNull: false,
+      type: Sequelize.STRING,
+    },
   }, {
     classMethods: {
       associate(db) {
+        this.belongsTo(db.offerer);
+
         this.belongsToMany(db.accessorie, {
           through: {
             model: db.offeritem,

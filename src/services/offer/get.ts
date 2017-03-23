@@ -14,7 +14,8 @@ export default function get(req: Request, res: Response, next: NextFunction): an
   db['offer'].find({
     where: { id },
     include: [
-      { all: true, through: { attributes: [] } }
+      { model: db['offerer'] },
+      { all: true, through: { attributes: [] } },
       // { model: db['accessorie'], through: { attributes: [] } },
       // { model: db['helmet'], through: { attributes: [] } },
       // { model: db['motorcycle'], through: { attributes: [] } },
