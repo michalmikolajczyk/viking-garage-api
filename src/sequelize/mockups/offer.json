@@ -6,5 +6,13 @@
       "type": "Point",
       "coordinates": [52.237684, 21.030086]
     }
+  },
+  {
+    "title": "Honda CM 125 1998",
+    "type": "motorcycle",
+    "coord": {
+      "type": "Point",
+      "coordinates": [52.185241, 21.047501]
+    }
   }
 ]

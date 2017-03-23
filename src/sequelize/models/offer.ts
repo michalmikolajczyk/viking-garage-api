@@ -13,7 +13,7 @@ export default function (sequelize, Sequelize) {
     },
     coord: {
       allowNull: false,
-      type: Sequelize.GEOMETRY,
+      type: Sequelize.GEOGRAPHY,
     },
   }, {
     classMethods: {
