@@ -13,7 +13,8 @@ import {
   Route,
 } from 'tsoa';
 import {
-  Offer
+  Offer,
+  OfferPost,
 } from '../models/offer';
 import * as offer from '../services/offer';
 
@@ -52,10 +53,11 @@ export class OfferController {
 
   /**
    * Create new offer
+   * @param {OfferPost} object with offer info
    */
   @Post('')
   @Tags('offer')
-  public post(@Inject() req: Request, @Inject() res: Response, @Inject() next: NextFunction): void {
+  public post(body: OfferPost, @Inject() req: Request, @Inject() res: Response, @Inject() next: NextFunction): void {
     offer.post(req, res, next);
   }
 
