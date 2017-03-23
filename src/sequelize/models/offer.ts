@@ -11,10 +11,6 @@ export default function (sequelize, Sequelize) {
       type: Sequelize.ENUM,
       values: offerTypes,
     },
-    main: {
-      allowNull: false,
-      type: Sequelize.INTEGER,
-    },
   }, {
     classMethods: {
       associate(db) {
@@ -27,7 +23,25 @@ export default function (sequelize, Sequelize) {
           constraints: false,
         });
 
+        this.belongsToMany(db.helmet, {
+          through: {
+            model: db.offeritem,
+            unique: false,
+          },
+          foreignKey: 'offerId',
+          constraints: false,
+        });
+
         this.belongsToMany(db.motorcycle, {
+          through: {
+            model: db.offeritem,
+            unique: false,
+          },
+          foreignKey: 'offerId',
+          constraints: false,
+        });
+
+        this.belongsToMany(db.protection, {
           through: {
             model: db.offeritem,
             unique: false,

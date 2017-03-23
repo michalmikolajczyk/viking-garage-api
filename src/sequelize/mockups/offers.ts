@@ -26,8 +26,10 @@ export default function create() {
     .then(() => {
       Promise.all([
         db['accessorie'].findById(1),
-        db['service'].findById(1),
         db['helmet'].findById(1),
+        db['motorcycle'].findById(1),
+        db['protection'].findById(1),
+        db['service'].findById(1),
       ])
         .then(items => items.map(item => item.addOffer(1)));
   });
