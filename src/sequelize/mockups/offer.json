@@ -14,5 +14,29 @@
       "type": "Point",
       "coordinates": [52.185241, 21.047501]
     }
+  },
+  {
+    "title": "Unikat Motorworks",
+    "type": "motorcycle",
+    "coord": {
+      "type": "Point",
+      "coordinates": [51.113875, 17.007770]
+    }
+  },
+  {
+    "title": "Motorcycle Indonesia",
+    "type": "motorcycle",
+    "coord": {
+      "type": "Point",
+      "coordinates": [-0.915462, 113.660875]
+    }
+  },
+  {
+    "title": "Motorcycle Portugal",
+    "type": "motorcycle",
+    "coord": {
+      "type": "Point",
+      "coordinates": [41.154832, -8.609959]
+    }
   }
 ]
