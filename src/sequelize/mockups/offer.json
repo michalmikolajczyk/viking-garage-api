@@ -1,6 +1,10 @@
 [
   {
     "title": "KTM SX 125 2012",
-    "type": "motorcycle"
+    "type": "motorcycle",
+    "coord": {
+      "type": "Point",
+      "coordinates": [52.237684, 21.030086]
+    }
   }
 ]

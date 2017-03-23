@@ -42,6 +42,15 @@ export class OfferController {
   }
 
   /**
+   * Get all offer
+   */
+  @Get('')
+  @Tags('offer')
+  public getAll(@Inject() req: Request, @Inject() res: Response, @Inject() next: NextFunction): void {
+    offer.getAll(req, res, next);
+  }
+
+  /**
    * Create new offer
    */
   @Post('')

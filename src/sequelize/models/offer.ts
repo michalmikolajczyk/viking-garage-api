@@ -11,6 +11,10 @@ export default function (sequelize, Sequelize) {
       type: Sequelize.ENUM,
       values: offerTypes,
     },
+    coord: {
+      allowNull: false,
+      type: Sequelize.GEOMETRY,
+    },
   }, {
     classMethods: {
       associate(db) {
