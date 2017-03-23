@@ -1,11 +1,10 @@
 import * as walkSync from 'walk-sync';
-import * as appRoot from 'app-root-path';
 import * as fs from 'fs';
 import create from './offers';
 import db from '../';
 
 function mockup() {
-  const path = `${appRoot.path}/src/sequelize/mockups`;
+  const path = `${__dirname}`;
   const paths = walkSync(`${path}`, { globs: ['*.json'] });
   const promises = [];
 
