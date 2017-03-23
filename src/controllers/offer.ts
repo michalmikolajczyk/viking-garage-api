@@ -12,7 +12,9 @@ import {
   Inject,
   Route,
 } from 'tsoa';
-
+import {
+  Offer
+} from '../models/offer';
 /**
  * Offer CRUD
  */
@@ -25,7 +27,9 @@ export class OfferController {
    */
   @Get('{id}')
   @Tags('offer')
-  public get(id: number, @Inject() req: Request, @Inject() res: Response, @Inject() next: NextFunction): void {}
+  public get(id: number, @Inject() req: Request, @Inject() res: Response, @Inject() next: NextFunction): Promise<Offer> {
+    return null;
+  }
 
   /**
    * Create new offer
