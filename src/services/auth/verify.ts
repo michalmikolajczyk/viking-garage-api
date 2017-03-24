@@ -4,7 +4,7 @@ import {
   NextFunction,
 } from 'express';
 import { login } from '../../helpers/passport';
-import { User } from '../../sequelize';
+import db from '../../sequelize';
 import { v1 } from 'uuid';
 import debug from 'debug';
 const log = debug('api:verify');
@@ -12,7 +12,7 @@ const log = debug('api:verify');
 export default function verify(req: Request, res: Response, next: NextFunction): any {
   const { token } = req.body;
 
-  User.findOne({ where: { token } })
+  db['user'].findOne({ where: { token } })
     .then((user) => {
       if (!user) {
         return res.status(400).json({

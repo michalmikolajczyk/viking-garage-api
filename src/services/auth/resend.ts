@@ -4,7 +4,7 @@ import {
   NextFunction,
 } from 'express';
 import { signinEmail } from '../../helpers/nodemailer';
-import { User } from '../../sequelize';
+import db from '../../sequelize';
 import debug from 'debug';
 const log = debug('api:resend');
 
@@ -19,7 +19,7 @@ export default function resend(req: Request, res: Response, next: NextFunction):
       });
   }
 
-  User.findOne({ where: { email } })
+  db['user'].findOne({ where: { email } })
     .then(user => signinEmail(email, user.dataValues.token)
       .then(() => res.status(200)
         .json({

@@ -10,19 +10,20 @@ Check out src/config.ts.example with sample data
 ```
 brew update
 brew install postgres
+brew install postgis
 ```
 
 ##### Database: server up
 ```
-postgres -D /usr/local/var/postgress
+postgres -D /usr/local/var/postgres
 ```
 
 ##### Database: Create user & db
 ```
 createuser -P viking  # provide username & password
 createdb test_db      # create database for prod, test and dev
-psql test_db          # login to db and grant privieges
-GRANT ALL PRIVILEGES ON DATABASE test_db TO viking;
+psql test_db -c "GRANT ALL PRIVILEGES ON DATABASE test_db TO viking"
+psql test_db -c "CREATE EXTENSION postgis"
 ```
 
 #### Install dependencies

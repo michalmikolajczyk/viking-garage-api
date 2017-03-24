@@ -1,0 +1,48 @@
+[
+  {
+    "year": 2012,
+    "type": "motocross",
+    "termsOfUse": "http://vikinggarage.com/terms-of-use",
+
+    "roadLegal": false,
+    "engine": "2-stroke",
+    "licenseType": "not required",
+    "capacity": 125,
+    "minRentalPeriod": 1,
+    "maxRentalPeriod": 14,
+    "maxPower": 35,
+    "weight": 120,
+    "topSpeed": 110,
+    "seatHeight": 992,
+    "torque": 28,
+    "maxRiders": 1,
+    "acceleration": 5,
+
+    "cylinderCount": 1,
+    "wheelSizes": "21'' F, 19'' R",
+    "boreStroke": 55,
+    "tires": "Excel",
+    "transmission": "6 gears, MT",
+    "brakes": "Brembo",
+    "compressionRatio": "xxx",
+    "suspension": "Sanchez",
+    "ignitionType": "Kickstarr",
+    "frame": "Alloy",
+    "kickstand": false,
+    "wheelbase": 1597,
+    "lights": "none",
+    "rakeTrail": "wtf",
+    "storageSpace": false,
+
+    "generalState": "Very Good",
+    "motoHours": 25,
+    "modifications": false,
+    "flaws": false,
+    "riderExperience": "Begginer",
+    "minimumDriverAge": 16,
+    "maintenanceRequired": "There is a broken right handle, but it is ok to drive anyway",
+    "maintenanceHistory": "New air filters and brake pads",
+
+    "fuelCapacity": 7.5
+  }
+]

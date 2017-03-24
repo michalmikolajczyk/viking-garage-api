@@ -4,9 +4,10 @@
   "description": "VIKING GARAGE API",
   "scripts": {
     "dev": "nodemon --watch src --exec 'ts-node' src/server.ts",
-    "test": "npm run build && npm run lint && mocha -r ts-node/register ./src/tests/**/*.spec.ts",
+    "test": "npm run createdb && npm run build && npm run lint && mocha -r ts-node/register ./src/tests/**/*.spec.ts",
     "tdd": "npm run build && mocha --watch --watch-extensions ts,tsx -r ts-node/register ./src/tests/**/*.spec.ts",
     "start": "npm run build && node ./dist/server.js",
+    "createdb": "ts-node ./src/sequelize/mockups/index.ts",
     "build": "npm run swagger-gen && npm run routes-gen && tsc",
     "lint": "tslint ./src/*.ts ./src/**/*.ts ./src/**/**/*.ts",
     "swagger-gen": "$(npm bin)/tsoa swagger",
@@ -61,6 +62,7 @@
     "ts-node": "^2.1.0",
     "tslint": "^4.4.2",
     "tslint-config-airbnb": "^1.0.0",
-    "typescript": "^2.1.6"
+    "typescript": "^2.1.6",
+    "walk-sync": "^0.3.1"
   }
 }

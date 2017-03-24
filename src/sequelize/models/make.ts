@@ -1,8 +1,9 @@
 export default function (sequelize, Sequelize) {
-  return sequelize.define('tag', {
+  return sequelize.define('make', {
     name: {
       allowNull: false,
+      primaryKey: true,
       type: Sequelize.STRING,
     },
   });
-}
+};

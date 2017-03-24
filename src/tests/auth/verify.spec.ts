@@ -4,15 +4,11 @@ import * as chai from 'chai';
 import chaiHttp = require('chai-http');
 import { v1 } from 'uuid';
 import server from '../../server';
-import { createUsers } from '../../sequelize/mockups';
-import { User } from '../../sequelize';
+import db from '../../sequelize';
 const should = chai.should();
 chai.use(chaiHttp);
 
 describe('user/verify tests', () => {
-
-  before(createUsers);
-
   it('should return error because of wrong token', (done) => {
     chai.request(server)
       .post('/user/verify')
@@ -29,7 +25,7 @@ describe('user/verify tests', () => {
 
   it('should verified user successfully', (done) => {
     const email = 'viking.garage.app@gmail.com';
-    User.findOne({ where: { email } })
+    db['user'].findOne({ where: { email } })
       .then((user) => {
         chai.request(server)
           .post('/user/verify')

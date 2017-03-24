@@ -1,25 +1,25 @@
+import * as walkSync from 'walk-sync';
 import sequelize from './config';
-import LocationModel from './models/location';
-import OfferModel from './models/offer';
-import OffererModel from './models/offerer';
-import TagModel from './models/tag';
-import UserModel from './models/user';
+import create from './mockups/offers';
 
-const freezeTableName = true;
-const Location = sequelize.define('location', LocationModel, { freezeTableName });
-const Offer = sequelize.define('offer', OfferModel, { freezeTableName });
-const Offerer = sequelize.define('offerer', OffererModel, { freezeTableName });
-const Tag = sequelize.define('tag', TagModel, { freezeTableName });
-const User = sequelize.define('user', UserModel, { freezeTableName });
 
-export {
-  Location,
-  Offer,
-  Offerer,
-  Tag,
-  User,
-}
+const db = {};
+const path = `${__dirname}/models`;
+const paths = walkSync(`${path}`);
 
-import { createAll } from './mockups';
+paths.forEach((file) => {
+  const model = sequelize.import(`${path}/${file}`);
+  db[model.name] = model;
+});
 
-// createAll();
+Object.keys(db).forEach((model) => {
+  if ('associate' in db[model]) {
+    db[model].associate(db);
+  }
+});
+
+db['sequelize'] = sequelize;
+
+export default db;
+
+

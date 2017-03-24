@@ -1,0 +1,23 @@
+[
+  {
+    "name": "Viking Garage",
+    "email": "viking.garage.app@gmail.com",
+    "birthday": "Mon Jan 12 1981 00:00:00 GMT+0100 (CET)",
+    "password": "secret",
+    "verified": true
+  },
+  {
+    "name": "Jan Horubala",
+    "email": "janek@vikinggarage.com",
+    "birthday": "Mon Jan 12 1981 00:00:00 GMT+0100 (CET)",
+    "password": "secret",
+    "verified": false
+  },
+  {
+    "name": "Michal Mikolajczyk",
+    "email": "michal@vikinggarage.com",
+    "birthday": "Mon Jan 12 1981 00:00:00 GMT+0100 (CET)",
+    "password": "secret",
+    "verified": true
+  }
+]

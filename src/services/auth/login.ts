@@ -4,7 +4,6 @@ import {
   NextFunction,
 } from 'express';
 import { login as logIn } from '../../helpers/passport';
-import { User } from '../../sequelize';
 import debug from 'debug';
 const log = debug('api:login');
 

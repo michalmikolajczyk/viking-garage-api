@@ -3,7 +3,6 @@ import {
   Response,
   NextFunction,
 } from 'express';
-import { User } from '../../sequelize';
 
 export default function me(req: Request, res: Response, next: NextFunction): any {
   if (req.isAuthenticated()) {
