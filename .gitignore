@@ -1,6 +1,5 @@
 ### Project ###
-src/config.env
-src/config.ts
+.env
 src/routes.ts
 dist
 
