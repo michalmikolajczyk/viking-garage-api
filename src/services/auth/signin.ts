@@ -29,7 +29,7 @@ export default function signin(req: Request, res: Response, next: NextFunction):
   };
 
   db['user'].create(newUser)
-    .then(user => signinEmail(email, user.dataValues.token)
+    .then(user => signinEmail(firstname, email, user.dataValues.token)
       .then(() => res.status(200).json({ msg: 'User created successfully - email sent' }))
       .catch((err) => {
         log(`Unexpected error ${err}`);

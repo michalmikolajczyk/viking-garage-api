@@ -21,7 +21,7 @@ export default function reset(req: Request, res: Response, next: NextFunction): 
           });
       }
 
-      resetEmail(user.email, user.token)
+      resetEmail(user.name, user.email, user.token)
         .then(info => res.status(200)
           .json({
             err: false,
