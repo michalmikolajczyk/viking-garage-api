@@ -6,7 +6,6 @@ import {
 } from 'express';
 import * as passport from 'passport';
 import * as jwt from 'jsonwebtoken';
-import conf from '../config';
 import { Strategy, ExtractJwt } from 'passport-jwt';
 import db from '../sequelize';
 
@@ -15,7 +14,7 @@ export function config(app: Express): void {
 
   passport.use(new Strategy(
     {
-      secretOrKey: conf.jwt.secret,
+      secretOrKey: process.env.JWT_SECRET,
       jwtFromRequest: ExtractJwt.fromAuthHeader(),
     },
     (payload, next) => {
@@ -33,7 +32,7 @@ export function authenticate(req: Request, res: Response, next: NextFunction): P
   return new Promise((resolve, reject) => {
     passport.authenticate(
       'jwt',
-      { session: conf.jwt.session },
+      { session: process.env.JWT_SESSION },
       (err, user, info) => {
         if (err || !user) return reject(info);
         resolve(user);
@@ -50,7 +49,7 @@ export function login(email: string, password: string): Promise<any> {
         throw new Error('User with provided email and password not exists');
       }
       const payload = { id: user.dataValues.id };
-      const token = jwt.sign(payload, conf.jwt.secret);
+      const token = jwt.sign(payload, process.env.JWT_SECRET);
       return { token, user: user.dataValues };
     });
 }

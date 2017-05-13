@@ -1,8 +1,9 @@
 # viking-garage-api
 VIKING GARAGE API
 
-## Config file
-Check out src/config.ts.example with sample data
+### Setup
+#### Add .env file in the root directory with configuration
+Check out .env.example with sample data
 
 ## Requirements
 Homebrew

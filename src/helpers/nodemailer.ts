@@ -1,6 +1,12 @@
 import * as nodemailer from 'nodemailer';
-import config from '../config';
-const transporter = nodemailer.createTransport(config.nodemailer);
+const config = {
+  service: process.env.MAIL_SERVICE,
+  auth: {
+    user: process.env.MAIL_USER,
+    pass: process.env.MAIL_PASS,
+  },
+}
+const transporter = nodemailer.createTransport(config);
 
 function sendEmail(body: any): Promise<any> {
   return new Promise((res, rej) => {
@@ -13,7 +19,7 @@ function sendEmail(body: any): Promise<any> {
 
 function signinEmail(name: string, email: string, token: string): Promise<any> {
   const body = {
-    from: config.nodemailer.auth.user,
+    from: config.auth.user,
     to: email,
     subject: 'Hi' + ` ${name}, ` + 'ride with VIKING GARAGE',
     text: 'Hello' + ` ${name}!` +
@@ -37,7 +43,7 @@ function signinEmail(name: string, email: string, token: string): Promise<any> {
 
 function resetEmail(name: string, email: string, token: string): Promise<any> {
   const body = {
-    from: config.nodemailer.auth.user,
+    from: config.auth.user,
     to: email,
     subject: 'VIKING GARAGE Reset Password',
     text: 'Hi' + ` ${name}!` +
