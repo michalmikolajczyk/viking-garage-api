@@ -1,7 +1,7 @@
 import * as nodemailer from 'nodemailer';
 import {
   signinMessage,
-  resetMessage
+  resetMessage,
 } from './templates';
 const config = {
   service: process.env.MAIL_SERVICE,
@@ -9,7 +9,7 @@ const config = {
     user: process.env.MAIL_USER,
     pass: process.env.MAIL_PASS,
   },
-}
+};
 const transporter = nodemailer.createTransport(config);
 
 function sendEmail(body: any): Promise<any> {
@@ -25,7 +25,7 @@ function signinEmail(name: string, email: string, token: string, code: string): 
   const body = {
     from: config.auth.user,
     to: email,
-    ...signinMessage(name, token, code)
+    ...signinMessage(name, token, code),
   };
   return sendEmail(body);
 }
@@ -34,7 +34,7 @@ function resetEmail(name: string, email: string, token: string, code: string): P
   const body = {
     from: config.auth.user,
     to: email,
-    ...resetMessage(name, token, code)
+    ...resetMessage(name, token, code),
   };
   return sendEmail(body);
 }

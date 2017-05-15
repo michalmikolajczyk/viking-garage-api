@@ -18,7 +18,7 @@ Dzięki za dołączenie do nas! Do zobaczenia na trasie!
 
 Zespół VIKING GARAGE
 `,
-      }
+      };
     default:
       return {
         subject: `Hi, ${name}, ride with VIKING GARAGE`,
@@ -37,7 +37,7 @@ Thanks again for joining. See you ridin' round!
 
 VIKING GARAGE Team
 `,
-      }
+      };
   }
 }
 
@@ -60,7 +60,7 @@ Pozdrowienia z naszego Garażu!
 
 Zespół VIKING GARAGE
 `,
-      }
+      };
     default:
       return {
         subject: `VIKING GARAGE Reset Password`,
@@ -78,6 +78,6 @@ Greetings from our VIKING GARAGE!
 
 VIKING GARAGE Team
 `,
-      }
+      };
   }
 }
