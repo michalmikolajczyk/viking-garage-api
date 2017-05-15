@@ -1,7 +1,8 @@
+import * as dotenv from 'dotenv';
+dotenv.config();
 import * as walkSync from 'walk-sync';
 import sequelize from './config';
 import create from './mockups/offers';
-
 
 const db = {};
 const path = `${__dirname}/models`;
@@ -21,5 +22,3 @@ Object.keys(db).forEach((model) => {
 db['sequelize'] = sequelize;
 
 export default db;
-
-
