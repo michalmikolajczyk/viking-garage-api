@@ -7,6 +7,7 @@ dist
 # Logs
 logs
 *.log
+logfile
 
 # node-waf configuration
 .lock-wscript
