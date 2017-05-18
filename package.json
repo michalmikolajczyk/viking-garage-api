@@ -14,7 +14,7 @@
     "swagger-gen": "$(npm bin)/tsoa swagger",
     "routes-gen": "$(npm bin)/tsoa routes",
     "copy": "cp src/config.ts.example src/config.ts",
-    "postinstall": "npm run copy && npm run create-dist && npm run copy-template && npm run copy-swagger && npm run build",
+    "postinstall": "npm run createdb && npm run copy && npm run create-dist && npm run copy-template && npm run copy-swagger && npm run build",
     "create-dist": "mkdirp dist/swagger-ui",
     "copy-swagger": "ncp ./node_modules/swagger-ui/dist ./dist/swagger-ui",
     "copy-template": "ncp ./src/express.js ./node_modules/tsoa/dist/routeGeneration/templates/express.js"
