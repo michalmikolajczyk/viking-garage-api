@@ -14,30 +14,28 @@ export default function login(req: Request, res: Response, next: NextFunction): 
   } = req.body;
 
   if (!email || !password) {
-    return res.status(400)
-      .json({
-        err: true,
-        msg: 'Empty field email or password',
-      });
+    return res.status(400).json({ err: 'Empty field email or password' });
   }
 
   logIn(email, password)
-    .then(({ token, user }) => res.status(200)
-      .json({
-        token,
-        err: false,
-        msg: 'User logged in successfully',
-        user: {
-          name: user.name,
-          email: user.email,
-        },
-      }))
+    .then(({ token, user }) => {
+      const {
+        email,
+        image,
+      } = user
+      return res.status(200).json({
+          data: {
+            token,
+            user: {
+              image,
+              email,
+            },
+          },
+        })
+      })
     .catch((err) => {
       log(`Unexpected error ${err}`);
-      res.status(400).json({
-        err: true,
-        msg: 'Invalid email or password',
-      });
+      res.status(400).json({ err: 'Invalid email or password' });
     });
 }
 
