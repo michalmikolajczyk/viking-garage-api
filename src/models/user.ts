@@ -13,5 +13,5 @@ export interface UserInfo {
   brief?: string;
 
 // profile picture
-  photo?: string;
+  image?: string;
 }
