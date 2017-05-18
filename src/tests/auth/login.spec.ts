@@ -17,9 +17,7 @@ describe('user/login tests', () => {
     .end((err, res) => {
       res.should.have.status(400);
       res.body.should.have.property('err');
-      res.body.err.should.equal(true);
-      res.body.should.have.property('msg');
-      res.body.msg.should.be.equal('Invalid email or password');
+      res.body.err.should.be.equal('Invalid email or password');
       done();
     });
   });
@@ -34,9 +32,7 @@ describe('user/login tests', () => {
     .end((err, res) => {
       res.should.have.status(400);
       res.body.should.have.property('err');
-      res.body.err.should.equal(true);
-      res.body.should.have.property('msg');
-      res.body.msg.should.be.equal('Invalid email or password');
+      res.body.err.should.be.equal('Invalid email or password');
       done();
     });
   });
@@ -50,10 +46,10 @@ describe('user/login tests', () => {
     })
     .end((err, res) => {
       res.should.have.status(200);
-      res.body.should.have.property('err');
-      res.body.err.should.equal(false);
-      res.body.should.have.property('msg');
-      res.body.msg.should.be.equal('User logged in successfully');
+      res.body.should.not.have.property('err');
+      res.body.should.have.property('data');
+      res.body.data.should.have.property('user');
+      res.body.data.user.should.have.property('email');
       done();
     });
   });

@@ -11,7 +11,7 @@ const log = debug('api:user/put');
 
 export default function put(req: Request, res: Response, next: NextFunction): any {
   authenticate(req, res, next)
-    .then(user => {
+    .then((user) => {
       const {
         firstname,
         lastname,
