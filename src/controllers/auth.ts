@@ -7,6 +7,7 @@ import {
   Get,
   Inject,
   Post,
+  Put,
   Tags,
   Route,
 } from 'tsoa';
@@ -17,10 +18,30 @@ import {
   UserSignin,
   UserToken,
 } from '../models/auth';
+import { UserInfo } from '../models/user';
 import * as auth from '../services/auth';
+import * as user from '../services/user';
 
 @Route('user')
 export class AuthController {
+
+  /**
+   * Get user info
+   */
+  @Get('')
+  @Tags('user')
+  public get(@Inject() req: Request, @Inject() res: Response, @Inject() next: NextFunction): void {
+    user.get(req, res, next);
+  }
+
+  /**
+   * Put user info
+   */
+  @Put('')
+  @Tags('user')
+  public put(body: UserInfo, @Inject() req: Request, @Inject() res: Response, @Inject() next: NextFunction): void {
+    user.put(req, res, next);
+  }
 
   /**
    * Change user password with provided token
