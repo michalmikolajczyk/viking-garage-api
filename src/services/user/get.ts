@@ -4,7 +4,7 @@ import {
   NextFunction,
 } from 'express';
 import { authenticate } from '../../helpers/passport';
-import err from '../error';
+import * as error from '../error';
 import debug from 'debug';
 const log = debug('api:user/get');
 
@@ -45,6 +45,6 @@ export default function get(req: Request, res: Response, next: NextFunction): an
     })
     .catch((err) => {
       log(`User is not authorized ${err}`);
-      res.status(401).json(err.unauthorized);
+      res.status(401).json(error.unauthorized);
     });
 }

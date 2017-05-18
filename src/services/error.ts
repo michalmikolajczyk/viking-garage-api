@@ -9,5 +9,6 @@ const unexpected = { err: 'Unexpected error' };
 export {
   invalid,
   notexists,
+  unauthorized,
   unexpected,
 }

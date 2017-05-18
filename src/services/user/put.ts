@@ -4,7 +4,7 @@ import {
   NextFunction,
 } from 'express';
 import { authenticate } from '../../helpers/passport';
-import err from '../error';
+import * as error from '../error';
 import db from '../../sequelize';
 import debug from 'debug';
 const log = debug('api:user/put');
@@ -37,12 +37,12 @@ export default function put(req: Request, res: Response, next: NextFunction): an
         brief,
         image,
       })
-      .then(() => res.status(204).end())
-      .catch(err => res.status(500).json(err.unexpected));
+        .then(() => res.status(200).json({ msg: 'ok' }))
+        .catch(err => res.status(500).json(error.unexpected));
   })
   .catch((err) => {
     log(`User is not authorized ${err}`);
-    res.status(401).json(err.unauthorized);
+    res.status(401).json(error.unauthorized);
   });
 
 }
