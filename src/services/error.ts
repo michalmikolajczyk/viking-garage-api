@@ -1,20 +1,13 @@
-const invalid = {
-  err: true,
-  msg: 'Url is not valid',
-};
+const invalid = { err: 'Url is not valid' };
 
-const notExists = {
-  err: true,
-  msg: 'Object does not exists',
-};
+const notexists = { err: 'Object does not exists' };
 
-const unexpected = {
-  err: true,
-  msg: 'There was an error processing your request',
-};
+const unauthorized = { err: 'Unauthorized request' };
+
+const unexpected = { err: 'Unexpected error' };
 
 export {
   invalid,
-  notExists,
+  notexists,
   unexpected,
 }

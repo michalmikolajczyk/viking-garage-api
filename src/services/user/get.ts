@@ -4,12 +4,13 @@ import {
   NextFunction,
 } from 'express';
 import { authenticate } from '../../helpers/passport';
+import err from '../error';
 import debug from 'debug';
 const log = debug('api:user/get');
 
 export default function get(req: Request, res: Response, next: NextFunction): any {
   authenticate(req, res, next)
-    .then(user => {
+    .then((user) => {
       const {
         firstname,
         lastname,
@@ -24,6 +25,7 @@ export default function get(req: Request, res: Response, next: NextFunction): an
 
         image,
       } = user;
+
       res.status(200).json({
           data: {
             firstname,
@@ -39,10 +41,10 @@ export default function get(req: Request, res: Response, next: NextFunction): an
 
             image,
           },
-        })
+        });
     })
     .catch((err) => {
       log(`User is not authorized ${err}`);
-      res.status(401).json({ err: 'User is not authorized' });
+      res.status(401).json(err.unauthorized);
     });
 }

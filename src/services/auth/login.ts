@@ -22,7 +22,7 @@ export default function login(req: Request, res: Response, next: NextFunction): 
       const {
         email,
         image,
-      } = user
+      } = user;
       return res.status(200).json({
           data: {
             token,
@@ -31,7 +31,7 @@ export default function login(req: Request, res: Response, next: NextFunction): 
               email,
             },
           },
-        })
+        });
       })
     .catch((err) => {
       log(`Unexpected error ${err}`);

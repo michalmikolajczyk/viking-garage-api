@@ -5,6 +5,8 @@ import {
 } from 'express';
 import * as err from '../error';
 import db from '../../sequelize';
+import debug from 'debug';
+const log = debug('api:offer/get');
 
 export default function get(req: Request, res: Response, next: NextFunction): any {
   const idStr = req.path.replace('/offer/', '');
@@ -24,11 +26,11 @@ export default function get(req: Request, res: Response, next: NextFunction): an
     ],
   })
     .then((offer) => {
-      if (!offer) return res.status(400).json(err.notExists);
+      if (!offer) return res.status(400).json(err.notexists);
       res.json(offer);
     })
     .catch((err) => {
-      console.log(`Unexpected error ${err}`);
+      log(`Unexpected error ${err}`);
       res.status(500).json(err.unexpected);
     });
 }

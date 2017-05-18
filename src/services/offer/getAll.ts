@@ -5,6 +5,8 @@ import {
 } from 'express';
 import db from '../../sequelize';
 import * as err from '../error';
+import debug from 'debug';
+const log = debug('api:offer/getAll');
 
 const query = (point, dist) =>
   `SELECT * FROM offers WHERE ST_DWithin(coord, ST_SetSRID(ST_Point(${point[0]}, ${point[1]}), 4326), ${dist});`;
@@ -16,11 +18,11 @@ export default function getAll(req: Request, res: Response, next: NextFunction):
 
   db['sequelize'].query(query([lat, lng], dist), { type: db['sequelize'].QueryTypes.SELECT })
     .then((offers) => {
-      if (!offers) return res.status(400).json(err.notExists);
+      if (!offers) return res.status(400).json(err.notexists);
       res.json(offers);
     })
     .catch((err) => {
-      console.log(`Unexpected error ${err}`);
+      log(`Unexpected error ${err}`);
       res.status(500).json(err.unexpected);
     });
 }
