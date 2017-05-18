@@ -24,8 +24,8 @@ export default {
   },
 
   // host and port for server
-  host: 'localhost',
-  port: 4000,
+  host: process.env.PORT ? 'https://viking-garage-api-dev.herokuapp.com' : 'localhost',
+  port: process.env.PORT || 4000,
 
   // domains allowed with CORS
   origin: [
