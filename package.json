@@ -1,8 +1,9 @@
 {
   "name": "viking-garage-api",
-  "version": "0.0.1",
+  "version": "0.5.5",
   "description": "VIKING GARAGE API",
   "scripts": {
+    "init": "scripts/initialize.sh",
     "dev": "nodemon --watch src --exec 'ts-node' src/server.ts",
     "test": "npm run createdb && npm run build && npm run lint && mocha -r ts-node/register ./src/tests/**/*.spec.ts",
     "tdd": "npm run build && mocha --watch --watch-extensions ts,tsx -r ts-node/register ./src/tests/**/*.spec.ts",
@@ -12,10 +13,14 @@
     "lint": "tslint ./src/*.ts ./src/**/*.ts ./src/**/**/*.ts",
     "swagger-gen": "$(npm bin)/tsoa swagger",
     "routes-gen": "$(npm bin)/tsoa routes",
-    "postinstall": "npm run create-dist && npm run copy-template && npm run copy-swagger && npm run build",
+    "copy": "cp src/config.ts.example src/config.ts",
+    "postinstall": "npm run copy && npm run create-dist && npm run copy-template && npm run copy-swagger && npm run build && node ./dist/sequelize/mockups/index.js",
     "create-dist": "mkdirp dist/swagger-ui",
     "copy-swagger": "ncp ./node_modules/swagger-ui/dist ./dist/swagger-ui",
     "copy-template": "ncp ./src/express.js ./node_modules/tsoa/dist/routeGeneration/templates/express.js"
+  },
+  "engines": {
+    "node": "7.10.0"
   },
   "repository": {
     "type": "git",

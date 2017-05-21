@@ -7,12 +7,16 @@ dist
 # Logs
 logs
 *.log
+logfile
 
 # node-waf configuration
 .lock-wscript
 
 # Dependency directory
 node_modules
+
+### DATA ###
+vgdb.sql
 
 ### OSX ###
 .DS_Store

@@ -6,7 +6,7 @@ const invalid = {
 const notExists = {
   err: true,
   msg: 'Object does not exists',
-}
+};
 
 const unexpected = {
   err: true,

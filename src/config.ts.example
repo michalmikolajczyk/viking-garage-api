@@ -5,7 +5,7 @@ export default {
     password: 'secret',
     host: 'localhost',
     port: 5432,
-    name: 'vg',
+    name: 'test_db',
   },
 
   // credentials for nodemailer
@@ -24,9 +24,18 @@ export default {
   },
 
   // host and port for server
-  host: 'localhost',
-  port: 4000,
+  host: process.env.PORT ? 'https://viking-garage-api-dev.herokuapp.com' : 'localhost',
+  port: process.env.PORT || 4000,
 
   // domains allowed with CORS
-  origin: ['http://localhost:3000', 'http://vikinggarage.com'],
+  origin: [
+    'http://localhost:3000',
+    'http://vikinggarage.com',
+    'http://viking-garage-frontend-dev.herokuapp.com',
+    'http://viking-garage-frontend-staging.herokuapp.com',
+    'http://viking-garage-frontend-prod.herokuapp.com',
+    'https://viking-garage-frontend-dev.herokuapp.com',
+    'https://viking-garage-frontend-staging.herokuapp.com',
+    'https://viking-garage-frontend-prod.herokuapp.com',
+  ],
 };

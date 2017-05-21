@@ -27,6 +27,6 @@ export default function (sequelize, Sequelize) {
     points: {
       allowNull: false,
       type: Sequelize.INTEGER,
-    }
+    },
   });
 }

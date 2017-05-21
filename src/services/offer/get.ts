@@ -21,13 +21,13 @@ export default function get(req: Request, res: Response, next: NextFunction): an
       // { model: db['motorcycle'], through: { attributes: [] } },
       // { model: db['protection'], through: { attributes: [] } },
       // { model: db['service'], through: { attributes: [] } },
-    ]
+    ],
   })
     .then((offer) => {
       if (!offer) return res.status(400).json(err.notExists);
       res.json(offer);
     })
-    .catch(err => {
+    .catch((err) => {
       console.log(`Unexpected error ${err}`);
       res.status(500).json(err.unexpected);
     });
