@@ -1,19 +1,23 @@
 import Sequelize from 'sequelize';
 import config from '../config';
 
-let db = process.env.DATABASE_URL || config.database;
-if (typeof db === 'string') db = db + '&sslmode=require'
+const db = process.env.DATABASE_URL || config.database;
 let sequelize;
 
-if (process.env.DATABASE_URL) {
-    sequelize = new Sequelize(db);
+if (typeof db === 'string') {
+  sequelize = new Sequelize(db, {
+    dialect: 'postgres',
+    dialectOptions: {
+      ssl: true,
+    },
+  });
 } else {
-    sequelize = new Sequelize(db.name, db.username, db.password, {
-      host: db.host || 'localhost',
-      port: db.port || 5432,
-      dialect: 'postgres',
-      logging: false,
-    });
+  sequelize = new Sequelize(db.name, db.username, db.password, {
+    host: db.host || 'localhost',
+    port: db.port || 5432,
+    dialect: 'postgres',
+    logging: false,
+  });
 }
 
 export default sequelize;
