@@ -25,7 +25,7 @@ describe('user/change tests', () => {
         res.body.msg.should.be.equal('Your reset token has expired, please reset the password again');
         done();
       });
-  });
+  }).timeout(10946);
 
   it('should changed password successfully', (done) => {
     const email = 'viking.garage.app@gmail.com';
