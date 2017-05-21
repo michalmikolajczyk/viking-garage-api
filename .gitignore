@@ -15,6 +15,9 @@ logfile
 # Dependency directory
 node_modules
 
+### DATA ###
+vgdb.sql
+
 ### OSX ###
 .DS_Store
 .AppleDouble

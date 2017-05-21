@@ -1,13 +1,12 @@
 import Sequelize from 'sequelize';
 import config from '../config';
 
-var db = process.env.DATABASE_URL || config.database;
-console.log(db);
-// var sequelize = "";
+let db = process.env.DATABASE_URL || config.database;
+if (typeof db === 'string') db = db + '&sslmode=require'
 let sequelize;
 
 if (process.env.DATABASE_URL) {
-    sequelize = new Sequelize(db)
+    sequelize = new Sequelize(db);
 } else {
     sequelize = new Sequelize(db.name, db.username, db.password, {
       host: db.host || 'localhost',
