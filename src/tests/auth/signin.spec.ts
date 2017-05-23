@@ -11,7 +11,8 @@ describe('user/signin tests', () => {
     chai.request(server)
       .post('/user/signin')
       .send({
-        name: 'Viking',
+        firstname: 'Viking',
+        lastname: 'Garage',
         email: 'viking.garage.app@gmail.com',
         password1: 'secret',
         password2: 'secret',
@@ -19,9 +20,7 @@ describe('user/signin tests', () => {
       .end((err, res) => {
         res.should.have.status(400);
         res.body.should.have.property('err');
-        res.body.err.should.equal(true);
-        res.body.should.have.property('msg');
-        res.body.msg.should.be.equal('Please fill in all the fields.');
+        res.body.err.should.be.equal('Please fill in all the fields.');
         done();
       });
   });
@@ -30,7 +29,8 @@ describe('user/signin tests', () => {
     chai.request(server)
       .post('/user/signin')
       .send({
-        name: 'Viking',
+        firstname: 'Viking',
+        lastname: 'Garage',
         email: 'viking.garage.app@gmail.com',
         birthday: new Date(),
         password1: 'secret',
@@ -39,8 +39,7 @@ describe('user/signin tests', () => {
       .end((err, res) => {
         res.should.have.status(500);
         res.body.should.have.property('err');
-        res.body.err.should.equal(true);
-        res.body.should.have.property('msg');
+        res.body.err.should.be.equal('There was an error processing your request');
         done();
       });
   });
@@ -49,7 +48,8 @@ describe('user/signin tests', () => {
     chai.request(server)
       .post('/user/signin')
       .send({
-        name: 'Viking',
+        firstname: 'Viking',
+        lastname: 'Garage',
         email: 'viking.garage.app+12@gmail.com',
         birthday: new Date(),
         password1: 'secret',
@@ -57,8 +57,7 @@ describe('user/signin tests', () => {
       })
       .end((err, res) => {
         res.should.have.status(200);
-        res.body.should.have.property('err');
-        res.body.err.should.equal(false);
+        res.body.should.not.have.property('err');
         res.body.should.have.property('msg');
         res.body.msg.should.be.equal('User created successfully - email sent');
         done();

@@ -10,22 +10,19 @@ const log = debug('api:signin');
 
 export default function signin(req: Request, res: Response, next: NextFunction): any {
   const {
-    name,
+    firstname,
+    lastname,
     email,
     birthday,
     password1,
     password2,
   } = req.body;
 
-  if (!name || !email || !birthday || !password1) {
-    return res.status(400).json({
-      err: true,
-      msg: 'Please fill in all the fields.',
-    });
-  }
+  if (!firstname || !lastname || !email || !birthday || !password1) return res.status(400).json({ err: 'Please fill in all the fields.' });
 
   const newUser = {
-    name,
+    firstname,
+    lastname,
     email,
     birthday,
     password: password1,
@@ -33,23 +30,13 @@ export default function signin(req: Request, res: Response, next: NextFunction):
 
   db['user'].create(newUser)
     .then(user => signinEmail(email, user.dataValues.token)
-      .then(() => res.status(200)
-        .json({
-          err: false,
-          msg: 'User created successfully - email sent',
-        }))
+      .then(() => res.status(200).json({ msg: 'User created successfully - email sent' }))
       .catch((err) => {
         log(`Unexpected error ${err}`);
-        res.status(500).json({
-          err: true,
-          msg: 'There was an error processing your request',
-        });
+        res.status(500).json({ err: 'There was an error processing your request' });
       }))
     .catch((err) => {
       log(`Unexpected error ${err}`);
-      res.status(500).json({
-        err: true,
-        msg: 'There was an error processing your request',
-      });
+      res.status(500).json({ err: 'There was an error processing your request' });
     });
 }

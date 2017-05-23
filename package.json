@@ -5,7 +5,7 @@
   "scripts": {
     "init": "scripts/initialize.sh",
     "dev": "nodemon --watch src --exec 'ts-node' src/server.ts",
-    "test": "npm run createdb && npm run build && npm run lint && mocha -r ts-node/register ./src/tests/**/*.spec.ts",
+    "test": "npm run lint && npm run createdb && npm run build && mocha -r ts-node/register ./src/tests/**/*.spec.ts",
     "tdd": "npm run build && mocha --watch --watch-extensions ts,tsx -r ts-node/register ./src/tests/**/*.spec.ts",
     "start": "npm run build && node ./dist/server.js",
     "createdb": "ts-node ./src/sequelize/mockups/index.ts",
