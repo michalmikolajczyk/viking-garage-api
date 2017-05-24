@@ -5,19 +5,19 @@
   "scripts": {
     "init": "scripts/initialize.sh",
     "dev": "nodemon --watch src --exec 'ts-node' src/server.ts",
-    "test": "npm run lint && npm run createdb && npm run build && mocha -r ts-node/register ./src/tests/**/*.spec.ts",
+    "test": "npm run lint && npm run build && npm run create:db && mocha -r ts-node/register ./src/tests/**/*.spec.ts",
     "tdd": "npm run build && mocha --watch --watch-extensions ts,tsx -r ts-node/register ./src/tests/**/*.spec.ts",
-    "start": "npm run build && node ./dist/server.js",
-    "createdb": "ts-node ./src/sequelize/mockups/index.ts",
-    "build": "npm run swagger-gen && npm run routes-gen && tsc",
     "lint": "tslint ./src/*.ts ./src/**/*.ts ./src/**/**/*.ts",
-    "swagger-gen": "$(npm bin)/tsoa swagger",
-    "routes-gen": "$(npm bin)/tsoa routes",
-    "copy": "cp .env.example .env",
-    "postinstall": "npm run copy && npm run create-dist && npm run copy-template && npm run copy-swagger && npm run build && node ./dist/sequelize/mockups/index.js",
-    "create-dist": "mkdirp dist/swagger-ui",
-    "copy-swagger": "ncp ./node_modules/swagger-ui/dist ./dist/swagger-ui",
-    "copy-template": "ncp ./src/express.js ./node_modules/tsoa/dist/routeGeneration/templates/express.js"
+    "postinstall": "npm run copy:env && npm run create:dist && npm run copy:template && npm run copy:swagger && npm run build",
+    "start": "npm run build && node ./dist/server.js",
+    "build": "npm run gen:swagger && npm run gen:routes && tsc",
+    "copy:env": "cp .env.example .env",
+    "copy:swagger": "cp -R ./node_modules/swagger-ui/dist ./dist/swagger-ui",
+    "copy:template": "cp ./src/express.js ./node_modules/tsoa/dist/routeGeneration/templates/express.js",
+    "create:db": "ts-node ./src/sequelize/mockups/index.ts",
+    "create:dist": "mkdirp dist/swagger-ui",
+    "gen:swagger": "$(npm bin)/tsoa swagger",
+    "gen:routes": "$(npm bin)/tsoa routes"
   },
   "engines": {
     "node": "7.10.0"
@@ -62,7 +62,6 @@
     "chai-http": "^3.0.0",
     "mkdirp": "^0.5.1",
     "mocha": "^3.2.0",
-    "ncp": "^2.0.0",
     "nodemon": "^1.11.0",
     "swagger-ui": "^2.2.10",
     "ts-node": "^2.1.0",
