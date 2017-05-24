@@ -1,20 +1,18 @@
 import Sequelize from 'sequelize';
-import config from '../config';
 
-const db = process.env.DATABASE_URL || config.database;
 let sequelize;
 
-if (typeof db === 'string') {
-  sequelize = new Sequelize(db, {
+if (typeof process.env.DATABASE_URL !== 'undefined') {
+  sequelize = new Sequelize(process.env.DATABASE_URL, {
     dialect: 'postgres',
     dialectOptions: {
       ssl: true,
     },
   });
 } else {
-  sequelize = new Sequelize(db.name, db.username, db.password, {
-    host: db.host || 'localhost',
-    port: db.port || 5432,
+  sequelize = new Sequelize(process.env.DB_NAME, process.env.DB_USER, process.env.DB_PASS, {
+    host: process.env.DB_HOST || 'localhost',
+    port: process.env.DB_PORT || 5432,
     dialect: 'postgres',
     logging: false,
   });

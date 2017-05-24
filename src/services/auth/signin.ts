@@ -3,7 +3,7 @@ import {
   Response,
   NextFunction,
 } from 'express';
-import { signinEmail } from '../../helpers/nodemailer';
+import { signinEmail } from '../../mailer';
 import db from '../../sequelize';
 import debug from 'debug';
 const log = debug('api:signin');
@@ -16,6 +16,7 @@ export default function signin(req: Request, res: Response, next: NextFunction):
     birthday,
     password1,
     password2,
+    language,
   } = req.body;
 
   if (!firstname || !lastname || !email || !birthday || !password1) return res.status(400).json({ err: 'Please fill in all the fields.' });
@@ -29,7 +30,7 @@ export default function signin(req: Request, res: Response, next: NextFunction):
   };
 
   db['user'].create(newUser)
-    .then(user => signinEmail(email, user.dataValues.token)
+    .then(user => signinEmail(firstname, email, user.dataValues.token, language)
       .then(() => res.status(200).json({ msg: 'User created successfully - email sent' }))
       .catch((err) => {
         log(`Unexpected error ${err}`);

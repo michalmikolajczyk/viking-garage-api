@@ -11,7 +11,7 @@ createdb test_db      # create database for prod, test and dev
 psql test_db -c "GRANT ALL PRIVILEGES ON DATABASE test_db TO viking"
 psql test_db -c "CREATE EXTENSION postgis"
 
-(cd src && cp config.ts.example config.ts)
+(cp .env.example .env)
 
 npm i
 npm test

@@ -4,12 +4,15 @@ import {
   NextFunction,
 } from 'express';
 import db from '../../sequelize';
-import { resetEmail } from '../../helpers/nodemailer';
+import { resetEmail } from '../../mailer';
 import debug from 'debug';
 const log = debug('api:reset');
 
 export default function reset(req: Request, res: Response, next: NextFunction): any {
-  const { email } = req.body;
+  const {
+    email,
+    language,
+  } = req.body;
 
   db['user'].findOne({ where: { email } })
     .then((user) => {
@@ -21,7 +24,7 @@ export default function reset(req: Request, res: Response, next: NextFunction): 
           });
       }
 
-      resetEmail(user.email, user.token)
+      resetEmail(user.name, user.email, user.token, language)
         .then(info => res.status(200)
           .json({
             err: false,
