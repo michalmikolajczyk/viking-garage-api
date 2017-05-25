@@ -38,8 +38,10 @@ app.use((err, req, res, next) => {
   res.status(500).send(`Unexpected error ${err}`);
 });
 
+const port = process.env.VG_PORT || '4000';
+
 app.listen(process.env.VG_PORT, () => {
-  log(`Server running at ${process.env.VG_HOST}:${process.env.VG_PORT}`);
+  log(`Server running at ${process.env.VG_HOST}:${port}`);
 });
 
 export default app;
