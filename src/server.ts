@@ -11,14 +11,20 @@ import debug from 'debug';
 const log = debug('api:server');
 
 const app = express();
+app.options('*', cors({
+  origin: '*',
+  methods: 'OPTIONS,GET,HEAD,PUT,PATCH,POST,DELETE',
+  preflightContinue: true,
+  optionsSuccessStatus: 204,
+  credentials: true,
+}))
 app.use('/docs', express.static(__dirname + '/../dist/swagger-ui'));
 app.use('/swagger.json', (req, res) => {
   res.sendfile('./dist/swagger.json');
 });
 
 app.use(cors({
-  origin: process.env.VG_CORS,
-  credentials: true,
+
 }));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
