@@ -17,7 +17,7 @@ app.options('*', cors({
   preflightContinue: true,
   optionsSuccessStatus: 204,
   credentials: true,
-}))
+}));
 app.use('/docs', express.static(__dirname + '/../dist/swagger-ui'));
 app.use('/swagger.json', (req, res) => {
   res.sendfile('./dist/swagger.json');
