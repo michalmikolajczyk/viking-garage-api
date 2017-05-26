@@ -1,6 +1,6 @@
 export default function (sequelize, Sequelize) {
   return sequelize.define('protection', {
-    hemlet: {
+    helmet: {
       allowNull: false,
       type: Sequelize.BOOLEAN,
     },
