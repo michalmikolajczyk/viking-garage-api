@@ -8,7 +8,7 @@ export default function (sequelize, Sequelize) {
       allowNull: false,
       type: Sequelize.BOOLEAN,
     },
-    transportTheMorocycle: {
+    transportTheMotorcycle: {
       allowNull: false,
       type: Sequelize.BOOLEAN,
     },
