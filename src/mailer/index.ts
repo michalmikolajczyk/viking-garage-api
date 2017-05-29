@@ -3,6 +3,7 @@ import {
   signinMessage,
   resetMessage,
 } from './templates';
+const ride = process.env.VG_RIDE || 'viking.garage.app@gmail.com';
 const config = {
   service: process.env.MAIL_SERVICE,
   auth: {
@@ -39,7 +40,34 @@ function resetEmail(name: string, email: string, token: string, code: string): P
   return sendEmail(body);
 }
 
+function rideEmail(data: any): Promise<any> {
+  const {
+    name,
+    email,
+    offer,
+    total,
+    startDate,
+    endDate,
+    equipment,
+  } = data;
+  const body = {
+    from: config.auth.user,
+    to: ride,
+    subject: `New ride request from ${name}, ${email}`,
+    text:
+`Name: ${name},
+Email: ${email},
+Offer Id: www.vikinggarage.com/offer/${offer}
+Start Date: ${startDate},
+End Date: ${endDate},
+Equipment Type: ${equipment},
+`
+  }
+  return sendEmail(body);
+}
+
 export {
   signinEmail,
   resetEmail,
+  rideEmail,
 }
