@@ -2,6 +2,7 @@ import * as dotenv from 'dotenv';
 dotenv.config();
 import './controllers';
 import * as express from 'express';
+import * as path from 'path';
 import * as cors from 'cors';
 import * as bodyParser from 'body-parser';
 import * as methodOverride from 'method-override';
@@ -18,10 +19,8 @@ app.options('*', cors({
   optionsSuccessStatus: 204,
   credentials: true,
 }));
-app.use('/docs', express.static(__dirname + '/../dist/swagger-ui'));
-app.use('/swagger.json', (req, res) => {
-  res.sendfile('./dist/swagger.json');
-});
+app.use('/docs', express.static(path.resolve('dist/swagger-ui/dist')));
+app.use('/swagger.json', (req, res) => res.sendfile(path.resolve('dist/swagger.json')));
 
 app.use(cors({
 
@@ -35,7 +34,7 @@ registerRoutes(app);
 
 app.use((err, req, res, next) => {
   log(`Unexpected error ${err}`);
-  res.status(500).send(`Unexpected error ${err}`);
+  res.status(500).send(`Unexpected error`);
 });
 
 const port = process.env.PORT || '4000';
