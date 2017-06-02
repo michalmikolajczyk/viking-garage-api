@@ -4,10 +4,13 @@
     "email": "viking.garage.app@gmail.com",
 
     "offer": 1,
-    "total": 623.32,
     "equipment": 1,
 
     "startDate": "2017-06-01T08:07:09.235Z",
-    "endDate": "2017-06-01T08:07:09.235Z"
+    "endDate": "2017-06-01T08:07:09.235Z",
+
+    "price": 55,
+    "total": 55,
+    "currency": "PLN"
   }
 ]
