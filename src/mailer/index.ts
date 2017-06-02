@@ -14,6 +14,7 @@ const config = {
 const transporter = nodemailer.createTransport(config);
 
 function sendEmail(body: any): Promise<any> {
+  if (process.env.NODE_ENV === 'test') return Promise.resolve();
   return new Promise((res, rej) => {
     transporter.sendMail(body, (err, info) => {
       if (err) return rej(`Email sent error ${err}`);
