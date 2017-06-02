@@ -61,8 +61,8 @@ Offer Id: www.vikinggarage.com/offer/${offer}
 Start Date: ${startDate},
 End Date: ${endDate},
 Equipment Type: ${equipment},
-`
-  }
+`,
+  };
   return sendEmail(body);
 }
 

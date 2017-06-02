@@ -3,6 +3,7 @@ import {
   Response,
   NextFunction,
 } from 'express';
+import * as Sequelize from 'sequelize';
 import db from '../../sequelize';
 import { rideEmail } from '../../mailer';
 import * as error from '../error';
@@ -14,22 +15,26 @@ export default function ride(req: Request, res: Response, next: NextFunction): a
     name,
     email,
     offer,
-    total,
     startDate,
     endDate,
     equipment,
+    price,
+    total,
+    currency,
   } = req.body;
 
-  if (!name || !email || !offer || !total || !startDate || !endDate || !equipment) return res.status(400).json({ err: 'Please fill in all the fields.' });
+  if (!name || !email || !offer || !startDate || !endDate || !equipment || !price || !total || !currency) return res.status(400).json(error.missing);
 
   const newRide = {
     name,
     email,
     offer,
-    total,
     startDate,
     endDate,
     equipment,
+    price,
+    total,
+    currency,
   };
 
   db['ride'].create(newRide)
@@ -39,6 +44,10 @@ export default function ride(req: Request, res: Response, next: NextFunction): a
         log(`Unexpected error ${err}`);
         res.status(500).json(error.unexpected);
       }))
+    .catch(Sequelize.ValidationError, (err) => {
+      log(`Validation error ${err}`);
+      res.status(400).json(error.validation);
+    })
     .catch((err) => {
       log(`Unexpected error ${err}`);
       res.status(500).json(error.unexpected);
