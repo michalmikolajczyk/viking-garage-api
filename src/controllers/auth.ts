@@ -1,15 +1,11 @@
 import {
-  Request,
-  Response,
-  NextFunction,
-} from 'express';
-import {
+  Body,
   Get,
-  Inject,
   Post,
   Put,
   Tags,
   Route,
+  Request,
 } from 'tsoa';
 import {
   UserChange,
@@ -30,7 +26,7 @@ export class AuthController {
    */
   @Get('')
   @Tags('user')
-  public get(@Inject() req: Request, @Inject() res: Response, @Inject() next: NextFunction): void {
+  public get(@Request() req: any, @Request() res: any, @Request() next: any): void {
     user.get(req, res, next);
   }
 
@@ -39,7 +35,7 @@ export class AuthController {
    */
   @Put('')
   @Tags('user')
-  public put(body: UserInfo, @Inject() req: Request, @Inject() res: Response, @Inject() next: NextFunction): void {
+  public put(@Request() req: any, @Request() res: any, @Request() next: any, @Body() body: UserInfo): void {
     user.put(req, res, next);
   }
 
@@ -49,7 +45,7 @@ export class AuthController {
    */
   @Post('change')
   @Tags('login')
-  public change(body: UserChange, @Inject() req: Request, @Inject() res: Response, @Inject() next: NextFunction): void {
+  public change(@Request() req: any, @Request() res: any, @Request() next: any, @Body() body: UserChange): void {
     auth.change(req, res, next);
   }
 
@@ -58,7 +54,7 @@ export class AuthController {
    */
   @Get('check')
   @Tags('login')
-  public check(@Inject() req: Request, @Inject() res: Response, @Inject() next: NextFunction): void {
+  public check(@Request() req: any, @Request() res: any, @Request() next: any): void {
     auth.check(req, res, next);
   }
 
@@ -68,7 +64,7 @@ export class AuthController {
    */
   @Post('login')
   @Tags('login')
-  public login(body: UserLogin, @Inject() req: Request, @Inject() res: Response, @Inject() next: NextFunction): void {
+  public login(@Request() req: any, @Request() res: any, @Request() next: any, @Body() body: UserLogin): void {
     auth.login(req, res, next);
   }
 
@@ -77,7 +73,7 @@ export class AuthController {
    */
   @Get('logout')
   @Tags('login')
-  public logout(@Inject() req: Request, @Inject() res: Response, @Inject() next: NextFunction): void {
+  public logout(@Request() req: any, @Request() res: any, @Request() next: any): void {
     auth.logout(req, res, next);
   }
 
@@ -87,7 +83,7 @@ export class AuthController {
    */
   @Post('resend')
   @Tags('signin')
-  public resend(body: UserEmail, @Inject() req: Request, @Inject() res: Response, @Inject() next: NextFunction): void {
+  public resend(@Request() req: any, @Request() res: any, @Request() next: any, @Body() body: UserEmail): void {
     auth.resend(req, res, next);
   }
 
@@ -97,7 +93,7 @@ export class AuthController {
    */
   @Post('reset')
   @Tags('login')
-  public reset(body: UserEmail, @Inject() req: Request, @Inject() res: Response, @Inject() next: NextFunction): void {
+  public reset(@Request() req: any, @Request() res: any, @Request() next: any, @Body() body: UserEmail): void {
     auth.reset(req, res, next);
   }
 
@@ -107,7 +103,7 @@ export class AuthController {
    */
   @Post('signin')
   @Tags('signin')
-  public signin(body: UserSignin, @Inject() req: Request, @Inject() res: Response, @Inject() next: NextFunction): void {
+  public signin(@Request() req: any, @Request() res: any, @Request() next: any, @Body() body: UserSignin): void {
     auth.signin(req, res, next);
   }
 
@@ -117,7 +113,7 @@ export class AuthController {
    */
   @Post('verify')
   @Tags('signin')
-  public verify(body: UserToken, @Inject() req: Request, @Inject() res: Response, @Inject() next: NextFunction): void {
+  public verify(@Request() req: any, @Request() res: any, @Request() next: any, @Body() body: UserToken): void {
     auth.verify(req, res, next);
   }
 }

@@ -1,16 +1,12 @@
 import {
-  Request,
-  Response,
-  NextFunction,
-} from 'express';
-import {
+  Body,
   Get,
   Post,
   Put,
   Delete,
   Tags,
-  Inject,
   Route,
+  Request,
 } from 'tsoa';
 import {
   Offer,
@@ -29,7 +25,7 @@ export class OfferController {
    */
   @Delete('{id}')
   @Tags('offer')
-  public delete(id: number, @Inject() req: Request, @Inject() res: Response, @Inject() next: NextFunction): void {
+  public delete(@Request() req: any, @Request() res: any, @Request() next: any, id: number): void {
     offer.del(req, res, next);
   }
 
@@ -38,35 +34,35 @@ export class OfferController {
    */
   @Get('{id}')
   @Tags('offer')
-  public get(id: number, @Inject() req: Request, @Inject() res: Response, @Inject() next: NextFunction): void {
+  public get(@Request() req: any, @Request() res: any, @Request() next: any, id: number): void {
     offer.get(req, res, next);
   }
 
-  /**
-   * Get all offer
-   */
+  // /**
+  //  * Get all offer
+  //  */
   @Get('')
   @Tags('offer')
-  public getAll(@Inject() req: Request, @Inject() res: Response, @Inject() next: NextFunction): void {
+  public getAll(@Request() req: any, @Request() res: any, @Request() next: any): void {
     offer.getAll(req, res, next);
   }
 
-  /**
-   * Create new offer
-   * @param {OfferPost} object with offer info
-   */
+  // /**
+  //  * Create new offer
+  //  * @param {OfferPost} object with offer info
+  //  */
   @Post('')
   @Tags('offer')
-  public post(body: OfferPost, @Inject() req: Request, @Inject() res: Response, @Inject() next: NextFunction): void {
+  public post(@Request() req: any, @Request() res: any, @Request() next: any, @Body() body: OfferPost): void {
     offer.post(req, res, next);
   }
 
-  /**
-   * Update existing offer
-   */
+  // /**
+  //  * Update existing offer
+  //  */
   @Put('{id}')
   @Tags('offer')
-  public put(id: number, @Inject() req: Request, @Inject() res: Response, @Inject() next: NextFunction): void {
+  public put(@Request() req: any, @Request() res: any, @Request() next: any, id: number): void {
     offer.put(req, res, next);
   }
 }

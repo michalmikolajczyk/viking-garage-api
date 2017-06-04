@@ -5,7 +5,7 @@ import * as express from 'express';
 import * as cors from 'cors';
 import * as bodyParser from 'body-parser';
 import * as methodOverride from 'method-override';
-import { RegisterRoutes } from './routes';
+import { registerRoutes } from './routes';
 import { config as passportConfig } from './helpers/passport';
 import debug from 'debug';
 const log = debug('api:server');
@@ -31,7 +31,7 @@ app.use(bodyParser.json());
 app.use(methodOverride());
 
 passportConfig(app);
-RegisterRoutes(app);
+registerRoutes(app);
 
 app.use((err, req, res, next) => {
   log(`Unexpected error ${err}`);
