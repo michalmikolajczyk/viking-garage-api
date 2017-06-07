@@ -14,7 +14,7 @@ const query = (point, dist) =>
 export default function getAll(req: Request, res: Response, next: NextFunction): any {
   const lat = req.query.lat || 52.237684;
   const lng = req.query.lng || 21.030086;
-  const dist = req.query.dist || 10000;
+  const dist = req.query.dist || 100000000;
 
   db['sequelize'].query(query([lat, lng], dist), { type: db['sequelize'].QueryTypes.SELECT })
     .then((offers) => {
