@@ -26,11 +26,11 @@
     "brakes": "Brembo",
     "compressionRatio": "xxx",
     "suspension": "Sanchez",
-    "ignitionType": "Kickstarr",
+    "ignitionType": "Kick start",
     "frame": "Alloy",
     "kickstand": false,
     "wheelbase": 1597,
-    "lights": "none",
+    "lights": "None",
     "rakeTrail": "wtf",
     "storageSpace": false,
 
