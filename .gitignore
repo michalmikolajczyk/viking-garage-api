@@ -3,6 +3,7 @@
 src/routes.ts
 src/config.ts
 dist
+backup.sql
 
 ### Node ###
 # Logs
