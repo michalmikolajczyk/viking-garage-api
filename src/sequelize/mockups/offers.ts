@@ -37,6 +37,7 @@ export default function create() {
         db['service'].findById(1),
       ])
         .then(items => items.map(item => item.addOffer(1)))
-        .then(createOffers);
+        .then(createOffers)
+        .then(() => process.exit());
   });
 }
