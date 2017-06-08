@@ -34,23 +34,5 @@ export default function (sequelize, Sequelize) {
       allowNull: false,
       type: Sequelize.STRING,
     },
-  }, {
-    classMethods: {
-      associate(db) {
-        this.belongsTo(db.make);
-        this.belongsTo(db.modelhelmet);
-        this.belongsToMany(db.offer,  {
-          through: {
-            model: db.offeritem,
-            unique: false,
-            scope: {
-              offerType: 'helmet',
-            },
-          },
-          foreignKey: 'itemId',
-          constraints: false,
-        });
-      },
-    },
   });
 }

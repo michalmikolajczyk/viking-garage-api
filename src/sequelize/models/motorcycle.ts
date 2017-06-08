@@ -179,23 +179,5 @@ export default function (sequelize, Sequelize) {
     fuelCapacity: {
       type: Sequelize.FLOAT,
     },
-  }, {
-    classMethods: {
-      associate(db) {
-        this.belongsTo(db.make);
-        this.belongsTo(db.modelmoto);
-        this.belongsToMany(db.offer,  {
-          through: {
-            model: db.offeritem,
-            unique: false,
-            scope: {
-              offerType: 'motorcycle',
-            },
-          },
-          foreignKey: 'itemId',
-          constraints: false,
-        });
-      },
-    },
   });
 }
