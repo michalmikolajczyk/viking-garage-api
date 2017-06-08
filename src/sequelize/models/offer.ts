@@ -34,5 +34,18 @@ export default function (sequelize, Sequelize) {
       allowNull: false,
       type: Sequelize.STRING,
     },
+  }, {
+    hooks: {
+      beforeUpdate: createCoord,
+      beforeCreate: createCoord,
+      beforeBulkCreate: (offers, options) => offers.forEach(createCoord),
+    }
   });
+}
+
+function createCoord(offer) {
+  offer.coord = {
+    'type': 'Point',
+    'coordinates': [ offer.lat, offer.lng ],
+  }
 }
