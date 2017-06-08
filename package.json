@@ -44,7 +44,7 @@
     "passport": "^0.3.2",
     "passport-jwt": "^2.2.1",
     "pg": "^6.1.2",
-    "sequelize": "^3.30.2",
+    "sequelize": "^4.0.0",
     "tsoa": "^1.1.8",
     "uuid": "^3.0.1"
   },
