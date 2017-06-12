@@ -7,22 +7,18 @@ const should = chai.should();
 chai.use(chaiHttp);
 import * as error from '../../services/error';
 
-const booking = {
+const contact = {
   name: 'Viking',
   email: 'viking.garage.app@gmail.com',
-  offer: 1,
-  startDate: '2017-06-01T08:07:09.235Z',
-  endDate: '2017-06-01T08:07:09.235Z',
-  equipment: 1,
-  price: 55,
-  currency: 'PLN',
+  body: 'start date: 1/12/2017 etc.',
+  message: 'hey how are you?',
 };
 
-describe('ride/ride tests', () => {
-  it('should return error due the one empty field (total)', (done) => {
+describe('contact/ tests', () => {
+  it('should return error due the one empty field (type)', (done) => {
     chai.request(server)
-      .post('/ride')
-      .send(booking)
+      .post('/contact')
+      .send(contact)
       .end((err, res) => {
         res.should.have.status(400);
         res.body.should.have.property('err');
@@ -33,10 +29,10 @@ describe('ride/ride tests', () => {
 
   it('should return error because of wrong data type', (done) => {
     chai.request(server)
-      .post('/ride')
+      .post('/contact')
       .send({
-        ...booking,
-        total: 'wrong type',
+        ...contact,
+        type: { wrong: 'type' },
       })
       .end((err, res) => {
         res.should.have.status(400);
@@ -46,18 +42,18 @@ describe('ride/ride tests', () => {
       });
   });
 
-  it('should create new booking instance successfully', (done) => {
+  it('should create new contact instance successfully', (done) => {
     chai.request(server)
-      .post('/ride')
+      .post('/contact')
       .send({
-        ...booking,
-        total: 55,
+        ...contact,
+        type: 'ride',
       })
       .end((err, res) => {
         res.should.have.status(200);
         res.body.should.not.have.property('err');
         res.body.should.have.property('msg');
-        res.body.msg.should.be.equal('Booking ride successfully');
+        res.body.msg.should.be.equal('Contact request saved');
         done();
       });
   });
