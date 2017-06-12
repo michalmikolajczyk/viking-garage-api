@@ -1,9 +1,9 @@
 import * as auth from './auth';
+import * as contact from './contact';
 import * as offer from './offer';
-import * as ride from './ride';
 
 export {
   auth,
+  contact,
   offer,
-  ride,
 }
