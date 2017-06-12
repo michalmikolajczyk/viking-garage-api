@@ -1,16 +1,11 @@
 import {
-  Request,
-  Response,
-  NextFunction,
-} from 'express';
-import {
+  Body,
   Get,
   Post,
   Put,
-  Delete,
   Tags,
-  Inject,
   Route,
+  Request,
 } from 'tsoa';
 import { ContactBody } from '../models/contact';
 import * as contact from '../services/contact';
@@ -28,7 +23,7 @@ export class ContactController {
    */
   @Post('')
   @Tags('contact')
-  public post(body: ContactBody, @Inject() req: Request, @Inject() res: Response, @Inject() next: NextFunction): void {
+  public post(@Request() req: any, @Request() res: any, @Request() next: any, @Body() body: ContactBody): void {
     contact.contact(req, res, next);
   }
 }
