@@ -12,23 +12,23 @@ import {
   Inject,
   Route,
 } from 'tsoa';
-import { RideBody } from '../models/ride';
-import * as ride from '../services/ride';
+import { ContactBody } from '../models/contact';
+import * as contact from '../services/contact';
 
 /**
- * Ride Booking
+ * Contact form
  */
 
-@Route('ride')
-export class RideController {
+@Route('contact')
+export class ContactController {
 
   /**
-   * Create new ride booking
-   * @param {RideBody} object with booking info
+   * Create new contact instance
+   * @param {ContactBody} object with contact info
    */
   @Post('')
-  @Tags('ride')
-  public post(body: RideBody, @Inject() req: Request, @Inject() res: Response, @Inject() next: NextFunction): void {
-    ride.ride(req, res, next);
+  @Tags('contact')
+  public post(body: ContactBody, @Inject() req: Request, @Inject() res: Response, @Inject() next: NextFunction): void {
+    contact.contact(req, res, next);
   }
 }

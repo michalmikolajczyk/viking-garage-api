@@ -1,3 +1,3 @@
-import ride from './ride';
+import contact from './contact';
 
-export { ride }
+export { contact }

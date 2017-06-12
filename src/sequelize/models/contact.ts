@@ -9,6 +9,9 @@ export default function (sequelize, Sequelize) {
       allowNull: false,
       validate: { isEmail: true },
     },
+    type: {
+      type: Sequelize.STRING,
+    },
     body: {
       type: Sequelize.TEXT,
     },
