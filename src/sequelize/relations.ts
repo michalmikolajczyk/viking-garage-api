@@ -17,8 +17,8 @@ export function createRelations(db) {
   /**
    * HELMET
    */
-  db.helmet.belongsTo(db.make);
-  db.helmet.belongsTo(db.modelhelmet);
+  // db.helmet.belongsTo(db.make);
+  // db.helmet.belongsTo(db.modelhelmet);
   db.helmet.belongsToMany(db.offer,  {
     through: {
       model: db.offeritem,

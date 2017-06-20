@@ -11,6 +11,9 @@ export default function (sequelize, Sequelize) {
       type: Sequelize.ENUM,
       values: offerTypes,
     },
+    brief: {
+      type: Sequelize.TEXT,
+    },
     category: {
       allowNull: false,
       type: Sequelize.STRING,
@@ -43,13 +46,13 @@ export default function (sequelize, Sequelize) {
       beforeUpdate: createCoord,
       beforeCreate: createCoord,
       beforeBulkCreate: (offers, options) => offers.forEach(createCoord),
-    }
+    },
   });
 }
 
 function createCoord(offer) {
   offer.coord = {
-    'type': 'Point',
-    'coordinates': [ offer.lat, offer.lng ],
-  }
+    type: 'Point',
+    coordinates: [offer.lat, offer.lng],
+  };
 }
