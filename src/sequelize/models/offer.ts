@@ -11,6 +11,10 @@ export default function (sequelize, Sequelize) {
       type: Sequelize.ENUM,
       values: offerTypes,
     },
+    category: {
+      allowNull: false,
+      type: Sequelize.STRING,
+    },
     coord: {
       type: Sequelize.GEOGRAPHY,
     },

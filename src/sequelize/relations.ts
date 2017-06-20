@@ -35,8 +35,8 @@ export function createRelations(db) {
   /**
    * MOTORCYCLE
    */
-  db.motorcycle.belongsTo(db.make);
-  db.motorcycle.belongsTo(db.modelmoto);
+  // db.motorcycle.belongsTo(db.make);
+  // db.motorcycle.belongsTo(db.modelmoto);
   db.motorcycle.belongsToMany(db.offer,  {
     through: {
       model: db.offeritem,

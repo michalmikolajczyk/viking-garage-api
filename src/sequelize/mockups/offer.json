@@ -2,6 +2,7 @@
   {
     "title": "KTM SX 125, 2012",
     "type": "motorcycle",
+    "category": "motocross",
     "lat": 52.237684,
     "lng": 21.030086,
     "image": "http://p.vitalmx.com/photos/users/64/photos/83572/s1600_125_SX_90Grad.jpg",
@@ -11,6 +12,7 @@
   {
     "title": "Honda CB 125, 1998",
     "type": "motorcycle",
+    "category": "street",
     "lat": 52.185241,
     "lng": 21.047501,
     "image": "http://kickstart.bikeexif.com/wp-content/uploads/2014/03/honda-cb750-motohanger.jpg",
@@ -20,6 +22,7 @@
   {
     "title": "Unikat Motorworks",
     "type": "motorcycle",
+    "category": "motocross",
     "lat": 51.113875,
     "lng": 17.007770,
     "image": "http://www.rental-motorcycle.com/images/motorcycles/hondaclr125cityfly-big.jpg",
@@ -29,6 +32,7 @@
   {
     "title": "Motorcycle Indonesia",
     "type": "motorcycle",
+    "category": "motocross",
     "lat": -0.915462,
     "lng": 113.660875,
     "image": "http://www.dirtrider.com/sites/dirtrider.com/files/styles/large_1x_/public/import/embedded/wp-content/uploads/2014/11/2015-Freeride-05.jpg?itok=4vsAM0so",
@@ -38,6 +42,7 @@
   {
     "title": "Motorcycle Portugal",
     "type": "motorcycle",
+    "category": "motocross",
     "lat": 41.154832,
     "lng": -8.609959,
     "image": "http://www.totalmotorcycle.com/motorcycles/2012models/2012-Husaberg-FE390a.jpg",
