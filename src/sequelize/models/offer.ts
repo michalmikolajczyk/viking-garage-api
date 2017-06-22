@@ -14,7 +14,7 @@ export default function (sequelize, Sequelize) {
     brief: {
       type: Sequelize.TEXT,
     },
-    category: {
+    subtype: {
       allowNull: false,
       type: Sequelize.STRING,
     },
