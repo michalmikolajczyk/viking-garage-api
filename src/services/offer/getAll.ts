@@ -8,18 +8,60 @@ import * as err from '../error';
 import debug from 'debug';
 const log = debug('api:offer/getAll');
 
-const query = (point, dist) =>
-  `SELECT * FROM offers WHERE ST_DWithin(coord, ST_SetSRID(ST_Point(${point[0]}, ${point[1]}), 4326), ${dist});`;
-
 export default function getAll(req: Request, res: Response, next: NextFunction): any {
-  const lat = req.query.lat || 52.237684;
-  const lng = req.query.lng || 21.030086;
-  const dist = req.query.dist || 10000000;
+  let subtypeWh;
+  let distanceOrd;
+  let distanceAttr;
+  let distanceFunc;
+  let distanceWhere;
 
-  db['sequelize'].query(query([lat, lng], dist), { type: db['sequelize'].QueryTypes.SELECT })
-    .then((offers) => {
-      if (!offers) return res.status(400).json(err.notexists);
-      res.json(offers);
+  const limit = 4;
+  const offset = parseInt(req.query.offset, 10) || 0;
+  const distMax = 10000000;
+
+  const {
+    lat,
+    lng,
+    dist,
+    type,
+  } = req.query;
+
+  // create subtype filter
+  if (typeof type === 'string' && type.length > 0) {
+    subtypeWh = { subtype: { $in: type.split(',') } };
+  }
+
+  // create distance filter
+  if (typeof lat !== 'undefined' || typeof lng !== 'undefined') {
+    distanceFunc = db['sequelize'].fn(
+      'ST_Distance',
+      db['sequelize'].col('coord'),
+      db['sequelize'].fn('ST_SetSRID', db['sequelize'].fn('ST_Point', lat, lng), 4326),
+    );
+    distanceOrd = { order: [distanceFunc] };
+    distanceAttr = { include: [[distanceFunc, 'distance']] };
+    distanceWhere = { $and: db['sequelize'].where(distanceFunc, '<=', dist || distMax) };
+  }
+
+  db['offer'].findAll({
+    limit,
+    offset,
+    ...distanceOrd,
+    attributes: {
+      ...distanceAttr,
+      exclude: ['coord', 'offererId', 'createdAt', 'updatedAt'],
+    },
+    where: {
+      ...subtypeWh,
+      ...distanceWhere,
+    },
+  })
+    .then((data) => {
+      if (!data) return res.status(400).json(err.notexists);
+      res.json({
+        data,
+        offset,
+      });
     })
     .catch((err) => {
       log(`Unexpected error ${err}`);
