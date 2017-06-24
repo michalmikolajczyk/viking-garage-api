@@ -22,7 +22,7 @@ export default function (sequelize, Sequelize) {
     },
     brief: {
       allowNull: false,
-      type: Sequelize.STRING,
+      type: Sequelize.TEXT,
     },
     points: {
       allowNull: false,

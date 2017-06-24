@@ -1,5 +1,7 @@
 [
   {
+    "make": "KTM",
+    "model": "SX 125",
     "year": 2012,
     "type": "motocross",
     "termsOfUse": "http://vikinggarage.com/terms-of-use",
@@ -26,11 +28,11 @@
     "brakes": "Brembo",
     "compressionRatio": "xxx",
     "suspension": "Sanchez",
-    "ignitionType": "Kickstarr",
+    "ignitionType": "Kick start",
     "frame": "Alloy",
     "kickstand": false,
     "wheelbase": 1597,
-    "lights": "none",
+    "lights": "None",
     "rakeTrail": "wtf",
     "storageSpace": false,
 

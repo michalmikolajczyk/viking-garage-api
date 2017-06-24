@@ -11,9 +11,23 @@ export default function (sequelize, Sequelize) {
       type: Sequelize.ENUM,
       values: offerTypes,
     },
-    coord: {
+    brief: {
+      type: Sequelize.TEXT,
+    },
+    subtype: {
       allowNull: false,
+      type: Sequelize.STRING,
+    },
+    coord: {
       type: Sequelize.GEOGRAPHY,
+    },
+    lat: {
+      allowNull: false,
+      type: Sequelize.FLOAT,
+    },
+    lng: {
+      allowNull: false,
+      type: Sequelize.FLOAT,
     },
     image: {
       allowNull: false,
@@ -28,55 +42,17 @@ export default function (sequelize, Sequelize) {
       type: Sequelize.STRING,
     },
   }, {
-    classMethods: {
-      associate(db) {
-        this.belongsTo(db.offerer);
-
-        this.belongsToMany(db.accessorie, {
-          through: {
-            model: db.offeritem,
-            unique: false,
-          },
-          foreignKey: 'offerId',
-          constraints: false,
-        });
-
-        this.belongsToMany(db.helmet, {
-          through: {
-            model: db.offeritem,
-            unique: false,
-          },
-          foreignKey: 'offerId',
-          constraints: false,
-        });
-
-        this.belongsToMany(db.motorcycle, {
-          through: {
-            model: db.offeritem,
-            unique: false,
-          },
-          foreignKey: 'offerId',
-          constraints: false,
-        });
-
-        this.belongsToMany(db.protection, {
-          through: {
-            model: db.offeritem,
-            unique: false,
-          },
-          foreignKey: 'offerId',
-          constraints: false,
-        });
-
-        this.belongsToMany(db.service, {
-          through: {
-            model: db.offeritem,
-            unique: false,
-          },
-          foreignKey: 'offerId',
-          constraints: false,
-        });
-      },
+    hooks: {
+      beforeUpdate: createCoord,
+      beforeCreate: createCoord,
+      beforeBulkCreate: (offers, options) => offers.forEach(createCoord),
     },
   });
+}
+
+function createCoord(offer) {
+  offer.coord = {
+    type: 'Point',
+    coordinates: [offer.lat, offer.lng],
+  };
 }

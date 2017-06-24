@@ -7,10 +7,6 @@ export default function (sequelize, Sequelize) {
     'Excellent',
   ];
 
-  const enumType = [
-    'Full Face',
-  ];
-
   return sequelize.define('helmet', {
     certificates: {
       allowNull: false,
@@ -27,30 +23,11 @@ export default function (sequelize, Sequelize) {
     },
     type: {
       allowNull: false,
-      type: Sequelize.ENUM,
-      values: enumType,
+      type: Sequelize.STRING,
     },
     picture: {
       allowNull: false,
       type: Sequelize.STRING,
-    },
-  }, {
-    classMethods: {
-      associate(db) {
-        this.belongsTo(db.make);
-        this.belongsTo(db.modelhelmet);
-        this.belongsToMany(db.offer,  {
-          through: {
-            model: db.offeritem,
-            unique: false,
-            scope: {
-              offerType: 'helmet',
-            },
-          },
-          foreignKey: 'itemId',
-          constraints: false,
-        });
-      },
     },
   });
 }

@@ -2,7 +2,7 @@ import * as dotenv from 'dotenv';
 dotenv.config();
 import * as walkSync from 'walk-sync';
 import sequelize from './config';
-import create from './mockups/offers';
+import { createRelations } from './relations';
 
 const db = {};
 const path = `${__dirname}/models`;
@@ -13,11 +13,7 @@ paths.forEach((file) => {
   db[model.name] = model;
 });
 
-Object.keys(db).forEach((model) => {
-  if ('associate' in db[model]) {
-    db[model].associate(db);
-  }
-});
+createRelations(db);
 
 db['sequelize'] = sequelize;
 
