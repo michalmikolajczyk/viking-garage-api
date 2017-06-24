@@ -16,7 +16,7 @@ export default function getAll(req: Request, res: Response, next: NextFunction):
   let distanceWhere;
 
   const limit = 4;
-  const offset = parseInt(req.query.offset) || 0;
+  const offset = parseInt(req.query.offset, 10) || 0;
   const distMax = 10000000;
 
   const {
@@ -28,7 +28,7 @@ export default function getAll(req: Request, res: Response, next: NextFunction):
 
   // create subtype filter
   if (typeof type === 'string' && type.length > 0) {
-    subtypeWh = { subtype: { $in: type.split(',') } }
+    subtypeWh = { subtype: { $in: type.split(',') } };
   }
 
   // create distance filter
@@ -40,7 +40,7 @@ export default function getAll(req: Request, res: Response, next: NextFunction):
     );
     distanceOrd = { order: [distanceFunc] };
     distanceAttr = { include: [[distanceFunc, 'distance']] };
-    distanceWhere = { $and: db['sequelize'].where(distanceFunc, '<=', dist || distMax) }
+    distanceWhere = { $and: db['sequelize'].where(distanceFunc, '<=', dist || distMax) };
   }
 
   db['offer'].findAll({
