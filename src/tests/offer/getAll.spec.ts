@@ -36,21 +36,6 @@ describe('/offer', () => {
     });
   });
 
-  it('should returns offers type street', (done) => {
-    chai.request(server)
-    .get('/offer?type=street')
-    .end((err, res) => {
-      res.should.have.status(200);
-      res.body.should.have.property('offset');
-      res.body.offset.should.be.equal(0);
-      res.body.data.should.be.an('array');
-      res.body.data.should.have.lengthOf(1);
-      res.body.data[0].should.have.property('subtype');
-      res.body.data[0].subtype.should.be.equal('street');
-      done();
-    });
-  });
-
   it('should returns offers in close distance', (done) => {
     const dist = 10000;
     chai.request(server)
