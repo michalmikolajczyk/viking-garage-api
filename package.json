@@ -64,10 +64,10 @@
     "mocha": "^3.2.0",
     "nodemon": "^1.11.0",
     "swagger-ui": "^2.2.10",
-    "ts-node": "^2.1.0",
+    "ts-node": "^3.1.0",
     "tslint": "^4.4.2",
     "tslint-config-airbnb": "^1.0.0",
-    "typescript": "^2.1.6",
+    "typescript": "2.3.4",
     "walk-sync": "^0.3.1"
   }
 }
