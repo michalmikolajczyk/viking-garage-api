@@ -3,15 +3,26 @@ import {
   signinMessage,
   resetMessage,
 } from './templates';
-const ride = process.env.VG_CONTACT_EMAIL || 'viking.garage.app@gmail.com';
-const config = {
-  service: process.env.MAIL_SERVICE,
+
+if (!process.env.GMAIL_USER ||
+    !process.env.GMAIL_CLIENT_ID ||
+    !process.env.GMAIL_CLIENT_SECRET ||
+    !process.env.GMAIL_REFRESH_TOKEN) {
+  console.log('You should set Gmail OAuth2 envs');
+}
+
+const transporter = nodemailer.createTransport({
+  host: 'smtp.gmail.com',
+  port: 465,
+  secure: true,
   auth: {
-    user: process.env.MAIL_USER,
-    pass: process.env.MAIL_PASS,
+    type: 'OAuth2',
+    user: process.env.GMAIL_USER,
+    clientId: process.env.GMAIL_CLIENT_ID,
+    clientSecret: process.env.GMAIL_CLIENT_SECRET,
+    refreshToken: process.env.GMAIL_REFRESH_TOKEN,
   },
-};
-const transporter = nodemailer.createTransport(config);
+});
 
 function sendEmail(body: any): Promise<any> {
   if (process.env.NODE_ENV === 'test') return Promise.resolve();
@@ -25,7 +36,7 @@ function sendEmail(body: any): Promise<any> {
 
 function signinEmail(name: string, email: string, token: string, code: string): Promise<any> {
   const body = {
-    from: config.auth.user,
+    from: process.env.GMAIL_USER,
     to: email,
     ...signinMessage(name, token, code),
   };
@@ -34,7 +45,7 @@ function signinEmail(name: string, email: string, token: string, code: string): 
 
 function resetEmail(name: string, email: string, token: string, code: string): Promise<any> {
   const body = {
-    from: config.auth.user,
+    from: process.env.GMAIL_USER,
     to: email,
     ...resetMessage(name, token, code),
   };
@@ -50,8 +61,8 @@ function contactEmail(data: any): Promise<any> {
     message,
   } = data;
   const emailBody = {
-    from: config.auth.user,
-    to: ride,
+    from: process.env.GMAIL_USER,
+    to: process.env.GMAIL_USER,
     subject: `[${type}] contact request from ${name}, ${email}`,
     text:
 `TYPE: ${type},
