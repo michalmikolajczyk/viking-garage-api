@@ -15,7 +15,7 @@ export default function getAll(req: Request, res: Response, next: NextFunction):
   let distanceFunc;
   let distanceWhere;
 
-  const limit = 4;
+  const limit = process.env.VG_LIMIT || 7;
   const offset = parseInt(req.query.offset, 10) || 0;
   const distMax = 10000000;
 
@@ -49,7 +49,7 @@ export default function getAll(req: Request, res: Response, next: NextFunction):
     ...distanceOrd,
     attributes: {
       ...distanceAttr,
-      exclude: ['coord', 'offererId', 'createdAt', 'updatedAt'],
+      exclude: ['offererId', 'createdAt', 'updatedAt'],
     },
     where: {
       ...subtypeWh,
@@ -58,6 +58,15 @@ export default function getAll(req: Request, res: Response, next: NextFunction):
   })
     .then((data) => {
       if (!data) return res.status(400).json(err.notexists);
+      if (data.length === 0 && offset === 0) {
+        return db['offer'].findAll({ limit }).then((data) => {
+          return res.json({
+            data,
+            offset,
+            empty: true,
+          });
+        });
+      }
       res.json({
         data,
         offset,

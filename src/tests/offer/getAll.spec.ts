@@ -16,7 +16,7 @@ describe('/offer', () => {
       res.body.should.have.property('offset');
       res.body.offset.should.be.equal(0);
       res.body.data.should.be.an('array');
-      res.body.data.should.have.lengthOf(4);
+      res.body.data.should.have.lengthOf(5);
       done();
     });
   });
@@ -60,7 +60,7 @@ describe('/offer', () => {
       res.body.should.have.property('offset');
       res.body.offset.should.be.equal(0);
       res.body.data.should.be.an('array');
-      res.body.data.should.have.lengthOf(4);
+      res.body.data.should.have.lengthOf(5);
       res.body.data[0].distance.should.be.below(res.body.data[1].distance);
       res.body.data[1].distance.should.be.below(res.body.data[2].distance);
       res.body.data[2].distance.should.be.below(res.body.data[3].distance);
