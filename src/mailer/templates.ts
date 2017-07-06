@@ -81,3 +81,50 @@ VIKING GARAGE Team
       };
   }
 }
+
+export function contactMessage(name: string, email: string, type: string, message: string, body: string): object {
+  return {
+    subject: `[${type}] contact request from ${name}, ${email}`,
+    text:
+`TYPE: ${type},
+Name: ${name},
+Email: ${email},
+---
+Message from user: ${message || 'no message'}
+---
+${body || ''}`,
+  }
+}
+
+export function rideMessage(name: string, code: string): object {
+ switch (code) {
+    case 'pl':
+      return {
+        subject: `Jazda z VIKING GARAGE`,
+        text:
+`Cześć ${name}!
+
+Właśnie dokonałeś wstępnej rezerwacji jazdy poprzez platformę VIKING GARAGE. Nasz zespół skontaktuje się z Tobą w ciągu 24h.
+
+W międzyczasie skontaktujemy się z właścicielem motocykla i potwierdzimy dostępność maszyny we wskazanych przez Ciebie terminie.
+Jeżeli nie chcesz tyle czekać możesz śmiało skontaktować się z nami pod numerem (+48) 667 772 402.
+
+Zespół VIKING GARAGE
+`,
+      };
+    default:
+      return {
+        subject: `Ride with VIKING GARAGE`,
+        text:
+`Hi, ${name}!
+
+You have made a pre-booking reservation via the VIKING GARAGE platform. Our team will contact you within 24 hours.
+
+In the meantime, we will contact the owner of the motorcycle to confirm the availability of the machine you choosed.
+If you do not want to wait so long, feel free to contact us at (+48) 667 772 402.
+
+VIKING GARAGE Team
+`,
+      };
+  }
+}
