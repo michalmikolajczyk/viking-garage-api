@@ -1,7 +1,9 @@
 import * as nodemailer from 'nodemailer';
 import {
+  contactMessage,
   signinMessage,
   resetMessage,
+  rideMessage,
 } from './templates';
 
 if (!process.env.GMAIL_USER ||
@@ -59,21 +61,25 @@ function contactEmail(data: any): Promise<any> {
     type,
     body,
     message,
+    code,
   } = data;
-  const emailBody = {
+  const contactBody = {
     from: process.env.GMAIL_USER,
     to: process.env.GMAIL_USER,
-    subject: `[${type}] contact request from ${name}, ${email}`,
-    text:
-`TYPE: ${type},
-Name: ${name},
-Email: ${email},
----
-Message from user: ${message || 'no message'}
----
-${body || ''}`,
+    ...contactMessage(name, email, type, message, body),
   };
-  return sendEmail(emailBody);
+  if (type === 'ride') {
+    const rideBody = {
+      from: process.env.GMAIL_USER,
+      to: email,
+      ...rideMessage(name, code),
+    };
+    return Promise.all([
+      sendEmail(rideBody),
+      sendEmail(contactBody),
+    ]);
+  }
+  return sendEmail(contactBody);
 }
 
 export {

@@ -93,7 +93,7 @@ Email: ${email},
 Message from user: ${message || 'no message'}
 ---
 ${body || ''}`,
-  }
+  };
 }
 
 export function rideMessage(name: string, code: string): object {
