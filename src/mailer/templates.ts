@@ -82,7 +82,7 @@ VIKING GARAGE Team
   }
 }
 
-export function contactMessage(name: string, email: string, type: string, message: string, body: string): object {
+export function contactRequest(name: string, email: string, type: string, message: string, body: string): object {
   return {
     subject: `[${type}] contact request from ${name}, ${email}`,
     text:
@@ -124,6 +124,39 @@ In the meantime, we will contact the owner of the motorcycle to confirm the avai
 If you do not want to wait so long, feel free to contact us at (+48) 667 772 402.
 
 VIKING GARAGE Team
+`,
+      };
+  }
+}
+
+export function contactMessage(name: string, code: string): object {
+ switch (code) {
+    case 'pl':
+      return {
+        subject: `Kontakt z VIKING GARAGE`,
+        text:
+`Cześć ${name}!
+
+Cieszymy się, że chcesz dołączyć do naszej zaufanej motospołeczności. To dopiero początek, dlatego z każdym kontaktujemy się indywidualnie. Nasz zespół odezwie się do Ciebie w ciągu 24 godzin i opowie o możliwościach otwierającymi się przed osobami, które dołączają do VIKING GARAGE.
+
+Jeżeli nie chcesz tyle czekać możesz śmiało skontaktować się z nami pod numerem (+48) 667 772 402.
+
+Do usłyszenia!
+Zespół VIKING GARAGE
+`,
+      };
+    default:
+      return {
+        subject: `Contact with VIKING GARAGE`,
+        text:
+`Hi, ${name}!
+
+We are glad that you want to join our trusted motocommunity. Since we are on early stage, we contact everyone individually. Our team will respond to you within 24 hours and tell you about the possibilities for people who join VIKING GARAGE.
+
+If you do not want to wait so long, feel free to contact us at (+48) 667 772 402.
+
+See you!
+VIKING GARAGE TEAM
 `,
       };
   }
