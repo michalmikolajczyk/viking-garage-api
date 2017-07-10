@@ -1,13 +1,13 @@
 export function createRelations(db) {
   /**
-   * ACCESSORIE
+   * ACCESSORY
    */
-  db.accessorie.belongsToMany(db.offer,  {
+  db.accessory.belongsToMany(db.offer,  {
     through: {
       model: db.offeritem,
       unique: false,
       scope: {
-        offerType: 'accessorie',
+        offerType: 'accessory',
       },
     },
     foreignKey: 'itemId',
@@ -54,7 +54,7 @@ export function createRelations(db) {
    * OFFER
    */
   db.offer.belongsTo(db.offerer);
-  db.offer.belongsToMany(db.accessorie, {
+  db.offer.belongsToMany(db.accessory, {
     through: {
       model: db.offeritem,
       unique: false,

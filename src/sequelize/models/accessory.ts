@@ -1,5 +1,5 @@
 export default function (sequelize, Sequelize) {
-  return sequelize.define('accessorie', {
+  return sequelize.define('accessory', {
     travelBoxes: {
       allowNull: false,
       type: Sequelize.BOOLEAN,
