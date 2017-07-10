@@ -18,7 +18,5 @@ export default function (sequelize, Sequelize) {
     message: {
       type: Sequelize.TEXT,
     },
-  }, {
-    timestamps: false,
   });
 }
