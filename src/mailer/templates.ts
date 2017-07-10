@@ -137,7 +137,7 @@ export function contactMessage(name: string, code: string): object {
         text:
 `Cześć ${name}!
 
-Cieszymy się, że chcesz dołączyć do naszej zaufanej motospołeczności. To dopiero początek, dlatego z każdym kontaktujemy się indywidualnie. Nasz zespół odezwie się do Ciebie w ciągu 24 godzin i opowie o możliwościach otwierającymi się przed osobami, które dołączają do VIKING GARAGE.
+Cieszymy się, że chcesz dołączyć do naszej zaufanej motospołeczności. To dopiero początek, dlatego z każdym kontaktujemy się indywidualnie. Nasz zespół odezwie się do Ciebie w ciągu 24 godzin i opowie o możliwościach otwierających się przed osobami, które dołączają do VIKING GARAGE.
 
 Jeżeli nie chcesz tyle czekać możesz śmiało skontaktować się z nami pod numerem (+48) 667 772 402.
 
