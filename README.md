@@ -9,6 +9,9 @@ Check out .env.example with sample data
 Homebrew
 Node.js
 
+## Config
+To run application you have to set env vars. Check `app.json` for required variables and default values. For local build you can create `.env` file in root directory with variables (for details check out [dotenv](https://github.com/motdotla/dotenv))
+
 ## One command setup
 ```
 npm run init
