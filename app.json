@@ -1,8 +1,31 @@
 {
   "name": "viking-garage-api",
-  "description": "",
-  "scripts": {
-  },
+  "logo": "https://res.cloudinary.com/hkhuw4b7v/image/upload/v1499880454/raido_logo_small_kx9txb.png",
+  "description": "A worldwide marketplace and community for real people riding real motorcycles. Local private rentals, repairs, tours. VG brings the Platform and logistics.",
+  "keywords": [
+    "motorcycle",
+    "rental",
+    "repair",
+    "tour",
+    "marketplace",
+    "community",
+    "global",
+    "local",
+    "private",
+    "worldwide",
+    "motocross",
+    "enduro",
+    "cafe racer",
+    "scrambler",
+    "chopper",
+    "bobber",
+    "brat style",
+    "adventure",
+    "braap"
+  ],
+  "website": "https://vikinggarage.com/",
+  "repository": "https://github.com/michalmikolajczyk/viking-garage-api",
+  "scripts": {},
   "env": {
     "DATABASE_URL": {
       "required": true
@@ -22,9 +45,9 @@
   "formation": {
   },
   "addons": [
-
+    "cloudinary",
+    "papertrail",
+    "heroku-postgresql:hobby-dev",
   ],
-  "buildpacks": [
-
-  ]
+  "buildpacks": []
 }
