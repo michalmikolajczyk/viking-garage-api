@@ -8,7 +8,7 @@ import db from '../../sequelize';
 import { contactEmail } from '../../mailer';
 import * as error from '../error';
 import debug from 'debug';
-const log = debug('api:ride');
+const log = debug('api:contact');
 
 export default function contact(req: Request, res: Response, next: NextFunction): any {
   const {
@@ -17,6 +17,7 @@ export default function contact(req: Request, res: Response, next: NextFunction)
     type,
     body,
     message,
+    code,
   } = req.body;
 
   if (!name || !email || !type) return res.status(400).json(error.missing);
@@ -30,7 +31,7 @@ export default function contact(req: Request, res: Response, next: NextFunction)
   };
 
   db['contact'].create(newContact)
-    .then(user => contactEmail(newContact)
+    .then(user => contactEmail({ ...newContact, code })
       .then(() => res.status(200).json({ msg: 'Contact request saved' }))
       .catch((err) => {
         log(`Unexpected error ${err}`);
