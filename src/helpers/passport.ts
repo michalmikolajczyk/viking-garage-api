@@ -32,7 +32,7 @@ export function authenticate(req: Request, res: Response, next: NextFunction): P
   return new Promise((resolve, reject) => {
     passport.authenticate(
       'jwt',
-      { session: process.env.JWT_SESSION == 'true' },
+      { session: process.env.JWT_SESSION === 'true' },
       (err, user, info) => {
         if (err || !user) return reject(info);
         resolve(user);
