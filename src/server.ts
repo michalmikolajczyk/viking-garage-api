@@ -8,8 +8,12 @@ const appJSON = fs.readFileSync('app.json', 'utf8');
 const appConf = JSON.parse(appJSON);
 
 Object.keys(appConf.env).forEach((key) => {
+  let unset = false;
   if (appConf.env[key].required && process.env[key] === undefined) {
     console.error(key, 'is undefined!');
+    unset = true;
+  }
+  if (unset) {
     console.error('You should set all env vars!');
     console.error('For details check app.json and README');
     process.exit(1);
