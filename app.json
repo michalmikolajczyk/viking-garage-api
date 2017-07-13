@@ -34,7 +34,7 @@
     },
     "DATABASE_SSL": {
       "description": "Check if databse support SSL connection",
-      "default": false,
+      "default": "false",
       "required": true
     },
     "DEBUG": {
@@ -81,12 +81,12 @@
     },
     "JWT_SESSION": {
       "description": "Check if JSON Web Token keep session",
-      "value": false,
+      "value": "false",
       "required": true
     },
     "NODE_MODULES_CACHE": {
       "description": "Heroku maintains a cache directory that is persisted between builds",
-      "value": false,
+      "value": "false",
       "required": true
     },
     "SERVER_NAME": {
