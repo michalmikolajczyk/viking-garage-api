@@ -32,7 +32,7 @@
       "required": true
     },
     "DATABASE_SSL": {
-      "description": "Check if databse support SSL connection",
+      "description": "Check if databse support SSL connection (set true for remote db)",
       "required": true
     },
     "DEBUG": {
