@@ -29,17 +29,14 @@
   "env": {
     "DATABASE_URL": {
       "description": "URL to database",
-      "default": "postgres://viking:secret@localhost:5432/test_db",
       "required": true
     },
     "DATABASE_SSL": {
-      "description": "Check if databse support SSL connection",
-      "default": "false",
+      "description": "Check if databse support SSL connection (set true for remote db)",
       "required": true
     },
     "DEBUG": {
       "description": "Variable for debug loggin",
-      "value": "api:*",
       "required": false
     },
     "GMAIL_CONTACT_CLIENT_ID": {
@@ -76,22 +73,18 @@
     },
     "JWT_SECRET": {
       "description": "Random string for JSON Web Token generator",
-      "generator": "secret",
       "required": true
     },
     "JWT_SESSION": {
       "description": "Check if JSON Web Token keep session",
-      "value": "false",
       "required": true
     },
     "NODE_MODULES_CACHE": {
       "description": "Heroku maintains a cache directory that is persisted between builds",
-      "value": "false",
       "required": true
     },
     "SERVER_NAME": {
       "description": "Name of actual server",
-      "value": "localhost",
       "required": true
     }
   },
