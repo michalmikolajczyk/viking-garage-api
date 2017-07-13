@@ -29,12 +29,12 @@
   "env": {
     "DATABASE_URL": {
       "description": "URL to database",
-      "default": "postgres://viking:secret@localhost:5432/test_db",
+      "value": "postgres://viking:secret@localhost:5432/test_db",
       "required": true
     },
     "DATABASE_SSL": {
       "description": "Check if databse support SSL connection",
-      "default": "false",
+      "value": "false",
       "required": true
     },
     "DEBUG": {
