@@ -1,30 +1,105 @@
 {
   "name": "viking-garage-api",
-  "description": "",
-  "scripts": {
-  },
+  "logo": "https://res.cloudinary.com/hkhuw4b7v/image/upload/v1499880454/raido_logo_small_kx9txb.png",
+  "description": "A worldwide marketplace and community for real people riding real motorcycles. Local private rentals, repairs, tours. VG brings the Platform and logistics.",
+  "keywords": [
+    "motorcycle",
+    "rental",
+    "repair",
+    "tour",
+    "marketplace",
+    "community",
+    "global",
+    "local",
+    "private",
+    "worldwide",
+    "motocross",
+    "enduro",
+    "cafe racer",
+    "scrambler",
+    "chopper",
+    "bobber",
+    "brat style",
+    "adventure",
+    "braap"
+  ],
+  "website": "https://www.vikinggarage.com/",
+  "repository": "https://github.com/michalmikolajczyk/viking-garage-api",
+  "scripts": {},
   "env": {
     "DATABASE_URL": {
+      "description": "URL to database",
+      "default": "postgres://viking:secret@localhost:5432/test_db",
       "required": true
     },
-    "MAIL_PASS": {
+    "DATABASE_SSL": {
+      "description": "Check if databse support SSL connection",
+      "default": false,
       "required": true
     },
-    "NODE_MODULES_CACHE": "false",
-    "NPM_CONFIG_PRODUCTION": "false",
+    "DEBUG": {
+      "description": "Variable for debug loggin",
+      "value": "api:*",
+      "required": false
+    },
+    "GMAIL_CONTACT_CLIENT_ID": {
+      "description": "Client id for gmail contact alias",
+      "required": true
+    },
+    "GMAIL_CONTACT_CLIENT_SECRET": {
+      "description": "Client secret for gmail contact alias",
+      "required": true
+    },
+    "GMAIL_CONTACT_REFRESH_TOKEN": {
+      "description": "Refresh token for gmail contact alias",
+      "required": true
+    },
+    "GMAIL_CONTACT_USER": {
+      "description": "Email address of gmail contact alias",
+      "required": true
+    },
+    "GMAIL_RIDE_CLIENT_ID": {
+      "description": "Client id for gmail ride alias",
+      "required": true
+    },
+    "GMAIL_RIDE_CLIENT_SECRET": {
+      "description": "Client secret for gmail ride alias",
+      "required": true
+    },
+    "GMAIL_RIDE_REFRESH_TOKEN": {
+      "description": "Refresh token for gmail ride alias",
+      "required": true
+    },
+    "GMAIL_RIDE_USER": {
+      "description": "Email address of gmail ride alias",
+      "required": true
+    },
+    "JWT_SECRET": {
+      "description": "Random string for JSON Web Token generator",
+      "generator": "secret",
+      "required": true
+    },
+    "JWT_SESSION": {
+      "description": "Check if JSON Web Token keep session",
+      "value": false,
+      "required": true
+    },
+    "NODE_MODULES_CACHE": {
+      "description": "Heroku maintains a cache directory that is persisted between builds",
+      "value": false,
+      "required": true
+    },
     "SERVER_NAME": {
-      "required": true
-    },
-    "HEROKU_APP_NAME": {
+      "description": "Name of actual server",
+      "value": "localhost",
       "required": true
     }
   },
-  "formation": {
-  },
+  "formation": {},
   "addons": [
-
+    "cloudinary",
+    "papertrail",
+    "heroku-postgresql:hobby-dev"
   ],
-  "buildpacks": [
-
-  ]
+  "buildpacks": []
 }
