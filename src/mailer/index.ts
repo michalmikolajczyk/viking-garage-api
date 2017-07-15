@@ -1,6 +1,4 @@
 import * as nodemailer from 'nodemailer';
-import debug from 'debug';
-const log = debug('api:mailer');
 import {
   contactRequest,
   contactMessage,
@@ -8,17 +6,6 @@ import {
   resetMessage,
   rideMessage,
 } from './templates';
-
-if (!process.env.GMAIL_RIDE_USER ||
-    !process.env.GMAIL_RIDE_CLIENT_ID ||
-    !process.env.GMAIL_RIDE_CLIENT_SECRET ||
-    !process.env.GMAIL_RIDE_REFRESH_TOKEN ||
-    !process.env.GMAIL_CONTACT_USER ||
-    !process.env.GMAIL_CONTACT_CLIENT_ID ||
-    !process.env.GMAIL_CONTACT_CLIENT_SECRET ||
-    !process.env.GMAIL_CONTACT_REFRESH_TOKEN) {
-  log('You should set Gmail OAuth2 envs');
-}
 
 const rideAddress = process.env.GMAIL_RIDE_USER;
 const contactAddress = process.env.GMAIL_CONTACT_USER;
