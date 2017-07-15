@@ -55,6 +55,16 @@
       "description": "Email address of gmail contact alias",
       "required": true
     },
+    "GMAIL_HOST": {
+      "description": "Gmail host address",
+      "required": true,
+      "value": "smtp.gmail.com",
+    },
+    "GMAIL_PORT": {
+      "description": "Gmail port number",
+      "required": true,
+      "value": "465",
+    },
     "GMAIL_RIDE_CLIENT_ID": {
       "description": "Client id for gmail ride alias",
       "required": true
@@ -70,6 +80,11 @@
     "GMAIL_RIDE_USER": {
       "description": "Email address of gmail ride alias",
       "required": true
+    },
+    "GMAIL_SECURE": {
+      "description": "Gmail secure connection",
+      "required": true,
+      "value": "true",
     },
     "JWT_SECRET": {
       "description": "Random string for JSON Web Token generator",

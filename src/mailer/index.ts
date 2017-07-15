@@ -11,9 +11,9 @@ const rideAddress = process.env.GMAIL_RIDE_USER;
 const contactAddress = process.env.GMAIL_CONTACT_USER;
 
 const transporterRide = nodemailer.createTransport({
-  host: 'smtp.gmail.com',
-  port: 465,
-  secure: true,
+  host: process.env.GMAIL_HOST,
+  port: parseInt(process.env.GMAIL_PORT, 10),
+  secure: process.env.GMAIL_SECURE === 'true',
   auth: {
     type: 'OAuth2',
     user: process.env.GMAIL_RIDE_USER,
@@ -24,9 +24,9 @@ const transporterRide = nodemailer.createTransport({
 });
 
 const transporterContact = nodemailer.createTransport({
-  host: 'smtp.gmail.com',
-  port: 465,
-  secure: true,
+  host: process.env.GMAIL_HOST,
+  port: parseInt(process.env.GMAIL_PORT, 10),
+  secure: process.env.GMAIL_SECURE === 'true',
   auth: {
     type: 'OAuth2',
     user: process.env.GMAIL_CONTACT_USER,
