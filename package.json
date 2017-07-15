@@ -19,7 +19,7 @@
     "gen:routes": "$(npm bin)/tsoa routes"
   },
   "engines": {
-    "node": "7.10.0"
+    "node": "7.10.1"
   },
   "repository": {
     "type": "git",
