@@ -58,12 +58,12 @@
     "GMAIL_HOST": {
       "description": "Gmail host address",
       "required": true,
-      "value": "smtp.gmail.com",
+      "value": "smtp.gmail.com"
     },
     "GMAIL_PORT": {
       "description": "Gmail port number",
       "required": true,
-      "value": "465",
+      "value": "465"
     },
     "GMAIL_RIDE_CLIENT_ID": {
       "description": "Client id for gmail ride alias",
@@ -84,7 +84,7 @@
     "GMAIL_SECURE": {
       "description": "Gmail secure connection",
       "required": true,
-      "value": "true",
+      "value": "true"
     },
     "JWT_SECRET": {
       "description": "Random string for JSON Web Token generator",
