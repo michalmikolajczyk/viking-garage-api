@@ -1,8 +1,10 @@
 import db from '../';
 
 function createOffers() {
-  db['offer'].findAll()
-    .then(offers => offers.map(offer => offer.setOfferer(1)));
+  return Promise.all([
+    db['offer'].findAll().then(offers => offers.map(offer => offer.setOfferer(1))),
+    db['offer'].findById(1).then(offer => offer.addBooking(1)),
+  ]);
 }
 
 export default function create() {
