@@ -53,6 +53,7 @@ export function createRelations(db) {
   /**
    * OFFER
    */
+  db.offer.hasMany(db.booking);
   db.offer.belongsTo(db.offerer);
   db.offer.belongsToMany(db.accessorie, {
     through: {
