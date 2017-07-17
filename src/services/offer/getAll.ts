@@ -14,6 +14,7 @@ export default function getAll(req: Request, res: Response, next: NextFunction):
   let distanceAttr;
   let distanceFunc;
   let distanceWhere;
+  let order;
 
   const limit = process.env.VG_LIMIT || 7;
   const offset = parseInt(req.query.offset, 10) || 0;
@@ -41,12 +42,17 @@ export default function getAll(req: Request, res: Response, next: NextFunction):
     distanceOrd = { order: [distanceFunc] };
     distanceAttr = { include: [[distanceFunc, 'distance']] };
     distanceWhere = { $and: db['sequelize'].where(distanceFunc, '<=', dist || distMax) };
+    order = [distanceFunc, 'id'];
+  }
+
+  if (typeof order === 'undefined') {
+    order = ['id'];
   }
 
   db['offer'].findAll({
     limit,
     offset,
-    ...distanceOrd,
+    order,
     attributes: {
       ...distanceAttr,
       exclude: ['offererId', 'createdAt', 'updatedAt'],
