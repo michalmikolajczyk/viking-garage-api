@@ -16,7 +16,7 @@ export default function getAll(req: Request, res: Response, next: NextFunction):
   let distanceWhere;
   let order;
 
-  const limit = process.env.VG_LIMIT || 7;
+  const limit = process.env.VG_LIMIT || 8;
   const offset = parseInt(req.query.offset, 10) || 0;
   const distMax = 10000000;
 
