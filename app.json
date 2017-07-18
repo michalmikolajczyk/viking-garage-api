@@ -36,7 +36,7 @@
       "required": true
     },
     "DEBUG": {
-      "description": "Variable for debug loggin",
+      "description": "Env var for logs (set to 'api:*' to show API services logs)",
       "required": false
     },
     "GMAIL_CONTACT_CLIENT_ID": {
@@ -101,6 +101,10 @@
     "SERVER_NAME": {
       "description": "Name of actual server",
       "required": true
+    },
+    "VG_LIMIT": {
+      "description": "Limit for pagination in main view",
+      "required": false
     }
   },
   "formation": {},
