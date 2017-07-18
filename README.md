@@ -28,6 +28,14 @@ npm tdd        # for running tests continuously mocha, TDD style
 npm start      # for production environment
 ```
 
+## Logs
+Application use [debug](https://github.com/visionmedia/debug) (npm module) for logs (checkout link for docs). To enable logs from the API services, set env var `DEBUG=api:*`. To add logs to a new module:
+```
+import debug from 'debug';
+const log = debug('api:NameOfModule');
+log('go to stout with prefix "api:NameOfModule"')
+```
+
 ## Dev env
 - Sublime
 - [DocBlockr](https://github.com/spadgos/sublime-jsdocs) plugin for Sublime jsDoc
