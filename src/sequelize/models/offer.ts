@@ -29,6 +29,12 @@ export default function (sequelize, Sequelize) {
       allowNull: false,
       type: Sequelize.FLOAT,
     },
+    city: {
+      type: Sequelize.STRING,
+    },
+    country: {
+      type: Sequelize.STRING,
+    },
     image: {
       allowNull: false,
       type: Sequelize.STRING,
