@@ -11,7 +11,7 @@ import {
   UserChange,
   UserEmail,
   UserLogin,
-  UserSignin,
+  UserSignup,
   UserToken,
 } from '../models/auth';
 import { UserInfo } from '../models/user';
@@ -82,7 +82,7 @@ export class AuthController {
    * @param {UserEmail} 'email' user email address
    */
   @Post('resend')
-  @Tags('signin')
+  @Tags('signup')
   public resend(@Request() req: any, @Request() res: any, @Request() next: any, @Body() body: UserEmail): void {
     auth.resend(req, res, next);
   }
@@ -98,13 +98,13 @@ export class AuthController {
   }
 
   /**
-   * User signin with credentials
+   * User signup with credentials
    * @param {UserSigin} user credentials
    */
-  @Post('signin')
-  @Tags('signin')
-  public signin(@Request() req: any, @Request() res: any, @Request() next: any, @Body() body: UserSignin): void {
-    auth.signin(req, res, next);
+  @Post('signup')
+  @Tags('signup')
+  public signup(@Request() req: any, @Request() res: any, @Request() next: any, @Body() body: UserSignup): void {
+    auth.signup(req, res, next);
   }
 
   /**
@@ -112,7 +112,7 @@ export class AuthController {
    * @param {UserToken} 'UserToken' user uuid token
    */
   @Post('verify')
-  @Tags('signin')
+  @Tags('signup')
   public verify(@Request() req: any, @Request() res: any, @Request() next: any, @Body() body: UserToken): void {
     auth.verify(req, res, next);
   }

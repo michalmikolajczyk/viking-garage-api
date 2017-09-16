@@ -3,12 +3,12 @@ import {
   Response,
   NextFunction,
 } from 'express';
-import { signinEmail } from '../../mailer';
+import { signupEmail } from '../../mailer';
 import db from '../../sequelize';
 import debug from 'debug';
-const log = debug('api:signin');
+const log = debug('api:signup');
 
-export default function signin(req: Request, res: Response, next: NextFunction): any {
+export default function signup(req: Request, res: Response, next: NextFunction): any {
   const {
     firstname,
     lastname,
@@ -30,7 +30,7 @@ export default function signin(req: Request, res: Response, next: NextFunction):
   };
 
   db['user'].create(newUser)
-    .then(user => signinEmail(firstname, email, user.dataValues.token, language)
+    .then(user => signupEmail(firstname, email, user.dataValues.token, language)
       .then(() => res.status(200).json({ msg: 'User created successfully - email sent' }))
       .catch((err) => {
         log(`Unexpected error ${err}`);

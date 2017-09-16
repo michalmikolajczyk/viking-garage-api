@@ -19,7 +19,7 @@ export interface UserLogin {
   remember: boolean;
 }
 
-export interface UserSignin {
+export interface UserSignup {
   name: string;
   email: string;
   birthday: Date;

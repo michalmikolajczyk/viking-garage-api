@@ -3,6 +3,7 @@
 src/routes.ts
 src/config.ts
 dist
+dump
 backup.sql
 
 ### Node ###
@@ -16,6 +17,7 @@ logfile
 
 # Dependency directory
 node_modules
+package-lock.json
 
 ### DATA ###
 vgdb.sql

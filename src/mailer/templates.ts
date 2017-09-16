@@ -1,4 +1,4 @@
-export function signinMessage(name: string, token: string, code: string): object {
+export function signupMessage(name: string, token: string, code: string): object {
   switch (code) {
     case 'pl':
       return {

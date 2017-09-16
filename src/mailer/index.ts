@@ -2,7 +2,7 @@ import * as nodemailer from 'nodemailer';
 import {
   contactRequest,
   contactMessage,
-  signinMessage,
+  signupMessage,
   resetMessage,
   rideMessage,
 } from './templates';
@@ -56,11 +56,11 @@ function sendEmail(body: any, type: string): Promise<any> {
   }
 }
 
-function signinEmail(name: string, email: string, token: string, code: string): Promise<any> {
+function signupEmail(name: string, email: string, token: string, code: string): Promise<any> {
   const body = {
     from: contactAddress,
     to: email,
-    ...signinMessage(name, token, code),
+    ...signupMessage(name, token, code),
   };
   return sendEmail(body, 'contact');
 }
@@ -116,7 +116,7 @@ function contactEmail(data: any): Promise<any> {
 }
 
 export {
-  signinEmail,
+  signupEmail,
   resetEmail,
   contactEmail,
 }

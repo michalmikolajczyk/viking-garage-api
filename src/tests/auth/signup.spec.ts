@@ -6,10 +6,10 @@ import server from '../../server';
 const should = chai.should();
 chai.use(chaiHttp);
 
-describe('user/signin tests', () => {
+describe('user/signup tests', () => {
   it('should return error due the one empty field (birthday)', (done) => {
     chai.request(server)
-      .post('/user/signin')
+      .post('/user/signup')
       .send({
         firstname: 'Viking',
         lastname: 'Garage',
@@ -27,7 +27,7 @@ describe('user/signin tests', () => {
 
   it('should return error because of user with the same email in database', (done) => {
     chai.request(server)
-      .post('/user/signin')
+      .post('/user/signup')
       .send({
         firstname: 'Viking',
         lastname: 'Garage',
@@ -46,7 +46,7 @@ describe('user/signin tests', () => {
 
   xit('should create new user successfully', (done) => {
     chai.request(server)
-      .post('/user/signin')
+      .post('/user/signup')
       .send({
         firstname: 'Viking',
         lastname: 'Garage',

@@ -4,7 +4,7 @@ import login from './login';
 import logout from './logout';
 import resend from './resend';
 import reset from './reset';
-import signin from './signin';
+import signup from './signup';
 import me from './me';
 import verify from './verify';
 
@@ -15,7 +15,7 @@ export {
   logout,
   resend,
   reset,
-  signin,
+  signup,
   me,
   verify,
 }
