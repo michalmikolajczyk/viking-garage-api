@@ -14,10 +14,8 @@
 (cp .env.example .env)
 
 dropdb -U postgres viking_garage
-
 createdb -E UTF8 -U postgres viking_garage
-
-pg_restore -U postgres --dbname viking_garage --verbose dump/latest.backup
+pg_restore -U postgres --dbname viking_garage --no-owner --verbose dump/latest.backup
 
 npm i
 npm test
