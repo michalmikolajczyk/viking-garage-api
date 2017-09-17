@@ -22,8 +22,8 @@ export default function resend(req: Request, res: Response, next: NextFunction):
       });
   }
 
-  db['user'].findOne({ where: { email } })
-    .then(user => signupEmail(user.dataValues.name, email, user.dataValues.token, language)
+  db['account'].findOne({ where: { email }, include: [db['user']] })
+    .then(account => signupEmail(account.user.name, email, account.token, language)
       .then(() => res.status(200)
         .json({
           err: false,

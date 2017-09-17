@@ -99,7 +99,7 @@ export class AuthController {
 
   /**
    * User signup with credentials
-   * @param {UserSigin} user credentials
+   * @param {UserSignup} user credentials
    */
   @Post('signup')
   @Tags('signup')
