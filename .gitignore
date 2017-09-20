@@ -5,6 +5,7 @@ src/config.ts
 dist
 dump
 backup.sql
+config
 
 ### Node ###
 # Logs
