@@ -22,5 +22,10 @@ export default function (sequelize, Sequelize) {
       defaultValue: false,
       allowNull: false,
     },
+    consent: {
+      type: Sequelize.BOOLEAN,
+      defaultValue: false,
+      allowNull: false
+    }
   })
 }

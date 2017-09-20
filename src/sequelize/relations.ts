@@ -128,6 +128,6 @@ export function createRelations(db) {
   /**
    * USER
    */
+  db.account.hasOne(db.user)
   db.user.belongsTo(db.account)
-  db.account.belongsTo(db.user)
 }

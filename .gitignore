@@ -30,3 +30,6 @@ vgdb.sql
 # Thumbnails
 ._*
 
+
+.vscode
+

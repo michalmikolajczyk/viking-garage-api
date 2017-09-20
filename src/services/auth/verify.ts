@@ -12,50 +12,26 @@ const log = debug('api:verify');
 export default function verify(req: Request, res: Response, next: NextFunction): any {
   const { token } = req.body;
 
-  db['user'].findOne({ where: { token } })
-    .then((user) => {
-      if (!user) {
-        return res.status(400).json({
-          err: true,
-          msg: 'Token expired',
-        });
-      }
-
-      user.update({
-        verified: true,
-        token: v1(),
-      })
-      .then(info => login(user.dataValues.email, user.dataValues.password)
-        .then(({ token, user }) => res.status(200)
-          .json({
-            token,
-            err: false,
-            msg: 'User verified successfully',
-            user: {
-              name: user.name,
-              email: user.email,
-            },
-          }))
-        .catch((err) => {
-          log(`Unexpected error ${err}`);
-          res.status(400).json({
-            err: true,
-            msg: 'User not authorized',
-          });
-        }))
-      .catch((err) => {
-        log(`Unexpected error ${err}`);
-        res.status(400).json({
-          err: true,
-          msg: 'User not authorized',
-        });
-      });
-    })
+  db['account'].findOne({ where: { token } })
+    .then(account => account.update({
+      verified: true,
+      token: v1(),
+    }))
+    .then(account => login(account.email, account.password))
+    .then(({ token, account }) => res.status(200).json({
+      token,
+      err: false,
+      msg: 'email verified successfully',
+      user: {
+        name: account.user.firstname,
+        email: account.email,
+      },
+    }))
     .catch((err) => {
       log(`Unexpected error ${err}`);
-      res.status(400).json({
+      return res.status(400).json({
         err: true,
-        msg: 'Token expired',
+        msg: 'User not authorized',
       });
     });
 }

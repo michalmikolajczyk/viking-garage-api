@@ -14,35 +14,17 @@ export default function reset(req: Request, res: Response, next: NextFunction): 
     language,
   } = req.body;
 
-  db['user'].findOne({ where: { email } })
-    .then((user) => {
-      if (!user) {
-        return res.status(400)
-          .json({
-            err: true,
-            msg: 'User with provided email does not exists',
-          });
-      }
-
-      resetEmail(user.firstname, user.email, user.token, language)
-        .then(info => res.status(200)
-          .json({
-            err: false,
-            msg: 'Email with reset link sent successfully',
-          }))
-        .catch((err) => {
-          log(`Unexpected error ${err}`);
-          res.status(500).json({
-            err: true,
-            msg: 'There was an error with sending the reset link email',
-          });
-        });
-    })
+  return db['account'].findOne({ where: { email }, include: ['user'] })
+    .then(account => resetEmail(account.user.firstname, account.email, account.token, language))
+    .then(info => res.status(200).json({
+      err: false,
+      msg: 'Please check your e-mail inbox for instructions',
+    }))
     .catch((err) => {
       log(`Unexpected error ${err}`);
-      res.status(500).json({
+      res.status(200).json({
         err: true,
-        msg: 'There was an error processing your request',
+        msg: 'Please check your e-mail inbox for instructions',
       });
     });
 }

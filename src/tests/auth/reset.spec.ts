@@ -7,18 +7,18 @@ const should = chai.should();
 chai.use(chaiHttp);
 
 describe('user/reset tests', () => {
-  it('should return error because of wrong email', (done) => {
+  it('should return 200 even with wrong email', (done) => {
     chai.request(server)
       .post('/user/reset')
       .send({
         email: 'wrong.email@gmail.com',
       })
       .end((err, res) => {
-        res.should.have.status(400);
+        res.should.have.status(200);
         res.body.should.have.property('err');
         res.body.err.should.equal(true);
         res.body.should.have.property('msg');
-        res.body.msg.should.be.equal('User with provided email does not exists');
+        res.body.msg.should.be.equal('Please check your e-mail inbox for instructions');
         done();
       });
   });
@@ -41,7 +41,7 @@ describe('user/reset tests', () => {
         res.body.should.have.property('err');
         res.body.err.should.equal(false);
         res.body.should.have.property('msg');
-        res.body.msg.should.be.equal('Email with reset link sent successfully');
+        res.body.msg.should.be.equal('Please check your e-mail inbox for instructions');
         done();
       });
   });

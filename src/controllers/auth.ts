@@ -104,7 +104,7 @@ export class AuthController {
   @Post('signup')
   @Tags('signup')
   public signup(@Request() req: any, @Request() res: any, @Request() next: any, @Body() body: UserSignup): void {
-    auth.signup(req, res, next);
+    return auth.signup(req, res, next);
   }
 
   /**

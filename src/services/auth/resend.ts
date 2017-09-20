@@ -23,7 +23,7 @@ export default function resend(req: Request, res: Response, next: NextFunction):
   }
 
   db['account'].findOne({ where: { email }, include: [db['user']] })
-    .then(account => signupEmail(account.user.name, email, account.token, language)
+    .then(account => signupEmail(account.user.firstname, email, account.token, language)
       .then(() => res.status(200)
         .json({
           err: false,

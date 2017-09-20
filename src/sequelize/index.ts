@@ -8,13 +8,14 @@ const db = {};
 const path = `${__dirname}/models`;
 const paths = walkSync(`${path}`);
 
+const dbEnv = sequelize[process.env.NODE_ENV]
 paths.forEach((file) => {
-  const model = sequelize.import(`${path}/${file}`);
+  const model = dbEnv.import(`${path}/${file}`);
   db[model.name] = model;
 });
 
 createRelations(db);
 
-db['sequelize'] = sequelize;
+db['sequelize'] = sequelize[process.env.NODE_ENV];
 
 export default db;

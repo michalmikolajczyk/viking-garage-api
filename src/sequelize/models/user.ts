@@ -1,20 +1,14 @@
 export default function (sequelize, Sequelize) {
   return sequelize.define('user', {
-// required
     firstname: {
-      type: Sequelize.STRING,
-      allowNull: false,
+      type: Sequelize.STRING
     },
     lastname: {
-      type: Sequelize.STRING,
-      allowNull: false,
+      type: Sequelize.STRING
     },
     birthday: {
-      type: Sequelize.DATE,
-      allowNull: false,
+      type: Sequelize.DATE
     },
-
-// optional
     phone: {
       type: Sequelize.STRING,
     },

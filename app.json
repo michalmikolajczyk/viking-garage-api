@@ -31,6 +31,12 @@
       "description": "URL to database",
       "required": true
     },
+    "DATABASE_URL_DEV": {
+      "description": "URL to development database"
+    },
+    "DATABASE_URL_TEST": {
+      "description": "URL to testing database"
+    },
     "DATABASE_SSL": {
       "description": "Check if databse support SSL connection (set true for remote db)",
       "required": true
@@ -93,6 +99,11 @@
     "JWT_SESSION": {
       "description": "Check if JSON Web Token keep session",
       "required": true
+    },
+    "NODE_ENV": {
+      "description": "Running mode",
+      "required": true,
+      "value": "development"
     },
     "NODE_MODULES_CACHE": {
       "description": "Heroku maintains a cache directory that is persisted between builds",

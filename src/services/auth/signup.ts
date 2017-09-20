@@ -10,31 +10,32 @@ const log = debug('api:signup');
 
 export default function signup(req: Request, res: Response, next: NextFunction): any {
   const {
-    firstname,
-    lastname,
+    consent,
     email,
-    birthday,
     password1,
     password2,
     language,
   } = req.body;
 
-  if (!firstname || !lastname || !email || !birthday || !password1) return res.status(400).json({ err: 'Please fill in all the fields.' });
+  if (!consent || !email || !password1 || password1 !== password2) return res.status(400).json({
+    err: 'Please fill in all the fields.' });
 
   const newAccount = {
+    consent,
     email,
-    password: password1
+    password: password1,
   }
-  const newUser = {
-    firstname,
-    lastname,
-    birthday,
-  };
 
-  db['account'].create(newAccount)
-    .then(account => db['user'].create(Object.assign({accountId: account.id}, newUser)))
-    .then(user => db['account'].update({ userId: user.id }, {where: { id: user.accountId }}))
-    .then(account => signupEmail(firstname, email, account.token, language))
+  const split = email.split('@')[0]
+  const firstname = split.charAt(0).toUpperCase() + split.slice(1)
+
+  return db['account'].create(newAccount)
+    .then(account => db['user'].create({ accountId: account.id }))
+    .then(user => db['account'].findOne({ where: { id: user.accountId } }))
+    .then(account => signupEmail(firstname, account.email, account.token, language))
     .then(() => res.status(200).json({ msg: 'User created successfully - email sent' }))
-    .catch((err) => log(`Unexpected error ${err}`) && res.status(500).json({ err: 'There was an error processing your request' }))
+    .catch((err) => {
+      log(err)
+      return res.status(500).json({ err: 'There was an error processing your request' })
+    })
 }

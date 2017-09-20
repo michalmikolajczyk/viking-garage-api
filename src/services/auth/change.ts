@@ -15,36 +15,24 @@ export default function change(req: Request, res: Response, next: NextFunction):
     token,
   } = req.body;
 
-  db['user'].findOne({ where: { token } })
-  .then((user) => {
-    if (!user) {
+  db['account'].findOne({ where: { token } })
+  .then((account) => {
+    if (!account) {
       return res.status(400)
         .json({
           err: true,
           msg: 'Your reset token has expired, please reset the password again',
         });
     }
-
-    user.update({
+    return account.update({
       password: password1,
       token: v1(),
     })
-    .then(() => res.status(200)
-      .json({
-        err: false,
-        msg: 'Password changed successfully',
-      }))
-    .catch((err) => {
-      log(`Unexpected error ${err}`);
-      res.status(500).json({
-        err: true,
-        msg: 'There was an error processing your request',
-      });
-    });
   })
+  .then(() => res.status(200).json({ err: false, msg: 'Password changed successfully' }))
   .catch((err) => {
     log(`Unexpected error ${err}`);
-    res.status(500).json({
+    return res.status(500).json({
       err: true,
       msg: 'There was an error processing your request',
     });
