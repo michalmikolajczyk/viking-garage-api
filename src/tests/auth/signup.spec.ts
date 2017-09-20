@@ -1,4 +1,3 @@
-process.env.NODE_ENV = 'test';
 import * as mocha from 'mocha';
 import * as chai from 'chai';
 import chaiHttp = require('chai-http');
@@ -6,13 +5,11 @@ import server from '../../server';
 const should = chai.should();
 chai.use(chaiHttp);
 
-describe('user/signin tests', () => {
-  it('should return error due the one empty field (birthday)', (done) => {
+describe('user/signup tests', () => {
+  it('should return error due to one empty field', (done) => {
     chai.request(server)
-      .post('/user/signin')
+      .post('/user/signup')
       .send({
-        firstname: 'Viking',
-        lastname: 'Garage',
         email: 'viking.garage.app@gmail.com',
         password1: 'secret',
         password2: 'secret',
@@ -27,12 +24,10 @@ describe('user/signin tests', () => {
 
   it('should return error because of user with the same email in database', (done) => {
     chai.request(server)
-      .post('/user/signin')
+      .post('/user/signup')
       .send({
-        firstname: 'Viking',
-        lastname: 'Garage',
+        consent: true,
         email: 'viking.garage.app@gmail.com',
-        birthday: new Date(),
         password1: 'secret',
         password2: 'secret',
       })
@@ -44,14 +39,29 @@ describe('user/signin tests', () => {
       });
   });
 
-  xit('should create new user successfully', (done) => {
+  it('should fail because password not match', (done) => {
     chai.request(server)
-      .post('/user/signin')
+      .post('/user/signup')
       .send({
-        firstname: 'Viking',
-        lastname: 'Garage',
+        consent: true,
         email: 'viking.garage.app+12@gmail.com',
-        birthday: new Date(),
+        password1: 'secret',
+        password2: 'notthesame',
+      })
+      .end((err, res) => {
+        res.should.have.status(400);
+        res.body.should.have.property('err');
+        res.body.should.not.have.property('msg');
+        done();
+    });
+});
+
+  it('should create new user successfully', (done) => {
+    chai.request(server)
+      .post('/user/signup')
+      .send({
+        consent: true,
+        email: 'viking.garage.app+' + Math.floor(Math.random() * 999) + '12@gmail.com',
         password1: 'secret',
         password2: 'secret',
       })

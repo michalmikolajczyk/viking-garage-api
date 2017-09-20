@@ -1,0 +1,21 @@
+[
+    {
+      "email": "viking.garage.app@gmail.com",
+      "password": "secret",
+      "verified": true,
+      "consent": true
+    },
+    {
+      "email": "janek@vikinggarage.com",
+      "password": "secret",
+      "verified": false,
+      "consent": true
+    },
+    {
+      "email": "michal@vikinggarage.com",
+      "password": "secret",
+      "verified": true,
+      "consent": true
+    }
+  ]
+  

@@ -5,6 +5,8 @@
     "max-line-length": [false],
     "ter-indent": [false],
     "variable-name": [false],
-    "align": [true, "parameters"]
+    "align": [true, "parameters"],
+    "semicolon": false,
+    "trailing-comma": false
   }
 }

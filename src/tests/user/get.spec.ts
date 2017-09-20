@@ -11,17 +11,17 @@ chai.use(chaiHttp);
 const email = 'janek@vikinggarage.com';
 const pass = 'secret';
 const userDefault = {
+  id: 2,
+  accountId: 2,
   email,
   firstname: 'Jan',
   lastname: 'Horubała',
   birthday: '1981-01-11T23:00:00.000Z',
-
   phone: null,
   emergency: null,
   city: null,
   country: null,
   brief: null,
-
   image: null,
 };
 
@@ -45,8 +45,14 @@ describe('user/get tests', () => {
       .end((err, res) => {
         res.should.have.status(200);
         res.body.should.have.property('data');
+        const createdAt = res.body.data.createdAt
+        const updatedAt = res.body.data.updatedAt
+        delete res.body.data.createdAt
+        delete res.body.data.updatedAt
+        createdAt.should.have.lengthOf(24)
+        updatedAt.should.have.lengthOf(24)
         res.body.data.should.be.deep.equal(userDefault);
-        done();
+        done()
       });
     });
   });

@@ -1,4 +1,3 @@
-process.env.NODE_ENV = 'test';
 import * as mocha from 'mocha';
 import * as chai from 'chai';
 import chaiHttp = require('chai-http');
@@ -18,25 +17,24 @@ describe('user/verify tests', () => {
         res.body.should.have.property('err');
         res.body.err.should.equal(true);
         res.body.should.have.property('msg');
-        res.body.msg.should.be.equal('Token expired');
+        res.body.msg.should.be.equal('User not authorized');
         done();
       });
   });
 
-  it('should verified user successfully', (done) => {
+  it('should verified user successfully', () => {
     const email = 'viking.garage.app@gmail.com';
-    db['user'].findOne({ where: { email } })
-      .then((user) => {
+    return db['account'].findOne({ where: { email } })
+      .then((account) => {
         chai.request(server)
           .post('/user/verify')
-          .send({ token: user.token })
+          .send({ token: account.token })
           .end((err, res) => {
             res.should.have.status(200);
             res.body.should.have.property('err');
             res.body.err.should.equal(false);
             res.body.should.have.property('msg');
-            res.body.msg.should.be.equal('User verified successfully');
-            done();
+            return res.body.msg.should.be.equal('email verified successfully');
           });
         });
   });

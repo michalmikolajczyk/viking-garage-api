@@ -124,5 +124,10 @@ export function createRelations(db) {
     foreignKey: 'itemId',
     constraints: false,
   });
-}
 
+  /**
+   * USER
+   */
+  db.account.hasOne(db.user)
+  db.user.belongsTo(db.account)
+}

@@ -21,7 +21,7 @@ describe('/offer', () => {
     });
   });
 
-  it('should returns offers type street', (done) => {
+  xit('should returns offers type street', (done) => {
     chai.request(server)
     .get('/offer?type=street')
     .end((err, res) => {

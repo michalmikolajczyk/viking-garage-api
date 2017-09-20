@@ -18,24 +18,13 @@ export default function login(req: Request, res: Response, next: NextFunction): 
   }
 
   logIn(email, password)
-    .then(({ token, user }) => {
-      const {
-        email,
-        image,
-      } = user;
-      return res.status(200).json({
-          data: {
-            token,
-            user: {
-              image,
-              email,
-            },
-          },
-        });
-      })
+    .then(({ token, account }) => {
+      const user = Object.assign({}, account.user.dataValues, { email: account.dataValues.email })
+      const data = { token, user }
+      return res.status(200).json({ data });
+    })
     .catch((err) => {
       log(`Unexpected error ${err}`);
-      res.status(400).json({ err: 'Invalid email or password' });
+      return res.status(400).json({ err: 'Invalid email or password' });
     });
 }
-

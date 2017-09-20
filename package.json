@@ -5,7 +5,7 @@
   "scripts": {
     "init": "scripts/initialize.sh",
     "dev": "nodemon --watch src --exec 'ts-node' src/server.ts",
-    "test": "npm run lint && npm run build && npm run create:db && mocha -r ts-node/register ./src/tests/**/*.spec.ts",
+    "test": "npm run lint && NODE_ENV=test npm run build && NODE_ENV=test npm run create:db && NODE_ENV=test mocha -r ts-node/register ./src/tests/**/*.spec.ts",
     "tdd": "npm run build && mocha --watch --watch-extensions ts,tsx -r ts-node/register ./src/tests/**/*.spec.ts",
     "lint": "tslint ./src/*.ts ./src/**/*.ts ./src/**/**/*.ts --exclude ./src/express.ts",
     "postinstall": "npm run create:dist && npm run copy:template && npm run copy:swagger && npm run build",
@@ -19,7 +19,7 @@
     "gen:routes": "$(npm bin)/tsoa routes"
   },
   "engines": {
-    "node": "7.10.1"
+    "node": "8.1.4"
   },
   "repository": {
     "type": "git",
@@ -58,6 +58,7 @@
     "passport-jwt": "^2.2.1",
     "pg": "^6.1.2",
     "sequelize": "^4.2.0",
+    "sequelize-cli": "^3.0.0-3",
     "swagger-ui": "^2.2.10",
     "ts-node": "^3.1.0",
     "tslint": "^4.4.2",

@@ -1,8 +1,3 @@
-export interface User {
-  email: string;
-  photo: string;
-}
-
 export interface UserChange {
   password1: string;
   password2: string;
@@ -19,10 +14,9 @@ export interface UserLogin {
   remember: boolean;
 }
 
-export interface UserSignin {
-  name: string;
+export interface UserSignup {
+  consent: boolean;
   email: string;
-  birthday: Date;
   password: string;
 }
 

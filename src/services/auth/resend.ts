@@ -3,7 +3,7 @@ import {
   Response,
   NextFunction,
 } from 'express';
-import { signinEmail } from '../../mailer';
+import { signupEmail } from '../../mailer';
 import db from '../../sequelize';
 import debug from 'debug';
 const log = debug('api:resend');
@@ -22,8 +22,8 @@ export default function resend(req: Request, res: Response, next: NextFunction):
       });
   }
 
-  db['user'].findOne({ where: { email } })
-    .then(user => signinEmail(user.dataValues.name, email, user.dataValues.token, language)
+  db['account'].findOne({ where: { email }, include: [db['user']] })
+    .then(account => signupEmail(account.user.firstname, email, account.token, language)
       .then(() => res.status(200)
         .json({
           err: false,

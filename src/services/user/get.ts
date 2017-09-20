@@ -9,42 +9,13 @@ import debug from 'debug';
 const log = debug('api:user/get');
 
 export default function get(req: Request, res: Response, next: NextFunction): any {
-  authenticate(req, res, next)
-    .then((user) => {
-      const {
-        firstname,
-        lastname,
-        email,
-        birthday,
-
-        phone,
-        emergency,
-        city,
-        country,
-        brief,
-
-        image,
-      } = user;
-
-      res.status(200).json({
-          data: {
-            firstname,
-            lastname,
-            email,
-            birthday,
-
-            phone,
-            emergency,
-            city,
-            country,
-            brief,
-
-            image,
-          },
-        });
+  return authenticate(req, res, next)
+    .then((account) => {
+      const data = Object.assign({}, account.user.dataValues, { email: account.dataValues.email })
+      return res.status(200).json({ data });
     })
     .catch((err) => {
       log(`User is not authorized ${err}`);
-      res.status(401).json(error.unauthorized);
+      return res.status(401).json(error.unauthorized);
     });
 }

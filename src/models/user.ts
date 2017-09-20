@@ -1,11 +1,12 @@
 export interface UserInfo {
 // required info
-  firstname: string;
-  lastname: string;
-  birthday: string;
-  email: string;
+  accountId: number;
 
 // optional info
+  firstname?: string;
+  lastname?: string;
+  birthday?: string;
+  email?: string;
   phone?: string;
   emergency?: string;
   city?: string;

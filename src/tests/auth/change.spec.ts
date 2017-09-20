@@ -1,4 +1,3 @@
-process.env.NODE_ENV = 'test';
 import * as mocha from 'mocha';
 import * as chai from 'chai';
 import chaiHttp = require('chai-http');
@@ -29,14 +28,14 @@ describe('user/change tests', () => {
 
   it('should changed password successfully', (done) => {
     const email = 'viking.garage.app@gmail.com';
-    db['user'].findOne({ where: { email } })
-    .then((user) => {
+    db['account'].findOne({ where: { email } })
+    .then((account) => {
       chai.request(server)
         .post('/user/change')
         .send({
           password1: 'new_pass',
           password2: 'new_pass',
-          token: user.token,
+          token: account.token,
         })
         .end((err, res) => {
           res.should.have.status(200);
