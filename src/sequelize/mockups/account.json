@@ -1,27 +1,21 @@
 [
     {
-      "id": 1,
       "email": "viking.garage.app@gmail.com",
       "password": "secret",
       "verified": true,
-      "consent": true,
-      "userId": 1
+      "consent": true
     },
     {
-      "id": 2,
       "email": "janek@vikinggarage.com",
       "password": "secret",
       "verified": false,
-      "consent": true,
-      "userId": 2
+      "consent": true
     },
     {
-      "id": 3,
       "email": "michal@vikinggarage.com",
       "password": "secret",
       "verified": true,
-      "consent": true,
-      "userId": 3
+      "consent": true
     }
   ]
   

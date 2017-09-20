@@ -1,20 +1,17 @@
 [
   {
-    "id": 1,
     "firstname": "Viking",
     "lastname": "Garage",
     "birthday": "Mon Jan 12 1981 00:00:00 GMT+0100 (CET)",
     "accountId": 1
   },
   {
-    "id": 2,
     "firstname": "Jan",
     "lastname": "Horubała",
     "birthday": "Mon Jan 12 1981 00:00:00 GMT+0100 (CET)",
     "accountId": 2
   },
   {
-    "id": 3,
     "firstname": "Michal",
     "lastname": "Mikołajczyk",
     "birthday": "Mon Jan 12 1981 00:00:00 GMT+0100 (CET)",
