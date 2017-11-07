@@ -59,6 +59,7 @@
     "pg": "^6.1.2",
     "sequelize": "^4.2.0",
     "sequelize-cli": "^3.0.0-3",
+    "stripe": "^5.3.0",
     "swagger-ui": "^2.2.10",
     "ts-node": "^3.1.0",
     "tslint": "^4.4.2",

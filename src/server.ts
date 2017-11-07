@@ -10,6 +10,10 @@ import { config as passportConfig } from './helpers/passport';
 import debug from 'debug';
 const log = debug('api:server');
 
+const https = require('https');
+const http = require('http');
+const fs = require('fs');
+
 const app = express();
 app.options('*', cors({
   origin: '*',
@@ -18,6 +22,13 @@ app.options('*', cors({
   optionsSuccessStatus: 204,
   credentials: true,
 }));
+
+// app.use((req, res, next) => {
+//   const httpsAddress = ['https://', req.get('Host'), req.url].join('');
+//   if (req.headers['x-forwarded-proto'] !== 'https') return res.redirect(httpsAddress);
+//   return next();
+// });
+
 app.use('/docs', express.static(path.resolve('dist/swagger-ui/dist')));
 app.use('/swagger.json', (req, res) => res.sendfile(path.resolve('dist/swagger.json')));
 
@@ -38,7 +49,17 @@ app.use((err, req, res, next) => {
 
 const port = process.env.PORT || '4000';
 
-app.listen(port, () => {
+// app.listen(port, () => {
+//   log(`Server running at ${process.env.VG_HOST}:${port}`);
+// });
+
+// http.createServer(app).listen(80);
+
+const privateKey = fs.readFileSync(__dirname + '/../ssl/server.key', 'utf8');
+const certificate = fs.readFileSync(__dirname + '/../ssl/server.crt', 'utf8');
+const credential = { key: privateKey, cert: certificate };
+
+https.createServer(credential, app).listen(port, () => {
   log(`Server running at ${process.env.VG_HOST}:${port}`);
 });
 

@@ -1,0 +1,24 @@
+{
+  "production": {
+    "username": "",
+    "password": "",
+    "database": "",
+    "host": "",
+    "dialect": "postgres",
+    "dialectOptions": {
+      "ssl": true
+    },
+    "ssl": true
+  },
+  "development": {
+    "username": "postgres",
+    "password": "",
+    "database": "viking_garage",
+    "host": "localhost",
+    "dialect": "postgres",
+    "dialectOptions": {
+      "ssl": false
+    },
+    "ssl": false
+  }
+}

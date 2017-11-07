@@ -66,7 +66,7 @@ interface Motorcycle {
 }
 
 interface Protection {
-  hemlet: boolean;
+  helmet: boolean;
   gloves: boolean;
   boots: boolean;
   jacket: boolean;
