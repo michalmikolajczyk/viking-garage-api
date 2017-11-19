@@ -14,7 +14,7 @@ import * as bookingMethods from '../services/booking';
  * Contact form
  */
 
-@Route('contact')
+@Route('booking')
 export class BookingController {
 
   /**
@@ -37,7 +37,7 @@ export class BookingController {
   }
 
   /**
-   * Get booking by id
+   * Edit booking by id
    */
   @Get('{id}')
   @Tags('booking')
@@ -46,7 +46,7 @@ export class BookingController {
   }
 
   /**
-   * Get booking by id
+   * Delete booking by id
    */
   @Get('{id}')
   @Tags('booking')

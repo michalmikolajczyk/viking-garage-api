@@ -30,9 +30,9 @@ export default function post(req: Request, res: Response, next: NextFunction): a
 	}
 	
 	return db['booking'].create(newBooking)
-		.then(booking => db['payment'].create({ bookingId: booking.id }))
+		// .then(booking => db['payment'].create({ bookingId: booking.id }))
 		// .then(payment => db['booking'].findOne({ where: { id: payment.bookingId } }))
-		.then(() => res.status(200).json({ msg: 'ok' }))
+		.then(booking => res.status(200).send(booking))
 		.catch((err) => {
 			log(err)
 			return res.status(500).json({ err: 'There was an error processing your request' })

@@ -9,7 +9,7 @@ import { registerRoutes } from './routes';
 import { config as passportConfig } from './helpers/passport';
 import debug from 'debug';
 const log = debug('api:server');
-
+const cookieParser = require('cookie-parser')
 const https = require('https');
 const http = require('http');
 const fs = require('fs');
@@ -31,7 +31,7 @@ app.options('*', cors({
 
 app.use('/docs', express.static(path.resolve('dist/swagger-ui/dist')));
 app.use('/swagger.json', (req, res) => res.sendfile(path.resolve('dist/swagger.json')));
-
+app.use(cookieParser());
 app.use(cors({
 
 }));

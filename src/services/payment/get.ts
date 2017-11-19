@@ -4,7 +4,7 @@ import {
     NextFunction,
   } from 'express';
 import debug from 'debug';
-const log = debug('api:offer/del');
+const log = debug('api:payment/del');
 import db from '../../sequelize';
 import * as err from '../error';
 export default function get(req: Request, res: Response, next: NextFunction): any {

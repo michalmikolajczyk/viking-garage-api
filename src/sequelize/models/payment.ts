@@ -1,7 +1,7 @@
 export default function (sequelize, Sequelize) {
   return sequelize.define('payment', {
     amount: {
-      type: Sequelize.INTEGER,
+      type: Sequelize.FLOAT,
     },
     bookingId: {
       type: Sequelize.INTEGER,
@@ -10,10 +10,17 @@ export default function (sequelize, Sequelize) {
       type: Sequelize.STRING,
     },
     description: {
-      type: Sequelize.STRING,
+      type: Sequelize.TEXT,
     },
     source: {
       type: Sequelize.STRING,
     },
+    token: {
+      type: Sequelize.TEXT
+    },
+    confirmed: {
+      type: Sequelize.BOOLEAN
+    },
+    timestamps: true
   });
 }

@@ -11,7 +11,7 @@ cd ..
 dropdb -U postgres viking_garage
 createdb -E UTF8 -U postgres viking_garage
 psql viking_garage -c "CREATE EXTENSION postgis"
-pg_restore -U postgres --dbname viking_garage --no-owner --verbose dump/latest.backup
+pg_restore -U postgres --dbname viking_garage --no-owner --verbose dump/latest.dump
 
 cp config/config.json.example config/config.json
 sequelize db:migrate --env development
