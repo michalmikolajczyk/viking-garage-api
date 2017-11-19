@@ -49,18 +49,18 @@ app.use((err, req, res, next) => {
 
 const port = process.env.PORT || '4000';
 
-// app.listen(port, () => {
-//   log(`Server running at ${process.env.VG_HOST}:${port}`);
-// });
-
-// http.createServer(app).listen(80);
-
-const privateKey = fs.readFileSync(__dirname + '/../ssl/server.key', 'utf8');
-const certificate = fs.readFileSync(__dirname + '/../ssl/server.crt', 'utf8');
-const credential = { key: privateKey, cert: certificate };
-
-https.createServer(credential, app).listen(port, () => {
-  log(`Server running at ${process.env.VG_HOST}:${port}`);
-});
+if (process.env.NODE_ENV === 'production') {
+  app.listen(port, () => {
+    log(`Server running at ${process.env.VG_HOST}:${port}`);
+  }); 
+} else {
+  const privateKey = fs.readFileSync(__dirname + '/../ssl/server.key', 'utf8');
+  const certificate = fs.readFileSync(__dirname + '/../ssl/server.crt', 'utf8');
+  const credential = { key: privateKey, cert: certificate };
+  
+  https.createServer(credential, app).listen(port, () => {
+    log(`Server running at ${process.env.VG_HOST}:${port}`);
+  });
+}
 
 export default app;
