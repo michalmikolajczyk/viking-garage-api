@@ -80,7 +80,7 @@ interface Protection {
   neckBrace:boolean;
 }
 
-interface Service {
+interface ServiceModel {
   parkingGarage: boolean;
   recommendedMechanic:boolean;
   transportTheMorocycle:boolean;
@@ -109,7 +109,7 @@ export interface Offer {
   helmet?: Helmet;
   motorcycle?: Motorcycle;
   protection?: Protection;
-  service?: Service;
+  service?: ServiceModel;
 }
 
 export interface OfferPost {
@@ -120,5 +120,5 @@ export interface OfferPost {
   helmet?: Helmet;
   motorcycle?: Motorcycle;
   protection?: Protection;
-  service?: Service;
+  service?: ServiceModel;
 }
