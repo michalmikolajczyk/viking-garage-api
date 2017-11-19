@@ -1,5 +1,5 @@
 export interface PaymentModel {
-  token: object;
+  token: any;
   bookingId: number;
   amount: number;
   currency: string;
