@@ -102,7 +102,7 @@ export interface Offer {
   images: {
     main: string;
   };
-  price: Object;
+  price: object;
 
 // offer items
   accessorie?: Accessorie;
