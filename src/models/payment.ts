@@ -1,4 +1,4 @@
-export interface Payment {
+export interface PaymentModel {
   token: object;
   bookingId: number;
   amount: number;

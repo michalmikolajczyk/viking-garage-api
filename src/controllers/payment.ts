@@ -7,7 +7,7 @@ import {
   Route,
   Request,
 } from 'tsoa';
-import { Payment } from '../models/payment';
+import { PaymentModel } from '../models/payment';
 import * as paymentMethods from '../services/payment';
 
 /**
@@ -32,7 +32,7 @@ export class PaymentController {
    */
   @Post('')
   @Tags('payment')
-  public post(@Request() req: any, @Request() res: any, @Request() next: any, @Body() body: Payment): void {
+  public post(@Request() req: any, @Request() res: any, @Request() next: any, @Body() body: PaymentModel): void {
     paymentMethods.post(req, res, next);
   }
 
