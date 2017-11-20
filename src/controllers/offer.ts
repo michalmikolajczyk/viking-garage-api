@@ -38,28 +38,28 @@ export class OfferController {
     offer.get(req, res, next);
   }
 
-  // /**
-  //  * Get all offer
-  //  */
+  /**
+   * Get all offer
+   */
   @Get('')
   @Tags('offer')
   public getAll(@Request() req: any, @Request() res: any, @Request() next: any): void {
     offer.getAll(req, res, next);
   }
 
-  // /**
-  //  * Create new offer
-  //  * @param {OfferPost} object with offer info
-  //  */
+  /**
+   * Create new offer
+   * @param {OfferPost} object with offer info
+   */
   @Post('')
   @Tags('offer')
   public post(@Request() req: any, @Request() res: any, @Request() next: any, @Body() body: OfferPost): void {
     offer.post(req, res, next);
   }
 
-  // /**
-  //  * Update existing offer
-  //  */
+  /**
+   * Update existing offer
+   */
   @Put('{id}')
   @Tags('offer')
   public put(@Request() req: any, @Request() res: any, @Request() next: any, id: number): void {

@@ -35,22 +35,4 @@ export class PaymentController {
   public post(@Request() req: any, @Request() res: any, @Request() next: any, @Body() body: PaymentModel): void {
     paymentMethods.post(req, res, next);
   }
-
-  // /**
-  //  * Edit payment by id
-  //  */
-  // @Get('{id}')
-  // @Tags('payment')
-  // public put(@Request() req: any, @Request() res: any, @Request() next: any, id: number): void {
-  //   paymentMethods.put(req, res, next);
-  // }
-
-  // /**
-  //  * Delete payment by id
-  //  */
-  // @Get('{id}')
-  // @Tags('paymemnt')
-  // public delete(@Request() req: any, @Request() res: any, @Request() next: any, id: number): void {
-  //   paymentMethods.del(req, res, next);
-  // }
 }

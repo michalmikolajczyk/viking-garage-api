@@ -23,12 +23,6 @@ app.options('*', cors({
   credentials: true,
 }));
 
-// app.use((req, res, next) => {
-//   const httpsAddress = ['https://', req.get('Host'), req.url].join('');
-//   if (req.headers['x-forwarded-proto'] !== 'https') return res.redirect(httpsAddress);
-//   return next();
-// });
-
 app.use('/docs', express.static(path.resolve('dist/swagger-ui/dist')));
 app.use('/swagger.json', (req, res) => res.sendfile(path.resolve('dist/swagger.json')));
 app.use(cookieParser());
