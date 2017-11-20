@@ -2,7 +2,6 @@ import '../setup';
 import './controllers';
 import * as express from 'express';
 import * as path from 'path';
-import * as cors from 'cors';
 import * as bodyParser from 'body-parser';
 import * as methodOverride from 'method-override';
 import { registerRoutes } from './routes';
@@ -15,20 +14,18 @@ const http = require('http');
 const fs = require('fs');
 
 const app = express();
-app.options('*', cors({
-  origin: '*',
-  methods: 'OPTIONS,GET,HEAD,PUT,PATCH,POST,DELETE',
-  preflightContinue: true,
-  optionsSuccessStatus: 204,
-  credentials: true,
-}));
+
+app.use(function(req, res, next) {  
+  res.header('Access-Control-Allow-Origin', `${req.headers.origin}`);
+  res.header('Access-Control-Allow-Credentials', 'true');
+  res.header('Access-Control-Allow-Methods', 'OPTIONS,GET,HEAD,PUT,PATCH,POST,DELETE');
+  res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
+  next();
+});  
 
 app.use('/docs', express.static(path.resolve('dist/swagger-ui/dist')));
 app.use('/swagger.json', (req, res) => res.sendfile(path.resolve('dist/swagger.json')));
 app.use(cookieParser());
-app.use(cors({
-
-}));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use(methodOverride());
