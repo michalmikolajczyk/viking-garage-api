@@ -103,6 +103,7 @@ export interface Offer {
     main: string;
   };
   price: object;
+  manualorder?: number;
 
 // offer items
   accessorie?: Accessorie;

@@ -39,6 +39,9 @@ export default function (sequelize, Sequelize) {
       allowNull: false,
       type: Sequelize.STRING,
     },
+    manualorder: {
+      type: Sequelize.FLOAT,
+    },
     price: {
       allowNull: false,
       type: Sequelize.INTEGER,

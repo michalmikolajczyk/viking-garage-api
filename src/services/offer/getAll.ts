@@ -9,18 +9,20 @@ import debug from 'debug';
 const log = debug('api:offer/getAll');
 
 export default function getAll(req: Request, res: Response, next: NextFunction): any {
-  let subtypeWh;
+  let countryWhere;
   let distanceOrd;
   let distanceAttr;
   let distanceFunc;
   let distanceWhere;
-  let order;
+  let order = ['manualorder'];
+  let subtypeWh;
 
   const limit = parseInt(process.env.VG_LIMIT, 10) || 8;
   const offset = parseInt(req.query.offset, 10) || 0;
   const distMax = 10000000;
 
   const {
+    country,
     lat,
     lng,
     dist,
@@ -30,6 +32,10 @@ export default function getAll(req: Request, res: Response, next: NextFunction):
   // create subtype filter
   if (typeof type === 'string' && type.length > 0) {
     subtypeWh = { subtype: { $in: type.split(',') } };
+  }
+
+  if (typeof country === 'string' && country.length > 0) {
+    countryWhere = { country: { $in: country.split(',') } };
   }
 
   // create distance filter
@@ -42,11 +48,7 @@ export default function getAll(req: Request, res: Response, next: NextFunction):
     distanceOrd = { order: [distanceFunc] };
     distanceAttr = { include: [[distanceFunc, 'distance']] };
     distanceWhere = { $and: db['sequelize'].where(distanceFunc, '<=', dist || distMax) };
-    order = [distanceFunc, 'id'];
-  }
-
-  if (typeof order === 'undefined') {
-    order = ['id'];
+    order = [distanceFunc, 'manualorder'];
   }
 
   db['offer'].findAll({
@@ -58,6 +60,7 @@ export default function getAll(req: Request, res: Response, next: NextFunction):
       exclude: ['offererId', 'createdAt', 'updatedAt'],
     },
     where: {
+      ...countryWhere,
       ...subtypeWh,
       ...distanceWhere,
     },
