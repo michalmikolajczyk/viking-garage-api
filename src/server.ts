@@ -16,19 +16,24 @@ const fs = require('fs');
 const app = express();
 
 app.use((req, res, next) => {  
-  res.header('Access-Control-Allow-Origin', `${req.headers.origin}`);
+  res.header('Access-Control-Allow-Origin', `${process.env.LIMIT_CORS || req.headers.origin}`);
   res.header('Access-Control-Allow-Credentials', 'true');
   res.header('Access-Control-Allow-Methods', 'OPTIONS,GET,HEAD,PUT,PATCH,POST,DELETE');
   res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
   next();
-});  
+});
+
+const acceptableMethods = ['PUT', 'PATCH', 'POST', 'DELETE'];
+app.use((req, res, next) => {
+  if (acceptableMethods.indexOf(req.method) > -1 && req.headers['content-type'] !== 'application/json') return res.send(406);
+  next();
+});
 
 app.use('/docs', express.static(path.resolve('dist/swagger-ui/dist')));
 app.use('/swagger.json', (req, res) => res.sendfile(path.resolve('dist/swagger.json')));
 app.use(cookieParser());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
-app.use(methodOverride());
 
 passportConfig(app);
 registerRoutes(app);

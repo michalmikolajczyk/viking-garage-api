@@ -21,6 +21,7 @@ export default function (sequelize, Sequelize) {
     confirmed: {
       type: Sequelize.BOOLEAN
     },
-    timestamps: true
+  }, {
+    timestamps: true,
   });
 }
