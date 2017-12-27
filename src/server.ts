@@ -43,7 +43,7 @@ app.use((err, req, res, next) => {
 
 const port = process.env.PORT || '4000';
 
-if (process.env.NODE_ENV === 'production') {
+if (process.env.NODE_ENV === 'production' || process.env.SERVER_NAME === 'travis') {
   app.listen(port, () => {
     log(`Server running at ${process.env.VG_HOST}:${port}`);
   }); 
