@@ -1,7 +1,6 @@
 ### Project ###
 .env
 cheatsheet
-src/routes.ts
 src/config.ts
 dist
 dump

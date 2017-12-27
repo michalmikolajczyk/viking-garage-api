@@ -12,8 +12,10 @@ import db from '../sequelize';
 
 const cookieExtractor = function (req) {
   let token = null;
-  if (req && req.cookies) {
+  if (req && req.cookies && req.cookies['access_token']) {
     token = req.cookies['access_token'];
+  } else if (req && req.headers && req.headers.cookie) {
+    token = req.headers.cookie.split(':')[1];
   }
   return token;
 };
@@ -28,19 +30,6 @@ export function config(app: Express): void {
     .then(account => next(null, account))
     .catch(err => next(null, false, { message: err }))
   ));
-}
-
-export function authenticate(req: Request, res: Response, next: NextFunction): Promise<any> {
-  return new Promise((resolve, reject) => {
-    return passport.authenticate(
-      'jwt',
-      { session: process.env.JWT_SESSION === 'true' },
-      (err, user, info) => {
-        if (err || !user) return reject(info);
-        return resolve(user);
-      },
-    )(req, res, next);
-  });
 }
 
 export function login(email: string, password: string): Promise<any> {

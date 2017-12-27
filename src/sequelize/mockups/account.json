@@ -1,7 +1,7 @@
 [
     {
       "email": "viking.garage.app@gmail.com",
-      "password": "secret",
+      "password": "new_pass",
       "verified": true,
       "consent": true
     },

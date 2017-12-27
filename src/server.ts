@@ -29,8 +29,6 @@ app.use((req, res, next) => {
   next();
 });
 
-app.use('/docs', express.static(path.resolve('dist/swagger-ui/dist')));
-app.use('/swagger.json', (req, res) => res.sendfile(path.resolve('dist/swagger.json')));
 app.use(cookieParser());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());

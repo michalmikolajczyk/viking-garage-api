@@ -6,6 +6,7 @@ import {
   Tags,
   Route,
   Request,
+  Security,
 } from 'tsoa';
 import {
   UserChange,
@@ -24,6 +25,7 @@ export class AuthController {
   /**
    * Get user info
    */
+  @Security('jwt')
   @Get('')
   @Tags('user')
   public get(@Request() req: any, @Request() res: any, @Request() next: any): void {

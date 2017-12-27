@@ -3,6 +3,8 @@ import * as fs from 'fs';
 import create from './offers';
 import db from '../';
 
+
+
 function mockup() {
   const path = `${__dirname}`;
   const paths = walkSync(`${path}`, { globs: ['*.json'] });
@@ -23,7 +25,8 @@ function mockup() {
 }
 
 function createAll() {
-  db['sequelize'].sync({ force: true })
+  if (process.env.NODE_ENV !== 'test') return false;
+  return db['sequelize'].sync({ force: true })
     .then(mockup)
     .then(create);
 }

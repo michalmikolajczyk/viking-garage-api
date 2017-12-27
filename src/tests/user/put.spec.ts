@@ -3,13 +3,13 @@ import * as mocha from 'mocha';
 import * as chai from 'chai';
 import chaiHttp = require('chai-http');
 import server from '../../server';
-import { login } from '../../helpers/passport';
+import { login, setCookie } from '../../helpers/passport';
 import * as error from '../../services/error';
 const should = chai.should();
 chai.use(chaiHttp);
 
-const email = 'janek@vikinggarage.com';
-const pass = 'secret';
+const email = 'viking.garage.app+999@gmail.com';
+const pass = 'new_pass';
 const newUser = {
   email,
   firstname: 'Piotr',
@@ -32,8 +32,7 @@ describe('user/put tests', () => {
     .send(newUser)
     .end((err, res) => {
       res.should.have.status(401);
-      res.body.should.have.property('err');
-      res.body.should.be.deep.equal(error.unauthorized);
+      res.body.should.be.deep.equal({});
       done();
     });
   });
@@ -42,7 +41,7 @@ describe('user/put tests', () => {
     login(email, pass).then(({ token, user }) => {
       chai.request(server)
       .put('/user')
-      .set('Authorization', `JWT ${token}`)
+      .set('Cookie', 'access_token:' + token)
       .send(newUser)
       .end((err, res) => {
         res.should.have.status(200);
