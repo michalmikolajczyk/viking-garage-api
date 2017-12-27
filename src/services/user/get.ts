@@ -3,7 +3,6 @@ import {
   Response,
   NextFunction,
 } from 'express';
-import { authenticate } from '../../helpers/passport';
 import * as error from '../error';
 import debug from 'debug';
 const log = debug('api:user/get');

@@ -3,7 +3,6 @@ import {
   Response,
   NextFunction,
 } from 'express';
-import { authenticate } from '../../helpers/passport';
 import * as error from '../error';
 import db from '../../sequelize';
 import debug from 'debug';
