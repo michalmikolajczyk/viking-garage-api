@@ -4,10 +4,12 @@
   "description": "VIKING GARAGE API",
   "scripts": {
     "init": "scripts/initialize.sh",
+    "build": "tsc",
     "dev": "nodemon --watch src --exec 'ts-node' src/server.ts",
     "test": "npm run lint && NODE_ENV=test npm run create:db && NODE_ENV=test mocha -r ts-node/register ./src/tests/**/*.spec.ts",
     "tdd": "mocha --watch --watch-extensions ts,tsx -r ts-node/register ./src/tests/**/*.spec.ts",
     "lint": "tslint ./src/*.ts ./src/**/*.ts ./src/**/**/*.ts --exclude ./src/express.ts",
+    "postinstall": "npm run build",
     "start": "node ./dist/server.js",
     "create:db": "ts-node ./src/sequelize/mockups/index.ts"
   },
