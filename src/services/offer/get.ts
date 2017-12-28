@@ -18,7 +18,7 @@ export default function get(req: Request, res: Response, next: NextFunction): an
     include: [
       { model: db['offerer'] },
       { all: true, through: { attributes: [] } },
-      // { model: db['accessorie'], through: { attributes: [] } },
+      // { model: db['accessory'], through: { attributes: [] } },
       // { model: db['helmet'], through: { attributes: [] } },
       // { model: db['motorcycle'], through: { attributes: [] } },
       // { model: db['protection'], through: { attributes: [] } },

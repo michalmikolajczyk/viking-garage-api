@@ -1,5 +1,5 @@
 export default [
-  'accessorie',
+  'accessory',
   'helmet',
   'motorcycle',
   'protection',

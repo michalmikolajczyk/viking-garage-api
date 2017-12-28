@@ -1,4 +1,4 @@
-interface Accessorie {
+interface Accessory {
   travelBoxes: boolean;
   lock: boolean;
   camera: boolean;
@@ -106,7 +106,7 @@ export interface Offer {
   manualorder?: number;
 
 // offer items
-  accessorie?: Accessorie;
+  accessory?: Accessory;
   helmet?: Helmet;
   motorcycle?: Motorcycle;
   protection?: Protection;
@@ -117,7 +117,7 @@ export interface OfferPost {
   type: string;
 
 // offer items
-  accessorie?: Accessorie;
+  accessory?: Accessory;
   helmet?: Helmet;
   motorcycle?: Motorcycle;
   protection?: Protection;

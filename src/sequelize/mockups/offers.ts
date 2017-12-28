@@ -7,7 +7,7 @@ function createOffers() {
 
 export default function create() {
   Promise.all([
-    db['accessorie'].findById(1),
+    db['accessory'].findById(1),
     db['helmet'].findById(1),
     db['motorcycle'].findById(1),
     db['protection'].findById(1),
