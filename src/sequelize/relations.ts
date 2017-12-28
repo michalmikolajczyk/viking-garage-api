@@ -128,6 +128,21 @@ export function createRelations(db) {
   /**
    * USER
    */
-  db.account.hasOne(db.user)
-  db.user.belongsTo(db.account)
+  db.account.hasOne(db.user);
+  db.user.belongsTo(db.account);
+
+  /**
+   * BOOKING
+   */
+  db.booking.hasMany(db.payment, {
+    foreignKey: 'paymentId',
+  });
+  db.payment.belongsTo(db.booking, {
+    foreignKey: 'paymentId',
+  });
+  db.booking.belongsTo(db.offer);
+
+  /**
+   * ROLES
+   */
 }

@@ -116,6 +116,10 @@
     "VG_LIMIT": {
       "description": "Limit for pagination in main view",
       "required": false
+    },
+    "LIMIT_CORS": {
+      "description": "hostname to limit CORS to",
+      "required": false
     }
   },
   "formation": {},

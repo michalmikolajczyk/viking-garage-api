@@ -18,7 +18,7 @@ npm run init
 ```
 
 ## Manual setup
-Please check the file `scripts/initialize.sh` for instructions
+Please check the file `scripts/initialize.sh` and files referenced therein, and simply follow the flow.
 
 ## Commands
 ```

@@ -3,7 +3,7 @@ import {
   Response,
   NextFunction,
 } from 'express';
-import { login as logIn } from '../../helpers/passport';
+import { login as logIn, setCookie } from '../../helpers/passport';
 import debug from 'debug';
 const log = debug('api:login');
 
@@ -20,7 +20,8 @@ export default function login(req: Request, res: Response, next: NextFunction): 
   logIn(email, password)
     .then(({ token, account }) => {
       const user = Object.assign({}, account.user.dataValues, { email: account.dataValues.email })
-      const data = { token, user }
+      setCookie(res, token);
+      const data = { user }
       return res.status(200).json({ data });
     })
     .catch((err) => {

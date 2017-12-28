@@ -66,7 +66,7 @@ interface Motorcycle {
 }
 
 interface Protection {
-  hemlet: boolean;
+  helmet: boolean;
   gloves: boolean;
   boots: boolean;
   jacket: boolean;
@@ -80,7 +80,7 @@ interface Protection {
   neckBrace:boolean;
 }
 
-interface Service {
+interface ServiceModel {
   parkingGarage: boolean;
   recommendedMechanic:boolean;
   transportTheMorocycle:boolean;
@@ -102,14 +102,15 @@ export interface Offer {
   images: {
     main: string;
   };
-  price: Object;
+  price: object;
+  manualorder?: number;
 
 // offer items
   accessorie?: Accessorie;
   helmet?: Helmet;
   motorcycle?: Motorcycle;
   protection?: Protection;
-  service?: Service;
+  service?: ServiceModel;
 }
 
 export interface OfferPost {
@@ -120,5 +121,5 @@ export interface OfferPost {
   helmet?: Helmet;
   motorcycle?: Motorcycle;
   protection?: Protection;
-  service?: Service;
+  service?: ServiceModel;
 }

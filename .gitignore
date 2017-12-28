@@ -1,11 +1,12 @@
 ### Project ###
 .env
-src/routes.ts
+cheatsheet
 src/config.ts
 dist
 dump
 backup.sql
-config
+config/config.json
+ssl
 
 ### Node ###
 # Logs

@@ -3,7 +3,7 @@ import {
   Response,
   NextFunction,
 } from 'express';
-import { login } from '../../helpers/passport';
+import { loginNoHash, setCookie } from '../../helpers/passport';
 import db from '../../sequelize';
 import { v1 } from 'uuid';
 import debug from 'debug';
@@ -17,16 +17,18 @@ export default function verify(req: Request, res: Response, next: NextFunction):
       verified: true,
       token: v1(),
     }))
-    .then(account => login(account.email, account.password))
-    .then(({ token, account }) => res.status(200).json({
-      token,
-      err: false,
-      msg: 'email verified successfully',
-      user: {
-        name: account.user.firstname,
-        email: account.email,
-      },
-    }))
+    .then(account => loginNoHash(account.email))
+    .then(({ token, account }) => {
+      setCookie(res, token);
+      return res.status(200).json({
+        err: false,
+        msg: 'email verified successfully',
+        user: {
+          name: account.user.firstname,
+          email: account.email,
+        },
+      })
+    })
     .catch((err) => {
       log(`Unexpected error ${err}`);
       return res.status(400).json({

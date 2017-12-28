@@ -3,20 +3,21 @@ import * as mocha from 'mocha';
 import * as chai from 'chai';
 import chaiHttp = require('chai-http');
 import server from '../../server';
-import { login } from '../../helpers/passport';
+import { login, setCookie } from '../../helpers/passport';
 import * as error from '../../services/error';
 const should = chai.should();
 chai.use(chaiHttp);
 
-const email = 'janek@vikinggarage.com';
-const pass = 'secret';
+// const email = 'janek@vikinggarage.com';
+const email = 'viking.garage.app+999@gmail.com';
+const pass = 'new_pass';
 const userDefault = {
-  id: 2,
-  accountId: 2,
+  id: 4,
+  accountId: 4,
   email,
-  firstname: 'Jan',
-  lastname: 'Horubała',
-  birthday: '1981-01-11T23:00:00.000Z',
+  birthday: null,
+  firstname: null,
+  lastname: null,
   phone: null,
   emergency: null,
   city: null,
@@ -31,17 +32,16 @@ describe('user/get tests', () => {
     .get('/user')
     .end((err, res) => {
       res.should.have.status(401);
-      res.body.should.have.property('err');
-      res.body.should.be.deep.equal(error.unauthorized);
+      res.body.should.be.deep.equal({});
       done();
     });
   });
 
   it('should return all user data', (done) => {
-    login(email, pass).then(({ token, user }) => {
+    login(email, pass).then(({ token, account }) => {
       chai.request(server)
       .get('/user')
-      .set('Authorization', `JWT ${token}`)
+      .set('Cookie', 'access_token:' + token)
       .end((err, res) => {
         res.should.have.status(200);
         res.body.should.have.property('data');
