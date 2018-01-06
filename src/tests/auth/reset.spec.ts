@@ -6,7 +6,7 @@ const should = chai.should();
 chai.use(chaiHttp);
 
 describe('user/reset tests', () => {
-  it('should return 200 even with wrong email', (done) => {
+  it('should return 200 for wrong email', (done) => {
     chai.request(server)
       .post('/user/reset')
       .send({
@@ -22,14 +22,7 @@ describe('user/reset tests', () => {
       });
   });
 
-  /**
-   * if we need this inside function (for example for timeout()) we can
-   * use function expression instead of arrow function, but we have to
-   * use this explicit (it's a 'no-function-expression' rule from linter)
-   */
-
-  xit('should send email with reset link successfully', function (done) {
-    this.timeout(10000);
+  it('should send email with reset link successfully', (done) => {
     chai.request(server)
       .post('/user/reset')
       .send({
