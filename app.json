@@ -120,6 +120,10 @@
     "LIMIT_CORS": {
       "description": "hostname to limit CORS to",
       "required": false
+    },
+    "MAILCHIMP_API_KEY": {
+      "description": "mailchimp API key",
+      "required": false
     }
   },
   "formation": {},
