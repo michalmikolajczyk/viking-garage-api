@@ -2,6 +2,7 @@ import { AuthController } from './controllers/auth';
 import { BookingController } from './controllers/booking';
 import { ContactController } from './controllers/contact';
 import { OfferController } from './controllers/offer';
+import { NewsletterController } from './controllers/newsletter';
 import { PaymentController } from './controllers/payment';
 
 import * as passport from 'passport';
@@ -93,6 +94,12 @@ export function registerRoutes(app: any) {
     });
     app.post('/payment', (req: any, res: any, next: any) => {
         const controller = new PaymentController();
+        controller.post.apply(controller, [req, res, next]);
+    });
+
+    // newsletter
+    app.post('/newsletter', (req: any, res: any, next: any) => {
+        const controller = new NewsletterController();
         controller.post.apply(controller, [req, res, next]);
     });
 }
